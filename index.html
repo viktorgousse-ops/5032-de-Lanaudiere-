@@ -1,13 +1,295 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My Google AI Studio App</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
-</html>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion 5032 de Lanaudière</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-inverse-primary: #a9c7ff;
+            --color-surface-container-highest: #e1e3e4;
+            --color-surface-container-low: #f3f4f5;
+            --color-primary-container: #00468c;
+            --color-on-secondary: #ffffff;
+            --color-secondary-fixed-dim: #88d982;
+            --color-tertiary-fixed-dim: #cdc897;
+            --color-tertiary: #636037;
+            --color-on-primary-container: #8cb6ff;
+            --color-on-background: #191c1d;
+            --color-inverse-surface: #2e3132;
+            --color-primary-fixed-dim: #a9c7ff;
+            --color-surface: #f8f9fa;
+            --color-on-surface: #191c1d;
+            --color-on-error-container: #93000a;
+            --color-primary-fixed: #d6e3ff;
+            --color-on-primary: #ffffff;
+            --color-on-tertiary-container: #44411b;
+            --color-surface-dim: #d9dadb;
+            --color-on-primary-fixed-variant: #00468c;
+            --color-surface-tint: #2a5ea5;
+            --color-on-tertiary: #ffffff;
+            --color-on-primary-fixed: #001b3d;
+            --color-tertiary-fixed: #eae4b1;
+            --color-inverse-on-surface: #f0f1f2;
+            --color-on-secondary-container: #217128;
+            --color-on-tertiary-fixed-variant: #4b4822;
+            --color-on-error: #ffffff;
+            --color-on-surface-variant: #424751;
+            --color-outline: #737782;
+            --color-surface-container: #edeeef;
+            --color-secondary-fixed: #a3f69c;
+            --color-primary: #003063;
+            --color-on-tertiary-fixed: #1e1c00;
+            --color-error: #ba1a1a;
+            --color-secondary-container: #a0f399;
+            --color-surface-container-high: #e7e8e9;
+            --color-surface-bright: #f8f9fa;
+            --color-on-secondary-fixed-variant: #005312;
+            --color-tertiary-container: #b2ad7d;
+            --color-surface-container-lowest: #ffffff;
+            --color-secondary: #1b6d24;
+            --color-outline-variant: #c2c6d2;
+            --color-on-secondary-fixed: #002204;
+            --color-background: #f8f9fa;
+            --color-error-container: #ffdad6;
+            --color-surface-variant: #e1e3e4;
 
+            --font-headline: "SF Pro Display", "SF Pro Text", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "Helvetica", "Arial", sans-serif;
+            --font-body: "SF Pro Text", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "Helvetica", "Arial", sans-serif;
+        }
+
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        surface: 'var(--color-surface)',
+                        'on-surface': 'var(--color-on-surface)',
+                        primary: 'var(--color-primary)',
+                        'primary-container': 'var(--color-primary-container)',
+                        'surface-container-lowest': 'var(--color-surface-container-lowest)',
+                        'surface-container-low': 'var(--color-surface-container-low)',
+                        'on-surface-variant': 'var(--color-on-surface-variant)',
+                        'outline-variant': 'var(--color-outline-variant)',
+                        secondary: 'var(--color-secondary)',
+                        tertiary: 'var(--color-tertiary)',
+                        'secondary-fixed': 'var(--color-secondary-fixed)'
+                    },
+                    fontFamily: {
+                        headline: 'var(--font-headline)',
+                        body: 'var(--font-body)',
+                        label: 'var(--font-body)'
+                    }
+                }
+            }
+        }
+
+        body {
+            background-color: var(--color-surface);
+            color: var(--color-on-surface);
+            font-family: var(--font-body);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: var(--font-headline);
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+        }
+
+        /* Basic Fade-in Animation */
+        .fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
+    </style>
+</head>
+<body class="min-h-screen selection:bg-primary selection:text-white">
+    <main class="py-12 px-6 max-w-5xl mx-auto space-y-12">
+        <!-- Title & Hero Section -->
+        <div class="fade-in mb-10">
+            <p class="font-label text-xs uppercase tracking-[0.2em] text-primary mb-2 font-bold">Gestion Financière</p>
+            <h1 class="text-4xl md:text-5xl font-headline font-extrabold tracking-tight text-on-surface">5032 de Lanaudière</h1>
+        </div>
+
+        <!-- Summary Grid (Bento Style) -->
+        <div class="fade-in delay-1 grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+            <div class="md:col-span-2 bg-gradient-to-br from-[#003063] to-[#00468c] p-6 rounded-xl text-white shadow-xl flex flex-col justify-between min-h-[160px]">
+                <div class="flex justify-between items-start">
+                    <span class="font-label text-xs uppercase tracking-widest opacity-80">Total à Répartir</span>
+                    <span class="font-label text-xs uppercase tracking-widest font-black opacity-80">paiements</span>
+                </div>
+                <div>
+                    <h2 class="text-3xl font-headline font-bold">2 260,68 $</h2>
+                    <p class="text-sm opacity-70 mt-1">Montant global mensuel (Bail + Charges)</p>
+                </div>
+            </div>
+            
+            <div class="bg-white p-6 rounded-xl shadow-[0_4px_24px_rgba(25,28,29,0.04)] border border-[#c2c6d2]/10">
+                <span class="block font-headline font-black text-[#003063] mb-3 text-sm uppercase tracking-tighter">loyer</span>
+                <p class="font-label text-[10px] uppercase tracking-widest text-[#424751] mb-1">Loyer Total (Juillet)</p>
+                <p class="text-xl font-headline font-bold text-[#191c1d]">2 165,00 $</p>
+            </div>
+            
+            <div class="bg-white p-6 rounded-xl shadow-[0_4px_24_rgba(25,28,29,0.04)] border border-[#c2c6d2]/10">
+                <span class="block font-headline font-black text-[#003063] mb-3 text-sm uppercase tracking-tighter">charges</span>
+                <p class="font-label text-[10px] uppercase tracking-widest text-[#424751] mb-1">Internet & Hydro</p>
+                <p class="text-xl font-headline font-bold text-[#191c1d]">95,68 $</p>
+            </div>
+        </div>
+
+        <!-- Main Financial Ledger -->
+        <section class="fade-in delay-2 mb-12">
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="text-xl font-headline font-bold flex items-center gap-3">
+                    <span class="w-1.5 h-6 bg-[#003063] rounded-full"></span>
+                    Grille de Répartition (Dès Juillet)
+                </h3>
+                <span class="text-[10px] font-bold text-[#003063] bg-[#003063]/10 px-4 py-1.5 rounded-full uppercase tracking-wider">Actualisé : Juillet 2024</span>
+            </div>
+            
+            <div class="overflow-hidden rounded-xl bg-[#f3f4f5] border border-[#c2c6d2]/10">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-white">
+                                <th class="p-5 font-label text-[10px] uppercase tracking-widest text-[#424751] font-bold">Occupant</th>
+                                <th class="p-5 font-label text-[10px] uppercase tracking-widest text-[#424751] font-bold">Loyer Juil.</th>
+                                <th class="p-5 font-label text-[10px] uppercase tracking-widest text-[#424751] font-bold">Internet</th>
+                                <th class="p-5 font-label text-[10px] uppercase tracking-widest text-[#424751] font-bold">Hydro</th>
+                                <th class="p-5 font-label text-[10px] uppercase tracking-widest text-[#003063] text-right font-bold">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody id="occupants-table-body" class="divide-y divide-[#f8f9fa]">
+                            <!-- Data injected by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Secondary Section: Evolution & Notes -->
+        <div class="fade-in delay-3 grid grid-cols-1 lg:grid-cols-5 gap-10">
+            <!-- Evolution Table -->
+            <div class="lg:col-span-3">
+                <h3 class="text-xl font-headline font-bold mb-6 flex items-center gap-3">
+                    <span class="w-1.5 h-6 bg-[#1b6d24] rounded-full"></span>
+                    Évolution des Loyers 2026
+                </h3>
+                <div class="bg-[#f3f4f5] rounded-xl overflow-hidden border border-[#c2c6d2]/10">
+                    <div class="p-5 bg-white border-b border-[#f8f9fa] flex justify-between items-center">
+                        <span class="font-label text-[10px] uppercase tracking-widest text-[#424751] font-bold">Projections 2026</span>
+                        <span class="text-[10px] text-[#1b6d24] font-bold flex items-center gap-1.5 uppercase tracking-wider">
+                            <span class="material-symbols-outlined text-base">trending_up</span> Prévisions de bail
+                        </span>
+                    </div>
+                    <div class="p-3 space-y-2">
+                        <div class="flex items-center justify-between p-4 rounded-lg hover:bg-white transition-all">
+                            <div class="flex items-center gap-5">
+                                <div class="w-10 h-10 rounded-full bg-[#1b6d24]/15 flex items-center justify-center text-[#1b6d24] font-black text-xs">26</div>
+                                <div>
+                                    <p class="font-bold text-[#191c1d]">Dès Juillet 2026</p>
+                                    <p class="text-[10px] text-[#424751] font-bold uppercase tracking-tight">Petite: 642$ • Moy: 781$ • Gde: 837$</p>
+                                </div>
+                            </div>
+                            <span class="font-headline font-black text-[#191c1d] text-lg">2 260 $</span>
+                        </div>
+                        <div class="flex items-center justify-between p-4 rounded-lg hover:bg-white transition-all">
+                            <div class="flex items-center gap-5">
+                                <div class="w-10 h-10 rounded-full bg-[#e1e3e4] flex items-center justify-center text-[#424751] font-black text-xs">26</div>
+                                <div>
+                                    <p class="font-bold text-[#191c1d]">Mai - Juin 2026</p>
+                                    <p class="text-[10px] text-[#424751] font-bold uppercase tracking-tight">Petite: 624$ • Moy: 758$ • Gde: 813$</p>
+                                </div>
+                            </div>
+                            <span class="font-headline font-black text-[#191c1d] text-lg">2 195 $</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Important Notes -->
+            <div class="lg:col-span-2">
+                <h3 class="text-xl font-headline font-bold mb-6 flex items-center gap-3 text-[#191c1d]">
+                    <span class="w-1.5 h-6 bg-[#636037] rounded-full"></span>
+                    Détails des Charges
+                </h3>
+                <div class="space-y-4">
+                    <div class="bg-[#a3f69c]/30 p-5 rounded-xl border border-[#88d982]/20 shadow-sm">
+                        <div class="flex gap-4">
+                            <span class="material-symbols-outlined text-[#1b6d24] text-2xl">wifi</span>
+                            <div>
+                                <p class="text-sm font-black text-[#217128] mb-1 uppercase tracking-wider">Internet (FIZZ)</p>
+                                <p class="text-[11px] text-[#005312] leading-relaxed font-medium">44,85 $ total divisé par 3 occupants (14,95 $/pers). Inclus haute vitesse illimitée.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white p-5 rounded-xl shadow-sm border border-[#c2c6d2]/15">
+                        <div class="flex gap-4">
+                            <span class="font-headline font-black text-[#003063] text-xs uppercase self-center tracking-tighter">charges</span>
+                            <div>
+                                <p class="text-sm font-black text-[#191c1d] mb-1 uppercase tracking-wider">Hydro-Québec</p>
+                                <p class="text-[11px] text-[#424751] leading-relaxed font-medium">50,83 $ total par mois (16,94 $/pers). Basé sur le plan de paiements égaux.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Side Decoration (Editorial Flair) -->
+    <div class="hidden lg:block fixed right-10 top-1/2 -translate-y-1/2 w-48 opacity-10 pointer-events-none rotate-6 select-none">
+        <img 
+            class="rounded-2xl grayscale blur-[1px] hover:blur-0 transition-all duration-700" 
+            referrerpolicy="no-referrer"
+            alt="Minimalist architectural detail" 
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBV3a_yp6RcPurok1LVblaRfGBPbd8Z40FSm3Fnpl_2qoetfaxZXWpoR51eXKoaIuIF4pNTRxAyEFRXK4f9l4kA1G4buUJfeImfOGMMrIkMMld65DFO9Mc3WR-0kU0hS43I_t39fr7HyJFJ3C9YcBxX41_OGYNQPYt7T2F21lfRuOqahgOOVgacF68Hor8Nb9wH32Rvjf1XrRS3K_13pwBacrq5pW_P9LrQnQ0XFAIIN8ZSlJtVJQPSOJTzF61EFxI2Axms8g449Jw"
+        />
+    </div>
+
+    <script>
+        const occupants = [
+            { name: "Anabelle", detail: "Petite • +18.33$ inc.", rent: "610,48 $", internet: "14,95 $", hydro: "16,94 $", total: "642,37 $" },
+            { name: "Kashish", detail: "Moyenne • +22.49$ inc.", rent: "748,99 $", internet: "14,95 $", hydro: "16,94 $", total: "780,88 $" },
+            { name: "Viktor", detail: "Grande • +24.18$ inc.", rent: "805,53 $", internet: "14,95 $", hydro: "16,94 $", total: "837,42 $" },
+        ];
+
+        const tableBody = document.getElementById('occupants-table-body');
+        
+        occupants.forEach((occ, i) => {
+            const tr = document.createElement('tr');
+            tr.className = "hover:bg-white transition-all group";
+            tr.innerHTML = `
+                <td class="p-5">
+                    <p class="font-headline font-bold text-[#191c1d] group-hover:text-[#003063] transition-colors">${occ.name}</p>
+                    <p class="text-[10px] text-[#424751] font-medium">${occ.detail}</p>
+                </td>
+                <td class="p-5 font-bold text-[#191c1d]">${occ.rent}</td>
+                <td class="p-5 text-[#424751] font-medium">${occ.internet}</td>
+                <td class="p-5 text-[#424751] font-medium">${occ.hydro}</td>
+                <td class="p-5 text-right font-headline font-extrabold text-[#003063] text-lg">${occ.total}</td>
+            `;
+            tableBody.appendChild(tr);
+        });
+    </script>
+</body>
+</html>
