@@ -137,15 +137,15 @@
                     <span class="font-label text-xs uppercase tracking-widest font-black opacity-80">paiements</span>
                 </div>
                 <div>
-                    <h2 class="text-3xl font-headline font-bold">2 260,68 $</h2>
-                    <p class="text-sm opacity-70 mt-1">Montant global mensuel (Bail + Charges)</p>
+                    <h2 class="text-3xl font-headline font-bold">2 195,00 $</h2>
+                    <p class="text-sm opacity-70 mt-1">Montant global mensuel actuel (Mai - Juin)</p>
                 </div>
             </div>
             
             <div class="bg-white p-6 rounded-xl shadow-[0_4px_24px_rgba(25,28,29,0.04)] border border-[#c2c6d2]/10">
                 <span class="block font-headline font-black text-[#003063] mb-3 text-sm uppercase tracking-tighter">loyer</span>
-                <p class="font-label text-[10px] uppercase tracking-widest text-[#424751] mb-1">Loyer Total (Juillet)</p>
-                <p class="text-xl font-headline font-bold text-[#191c1d]">2 165,00 $</p>
+                <p class="font-label text-[10px] uppercase tracking-widest text-[#424751] mb-1">Loyer Total (Mai-Juin)</p>
+                <p class="text-xl font-headline font-bold text-[#191c1d]">2 099,32 $</p>
             </div>
             
             <div class="bg-white p-6 rounded-xl shadow-[0_4px_24_rgba(25,28,29,0.04)] border border-[#c2c6d2]/10">
@@ -155,14 +155,14 @@
             </div>
         </div>
 
-        <!-- Main Financial Ledger -->
+        <!-- Main Financial Ledger (Actuel: Mai-Juin 2026) -->
         <section class="fade-in delay-2 mb-12">
             <div class="flex items-center justify-between mb-6">
                 <h3 class="text-xl font-headline font-bold flex items-center gap-3">
-                    <span class="w-1.5 h-6 bg-[#003063] rounded-full"></span>
-                    Grille de Répartition (Dès Juillet)
+                    <span class="w-1.5 h-6 bg-[#1b6d24] rounded-full"></span>
+                    Grille de Répartition (Mai - Juin 2026)
                 </h3>
-                <span class="text-[10px] font-bold text-[#003063] bg-[#003063]/10 px-4 py-1.5 rounded-full uppercase tracking-wider">Actualisé : Juillet 2024</span>
+                <span class="text-[10px] font-bold text-[#1b6d24] bg-[#1b6d24]/10 px-4 py-1.5 rounded-full uppercase tracking-wider">Actuel</span>
             </div>
             
             <div class="overflow-hidden rounded-xl bg-[#f3f4f5] border border-[#c2c6d2]/10">
@@ -170,16 +170,42 @@
                     <table class="w-full text-left border-collapse">
                         <thead>
                             <tr class="bg-white">
-                                <th class="p-5 font-label text-[10px] uppercase tracking-widest text-[#424751] font-bold">Occupant</th>
-                                <th class="p-5 font-label text-[10px] uppercase tracking-widest text-[#424751] font-bold">Loyer Juil.</th>
-                                <th class="p-5 font-label text-[10px] uppercase tracking-widest text-[#424751] font-bold">Internet</th>
-                                <th class="p-5 font-label text-[10px] uppercase tracking-widest text-[#424751] font-bold">Hydro</th>
-                                <th class="p-5 font-label text-[10px] uppercase tracking-widest text-[#003063] text-right font-bold">Total</th>
+                                <th class="p-5 font-label text-[10px] uppercase tracking-widest text-[#424751] font-bold whitespace-nowrap">Occupant</th>
+                                <th class="p-5 font-label text-[10px] uppercase tracking-widest text-[#424751] font-bold whitespace-nowrap">Loyer</th>
+                                <th class="p-5 font-label text-[10px] uppercase tracking-widest text-[#424751] font-bold whitespace-nowrap">Internet</th>
+                                <th class="p-5 font-label text-[10px] uppercase tracking-widest text-[#424751] font-bold min-w-[120px] whitespace-nowrap">Hydro</th>
+                                <th class="p-5 font-label text-[10px] uppercase tracking-widest text-[#1b6d24] text-right font-bold whitespace-nowrap">Total</th>
                             </tr>
                         </thead>
-                        <tbody id="occupants-table-body" class="divide-y divide-[#f8f9fa]">
-                            <!-- Data injected by JS -->
-                        </tbody>
+                        <tbody id="occupants-table-body-2026" class="divide-y divide-[#f8f9fa]"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Financial Ledger (Prévisionnel: Juillet 2026) -->
+        <section class="fade-in delay-2 mb-12">
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="text-xl font-headline font-bold flex items-center gap-3">
+                    <span class="w-1.5 h-6 bg-[#003063] rounded-full"></span>
+                    Grille de Répartition (Dès Juillet 2026)
+                </h3>
+                <span class="text-[10px] font-bold text-[#003063] bg-[#003063]/10 px-4 py-1.5 rounded-full uppercase tracking-wider">Prévisionnel</span>
+            </div>
+            
+            <div class="overflow-hidden rounded-xl bg-[#f3f4f5] border border-[#c2c6d2]/10">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-white">
+                                <th class="p-5 font-label text-[10px] uppercase tracking-widest text-[#424751] font-bold whitespace-nowrap">Occupant</th>
+                                <th class="p-5 font-label text-[10px] uppercase tracking-widest text-[#424751] font-bold whitespace-nowrap">Loyer (Prév.)</th>
+                                <th class="p-5 font-label text-[10px] uppercase tracking-widest text-[#424751] font-bold whitespace-nowrap">Internet</th>
+                                <th class="p-5 font-label text-[10px] uppercase tracking-widest text-[#424751] font-bold min-w-[120px] whitespace-nowrap">Hydro</th>
+                                <th class="p-5 font-label text-[10px] uppercase tracking-widest text-[#003063] text-right font-bold whitespace-nowrap">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody id="occupants-table-body" class="divide-y divide-[#f8f9fa]"></tbody>
                     </table>
                 </div>
             </div>
@@ -191,35 +217,42 @@
             <div class="lg:col-span-3">
                 <h3 class="text-xl font-headline font-bold mb-6 flex items-center gap-3">
                     <span class="w-1.5 h-6 bg-[#1b6d24] rounded-full"></span>
-                    Évolution des Loyers 2026
+                    Historique des Loyers 2026
                 </h3>
-                <div class="bg-[#f3f4f5] rounded-xl overflow-hidden border border-[#c2c6d2]/10">
-                    <div class="p-5 bg-white border-b border-[#f8f9fa] flex justify-between items-center">
-                        <span class="font-label text-[10px] uppercase tracking-widest text-[#424751] font-bold">Projections 2026</span>
+
+                <div class="bg-[#f3f4f5] rounded-xl overflow-x-auto border border-[#c2c6d2]/10">
+                    <div class="p-5 bg-white border-b border-[#f8f9fa] flex justify-between items-center whitespace-nowrap gap-8">
+                        <span class="font-label text-[10px] uppercase tracking-widest text-[#424751] font-bold">Calendrier des Paiements</span>
                         <span class="text-[10px] text-[#1b6d24] font-bold flex items-center gap-1.5 uppercase tracking-wider">
-                            <span class="material-symbols-outlined text-base">trending_up</span> Prévisions de bail
+                            <span class="material-symbols-outlined text-base">calendar_today</span> évolution du prix
                         </span>
                     </div>
-                    <div class="p-3 space-y-2">
-                        <div class="flex items-center justify-between p-4 rounded-lg hover:bg-white transition-all">
-                            <div class="flex items-center gap-5">
-                                <div class="w-10 h-10 rounded-full bg-[#1b6d24]/15 flex items-center justify-center text-[#1b6d24] font-black text-xs">26</div>
-                                <div>
-                                    <p class="font-bold text-[#191c1d]">Dès Juillet 2026</p>
-                                    <p class="text-[10px] text-[#424751] font-bold uppercase tracking-tight">Petite: 642$ • Moy: 781$ • Gde: 837$</p>
-                                </div>
-                            </div>
-                            <span class="font-headline font-black text-[#191c1d] text-lg">2 260 $</span>
-                        </div>
-                        <div class="flex items-center justify-between p-4 rounded-lg hover:bg-white transition-all">
-                            <div class="flex items-center gap-5">
-                                <div class="w-10 h-10 rounded-full bg-[#e1e3e4] flex items-center justify-center text-[#424751] font-black text-xs">26</div>
+                    <div class="p-3 space-y-2 min-w-max">
+                        <div class="flex items-center justify-between p-4 rounded-lg hover:bg-white transition-all bg-secondary-fixed/10 gap-10">
+                            <div class="flex items-center gap-5 whitespace-nowrap">
+                                <div class="w-10 h-10 rounded-full bg-[#1b6d24]/15 flex items-center justify-center text-[#1b6d24] font-black text-xs shrink-0">ACT</div>
                                 <div>
                                     <p class="font-bold text-[#191c1d]">Mai - Juin 2026</p>
-                                    <p class="text-[10px] text-[#424751] font-bold uppercase tracking-tight">Petite: 624$ • Moy: 758$ • Gde: 813$</p>
+                                    <p class="text-[10px] text-[#424751] font-bold uppercase tracking-tight whitespace-nowrap">Petite: 624$ • Moy: 758$ • Gde: 813$ (Tout inclus)</p>
                                 </div>
                             </div>
-                            <span class="font-headline font-black text-[#191c1d] text-lg">2 195 $</span>
+                            <div class="text-right whitespace-nowrap">
+                                <p class="text-[10px] font-bold text-[#424751] uppercase tracking-wider mb-0.5">évolution du prix</p>
+                                <span class="font-headline font-black text-[#1b6d24] text-lg leading-none">2 195 $</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between p-4 rounded-lg hover:bg-white transition-all gap-10">
+                            <div class="flex items-center gap-5 whitespace-nowrap">
+                                <div class="w-10 h-10 rounded-full bg-[#003063]/10 flex items-center justify-center text-[#003063] font-black text-xs shrink-0">PRÉ</div>
+                                <div>
+                                    <p class="font-bold text-[#191c1d]">Dès Juillet 2026</p>
+                                    <p class="text-[10px] text-[#424751] font-bold uppercase tracking-tight whitespace-nowrap">Petite: 642$ • Moy: 781$ • Gde: 837$ (Tout inclus)</p>
+                                </div>
+                            </div>
+                            <div class="text-right whitespace-nowrap">
+                                <p class="text-[10px] font-bold text-[#424751] uppercase tracking-wider mb-0.5">évolution du prix</p>
+                                <span class="font-headline font-black text-[#191c1d] text-lg leading-none">2 260 $</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -244,7 +277,7 @@
                     
                     <div class="bg-white p-5 rounded-xl shadow-sm border border-[#c2c6d2]/15">
                         <div class="flex gap-4">
-                            <span class="font-headline font-black text-[#003063] text-xs uppercase self-center tracking-tighter">charges</span>
+                            <span class="material-symbols-outlined text-[#0077c8] text-2xl self-center">local_fire_department</span>
                             <div>
                                 <p class="text-sm font-black text-[#191c1d] mb-1 uppercase tracking-wider">Hydro-Québec</p>
                                 <p class="text-[11px] text-[#424751] leading-relaxed font-medium">50,83 $ total par mois (16,94 $/pers). Basé sur le plan de paiements égaux.</p>
@@ -267,29 +300,42 @@
     </div>
 
     <script>
-        const occupants = [
+        const occupantsCurrent = [
             { name: "Anabelle", detail: "Petite • +18.33$ inc.", rent: "610,48 $", internet: "14,95 $", hydro: "16,94 $", total: "642,37 $" },
             { name: "Kashish", detail: "Moyenne • +22.49$ inc.", rent: "748,99 $", internet: "14,95 $", hydro: "16,94 $", total: "780,88 $" },
             { name: "Viktor", detail: "Grande • +24.18$ inc.", rent: "805,53 $", internet: "14,95 $", hydro: "16,94 $", total: "837,42 $" },
         ];
 
-        const tableBody = document.getElementById('occupants-table-body');
-        
-        occupants.forEach((occ, i) => {
-            const tr = document.createElement('tr');
-            tr.className = "hover:bg-white transition-all group";
-            tr.innerHTML = `
-                <td class="p-5">
-                    <p class="font-headline font-bold text-[#191c1d] group-hover:text-[#003063] transition-colors">${occ.name}</p>
-                    <p class="text-[10px] text-[#424751] font-medium">${occ.detail}</p>
-                </td>
-                <td class="p-5 font-bold text-[#191c1d]">${occ.rent}</td>
-                <td class="p-5 text-[#424751] font-medium">${occ.internet}</td>
-                <td class="p-5 text-[#424751] font-medium">${occ.hydro}</td>
-                <td class="p-5 text-right font-headline font-extrabold text-[#003063] text-lg">${occ.total}</td>
-            `;
-            tableBody.appendChild(tr);
-        });
+        const occupantsActuel = [
+            { name: "Anabelle", detail: "Petite • +18.33$ inc.", rent: "592,11 $", internet: "14,95 $", hydro: "16,94 $", total: "624,00 $" },
+            { name: "Kashish", detail: "Moyenne • +22.49$ inc.", rent: "726,11 $", internet: "14,95 $", hydro: "16,94 $", total: "758,00 $" },
+            { name: "Viktor", detail: "Grande • +24.18$ inc.", rent: "781,11 $", internet: "14,95 $", hydro: "16,94 $", total: "813,00 $" },
+        ];
+
+        function renderTable(data, elementId, colorClass, showDetail = true) {
+            const container = document.getElementById(elementId);
+            if (!container) return;
+            data.forEach((occ) => {
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-white transition-all group";
+                tr.innerHTML = `
+                    <td class="p-5 whitespace-nowrap">
+                        <p class="font-headline font-bold text-[#191c1d] group-hover:text-primary transition-colors">${occ.name}</p>
+                        ${showDetail ? `<p class="text-[10px] text-[#424751] font-medium">${occ.detail}</p>` : ''}
+                    </td>
+                    <td class="p-5 font-bold text-[#191c1d] whitespace-nowrap">${occ.rent}</td>
+                    <td class="p-5 text-[#424751] font-medium whitespace-nowrap">${occ.internet}</td>
+                    <td class="p-5 text-[#424751] font-medium whitespace-nowrap">${occ.hydro}</td>
+                    <td class="p-5 text-right font-headline font-extrabold ${colorClass} text-lg whitespace-nowrap">${occ.total}</td>
+                `;
+                container.appendChild(tr);
+            });
+        }
+
+        // Mai-Juin is labeled "Actuel"
+        renderTable(occupantsActuel, 'occupants-table-body-2026', 'text-[#1b6d24]', false);
+        // Juillet is labeled "Prévisionnel"
+        renderTable(occupantsCurrent, 'occupants-table-body', 'text-[#003063]');
     </script>
 </body>
 </html>
