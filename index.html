@@ -8,6 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
     <style>
         :root {
+            /* ... colors unchanged ... */
             --color-inverse-primary: #a9c7ff;
             --color-surface-container-highest: #e1e3e4;
             --color-surface-container-low: #f3f4f5;
@@ -119,25 +120,111 @@
         .delay-2 { animation-delay: 0.2s; }
         .delay-3 { animation-delay: 0.3s; }
         .delay-4 { animation-delay: 0.4s; }
+
+        .tab-btn.active {
+            color: var(--color-primary);
+        }
+        
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
     </style>
 </head>
 <body class="min-h-screen selection:bg-primary selection:text-white">
+    <nav class="bg-white/80 backdrop-blur-md border-b border-outline-variant/30 sticky top-0 z-40 px-6">
+        <div class="max-w-5xl mx-auto flex justify-between items-center h-16">
+            <div class="flex items-center gap-8">
+                <span class="material-symbols-outlined text-primary text-2xl">home</span>
+                <div class="flex items-center gap-2 md:gap-6 h-full overflow-x-auto no-scrollbar">
+                    <button onclick="switchTab('home')" id="tab-home" class="tab-btn active h-16 border-b-2 border-primary/100 px-2 font-bold text-[10px] md:text-xs uppercase tracking-widest text-on-surface-variant hover:text-primary transition-all whitespace-nowrap">Accueil</button>
+                    <button onclick="switchTab('finance')" id="tab-finance" class="tab-btn h-16 border-b-2 border-primary/0 px-2 font-bold text-[10px] md:text-xs uppercase tracking-widest text-on-surface-variant hover:text-primary transition-all whitespace-nowrap">Gestion financière</button>
+                    <button onclick="switchTab('life')" id="tab-life" class="tab-btn h-16 border-b-2 border-primary/0 px-2 font-bold text-[10px] md:text-xs uppercase tracking-widest text-on-surface-variant hover:text-primary transition-all whitespace-nowrap">Vie en coloc</button>
+                    <button onclick="switchTab('docs')" id="tab-docs" class="tab-btn h-16 border-b-2 border-primary/0 px-2 font-bold text-[10px] md:text-xs uppercase tracking-widest text-on-surface-variant hover:text-primary transition-all whitespace-nowrap">Documents</button>
+                </div>
+            </div>
+            <div class="flex items-center gap-4">
+                <button onclick="toggleLanguage()" class="bg-surface-container px-3 py-1.5 rounded-full flex items-center gap-2 hover:bg-outline-variant/20 transition-all group">
+                    <span class="material-symbols-outlined text-primary text-sm">language</span>
+                    <span id="lang-text" class="font-label text-[10px] font-black uppercase tracking-widest text-on-surface-variant group-hover:text-primary">EN</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
     <main class="py-12 px-6 max-w-5xl mx-auto space-y-12">
-        <!-- Language Toggle -->
-        <div class="fixed top-6 right-6 z-50">
-            <button onclick="toggleLanguage()" class="bg-white/80 backdrop-blur-sm border border-outline-variant shadow-sm px-4 py-2 rounded-full flex items-center gap-2 hover:bg-white transition-all group">
-                <span class="material-symbols-outlined text-primary text-xl">language</span>
-                <span id="lang-text" class="font-label text-xs font-bold uppercase tracking-widest text-on-surface-variant group-hover:text-primary">EN</span>
-            </button>
+        <!-- Tab 1: Accueil (Home) -->
+        <div id="content-home" class="tab-content transition-all duration-500">
+            <div class="fade-in mb-10">
+                <p id="home-category" class="font-label text-xs uppercase tracking-[0.2em] text-primary mb-2 font-bold">Bienvenue chez nous</p>
+                <h1 id="home-title" class="text-4xl md:text-5xl font-headline font-extrabold tracking-tight text-on-surface">5032 de Lanaudière</h1>
+            </div>
+
+            <!-- Hero Gallery -->
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-4 h-[500px]">
+                <div class="md:col-span-8 h-full rounded-2xl overflow-hidden shadow-lg relative group">
+                    <img src="https://picsum.photos/seed/lanaudiere-exterior/1200/800" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="Façade de l'appartement" referrerpolicy="no-referrer">
+                    <div class="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black/60 to-transparent text-white">
+                        <p class="font-headline font-bold text-2xl" id="hero-img-label">Le 5032 de Lanaudière</p>
+                        <p class="text-sm opacity-80" id="hero-img-sub">Plateau-Mont-Royal, Montréal</p>
+                    </div>
+                </div>
+                <div class="md:col-span-4 grid grid-rows-2 gap-4 h-full">
+                    <div class="rounded-2xl overflow-hidden shadow-lg">
+                        <img src="https://picsum.photos/seed/plateau-park/600/400" class="w-full h-full object-cover" alt="Parc à proximité" referrerpolicy="no-referrer">
+                    </div>
+                    <div class="rounded-2xl overflow-hidden shadow-lg">
+                        <img src="https://picsum.photos/seed/plateau-cafe/600/400" class="w-full h-full object-cover" alt="Café du quartier" referrerpolicy="no-referrer">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Roommates Section -->
+            <section class="pt-12">
+                <h2 class="text-3xl font-headline font-bold mb-8 flex items-center gap-3">
+                    <span class="w-1.5 h-7 bg-primary rounded-full"></span>
+                    <span id="roommates-title">Les Colocataires</span>
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-white p-8 rounded-3xl shadow-sm border border-outline-variant/10 text-center space-y-4 hover:shadow-md transition-shadow">
+                        <img src="https://picsum.photos/seed/mate-1/200/200" class="w-24 h-24 rounded-full mx-auto" alt="Anabelle" referrerpolicy="no-referrer">
+                        <div>
+                            <h3 class="font-headline font-bold text-xl">Anabelle</h3>
+                            <p class="text-xs text-primary font-bold uppercase tracking-widest mt-1" id="role-ana">Petite Chambre</p>
+                        </div>
+                    </div>
+                    <div class="bg-white p-8 rounded-3xl shadow-sm border border-outline-variant/10 text-center space-y-4 hover:shadow-md transition-shadow">
+                        <img src="https://picsum.photos/seed/mate-2/200/200" class="w-24 h-24 rounded-full mx-auto" alt="Kashish" referrerpolicy="no-referrer">
+                        <div>
+                            <h3 class="font-headline font-bold text-xl">Kashish</h3>
+                            <p class="text-xs text-primary font-bold uppercase tracking-widest mt-1" id="role-kash">Moyenne Chambre</p>
+                        </div>
+                    </div>
+                    <div class="bg-white p-8 rounded-3xl shadow-sm border border-outline-variant/10 text-center space-y-4 hover:shadow-md transition-shadow">
+                        <img src="https://picsum.photos/seed/mate-3/200/200" class="w-24 h-24 rounded-full mx-auto" alt="Viktor" referrerpolicy="no-referrer">
+                        <div>
+                            <h3 class="font-headline font-bold text-xl">Viktor</h3>
+                            <p class="text-xs text-primary font-bold uppercase tracking-widest mt-1" id="role-vik">Grande Chambre</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
 
-        <!-- Title & Hero Section -->
-        <div class="fade-in mb-10">
-            <p id="hero-category" class="font-label text-xs uppercase tracking-[0.2em] text-primary mb-2 font-bold">Gestion Financière</p>
-            <h1 id="hero-title" class="text-4xl md:text-5xl font-headline font-extrabold tracking-tight text-on-surface">5032 de Lanaudière</h1>
-        </div>
+        <!-- Tab 2: Gestion Financière (Finance) -->
+        <div id="content-finance" class="tab-content hidden transition-all duration-500">
+            <!-- Title & Hero Section -->
+            <div class="fade-in mb-10">
+                <p id="hero-category" class="font-label text-xs uppercase tracking-[0.2em] text-primary mb-2 font-bold">Gestion Financière</p>
+                <h1 id="hero-title" class="text-4xl md:text-5xl font-headline font-extrabold tracking-tight text-on-surface">Répartition de Mai à Juillet</h1>
+            </div>
 
-        <!-- Summary Grid (Bento Style) -->
+            <!-- ... existing summary grid and tables ... -->
+            <!-- Note: I will wrap the existing summary grid and tables here -->
+
         <div class="fade-in delay-1 grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
             <div class="md:col-span-2 bg-gradient-to-br from-[#003063] to-[#00468c] p-6 rounded-xl text-white shadow-xl flex flex-col justify-between min-h-[160px]">
                 <div class="flex justify-between items-start">
@@ -312,6 +399,70 @@
                 </div>
             </div>
         </div>
+
+        </div>
+
+        <!-- Tab 3: Vie en Coloc (Life) -->
+        <div id="content-life" class="tab-content hidden transition-all duration-500">
+            <div class="fade-in mb-10">
+                <p id="life-category" class="font-label text-xs uppercase tracking-[0.2em] text-primary mb-2 font-bold">Vie Commune</p>
+                <h1 id="life-title" class="text-4xl md:text-5xl font-headline font-extrabold tracking-tight text-on-surface">Tâches & Vie en Colocation</h1>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-outline-variant/10">
+                    <h3 class="text-xl font-headline font-bold mb-6 flex items-center gap-3">
+                        <span class="material-symbols-outlined text-secondary">cleaning_services</span>
+                        <span id="tasks-title">Tâches Ménagères</span>
+                    </h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-center gap-4 p-4 bg-surface-container-low rounded-xl">
+                            <span class="material-symbols-outlined text-on-surface-variant">check_circle</span>
+                            <span class="text-sm font-medium" id="task-1">Poubelles & Recyclage (Lundi soir)</span>
+                        </li>
+                        <li class="flex items-center gap-4 p-4 bg-surface-container-low rounded-xl">
+                            <span class="material-symbols-outlined text-on-surface-variant">check_circle</span>
+                            <span class="text-sm font-medium" id="task-2">Nettoyage de la Cuisine</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-outline-variant/10">
+                    <h3 class="text-xl font-headline font-bold mb-6 flex items-center gap-3">
+                        <span class="material-symbols-outlined text-tertiary">groups</span>
+                        <span id="rules-title">Règles de Vie</span>
+                    </h3>
+                    <div class="p-6 bg-tertiary-container/10 rounded-2xl border border-tertiary-container/20">
+                        <p class="text-sm italic text-on-tertiary-container" id="rules-desc">"Le respect et la communication sont les clés d'une colocation réussie."</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab 4: Documents -->
+        <div id="content-docs" class="tab-content hidden transition-all duration-500">
+            <div class="fade-in mb-10">
+                <p id="docs-category" class="font-label text-xs uppercase tracking-[0.2em] text-primary mb-2 font-bold">Archives & Preuves</p>
+                <h1 id="docs-title" class="text-4xl md:text-5xl font-headline font-extrabold tracking-tight text-on-surface">Documents Partagés</h1>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white p-6 rounded-2xl border border-outline-variant/20 hover:border-primary/50 transition-all cursor-pointer group">
+                    <span class="material-symbols-outlined text-primary text-3xl mb-4">description</span>
+                    <h4 class="font-headline font-bold text-lg mb-1" id="doc-lease">Le Bail (2026-2027)</h4>
+                    <p class="text-xs text-on-surface-variant" id="doc-lease-desc">Signé le 15 Janvier</p>
+                </div>
+                <div class="bg-white p-6 rounded-2xl border border-outline-variant/20 hover:border-primary/50 transition-all cursor-pointer group">
+                    <span class="material-symbols-outlined text-secondary text-3xl mb-4">receipt_long</span>
+                    <h4 class="font-headline font-bold text-lg mb-1" id="doc-hydro">Factures Hydro</h4>
+                    <p class="text-xs text-on-surface-variant" id="doc-hydro-desc">Historique mensuel</p>
+                </div>
+                <div class="bg-white p-6 rounded-2xl border border-outline-variant/20 hover:border-primary/50 transition-all cursor-pointer group">
+                    <span class="material-symbols-outlined text-tertiary text-3xl mb-4">handshake</span>
+                    <h4 class="font-headline font-bold text-lg mb-1" id="doc-agr">Entente de Coloc</h4>
+                    <p class="text-xs text-on-surface-variant" id="doc-agr-desc">Règles et signatures</p>
+                </div>
+            </div>
+        </div>
     </main>
 
     <!-- Side Decoration (Editorial Flair) -->
@@ -340,14 +491,39 @@
                     <p id="modal-error" class="hidden text-center text-xs font-bold text-error uppercase tracking-wider">Code incorrect</p>
                     <div class="flex gap-2">
                         <button onclick="closePasscodeModal()" class="flex-1 px-4 py-3 rounded-xl font-bold text-xs uppercase tracking-widest text-on-surface-variant bg-surface-container hover:bg-surface-container-high transition-all">Annuler</button>
-                        <button onclick="validatePasscode()" class="flex-1 px-4 py-3 rounded-xl font-bold text-xs uppercase tracking-widest text-white bg-primary hover:opacity-90 transition-all shadow-lg active:scale-95">Valider</button>
+                        <button onclick="validatePasscode()" class="flex-1 px-4 py-3 rounded-xl font-bold text-xs uppercase tracking-widest text-white bg-blue-600 hover:bg-blue-700 transition-all shadow-lg active:scale-95">Valider</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- Back to Top Button -->
+    <button id="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="fixed bottom-8 right-8 z-50 bg-white text-primary w-12 h-12 rounded-full shadow-2xl flex items-center justify-center hover:scale-110 active:scale-95 transition-all opacity-0 pointer-events-none translate-y-10 border border-primary/20">
+        <span class="material-symbols-outlined">home</span>
+    </button>
+
     <script>
+        function switchTab(tabId) {
+            // Scroll to top on tab change
+            window.scrollTo({top: 0, behavior: 'smooth'});
+            
+            // Update tabs visibility
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.add('hidden');
+            });
+            document.getElementById('content-' + tabId).classList.remove('hidden');
+
+            // Update button styles
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+                btn.classList.replace('border-primary/100', 'border-primary/0');
+            });
+            const activeBtn = document.getElementById('tab-' + tabId);
+            activeBtn.classList.add('active');
+            activeBtn.classList.replace('border-primary/0', 'border-primary/100');
+        }
+
         let currentLang = 'FR';
         const translations = {
             FR: {
@@ -389,7 +565,34 @@
                 modalDesc: 'Veuillez entrer le code d\'accès pour modifier.',
                 modalError: 'Code incorrect',
                 modalCancel: 'Annuler',
-                modalValidate: 'Valider'
+                modalValidate: 'Valider',
+                // New Tabs
+                navHome: 'Accueil',
+                navFinance: 'Gestion financière',
+                navLife: 'Vie en coloc',
+                navDocs: 'Documents',
+                homeCategory: 'Bienvenue chez nous',
+                heroImgLabel: 'Le 5032 de Lanaudière',
+                heroImgSub: 'Plateau-Mont-Royal, Montréal',
+                roommatesTitle: 'Les Colocataires',
+                roleAna: 'Petite Chambre',
+                roleKash: 'Moyenne Chambre',
+                roleVik: 'Grande Chambre',
+                lifeCategory: 'Vie Commune',
+                lifeTitle: 'Tâches & Vie en Colocation',
+                tasksTitle: 'Tâches Ménagères',
+                rulesTitle: 'Règles de Vie',
+                rulesDesc: '"Le respect et la communication sont les clés d\'une colocation réussie."',
+                task1: 'Poubelles & Recyclage (Lundi soir)',
+                task2: 'Nettoyage de la Cuisine',
+                docsCategory: 'Archives & Preuves',
+                docsTitle: 'Documents Partagés',
+                docLease: 'Le Bail (2026-2027)',
+                docLeaseDesc: 'Signé le 15 Janvier',
+                docHydro: 'Factures Hydro',
+                docHydroDesc: 'Historique mensuel',
+                docAgr: 'Entente de Coloc',
+                docAgrDesc: 'Règles et signatures'
             },
             EN: {
                 langBtn: 'FR',
@@ -430,7 +633,34 @@
                 modalDesc: 'Please enter the access code to edit.',
                 modalError: 'Incorrect code',
                 modalCancel: 'Cancel',
-                modalValidate: 'Validate'
+                modalValidate: 'Validate',
+                // New Tabs
+                navHome: 'Home',
+                navFinance: 'Financial Management',
+                navLife: 'Life & Tasks',
+                navDocs: 'Documents',
+                homeCategory: 'Welcome home',
+                heroImgLabel: 'The 5032 Lanaudière',
+                heroImgSub: 'Plateau-Mont-Royal, Montreal',
+                roommatesTitle: 'The Roommates',
+                roleAna: 'Small Room',
+                roleKash: 'Medium Room',
+                roleVik: 'Large Room',
+                lifeCategory: 'Common Life',
+                lifeTitle: 'Tasks & Living Together',
+                tasksTitle: 'Housework',
+                rulesTitle: 'House Rules',
+                rulesDesc: '"Respect and communication are the keys to a successful co-living."',
+                task1: 'Trash & Recycling (Monday evening)',
+                task2: 'Kitchen Cleaning',
+                docsCategory: 'Archives & Proofs',
+                docsTitle: 'Shared Documents',
+                docLease: 'The Lease (2026-2027)',
+                docLeaseDesc: 'Signed on Jan 15th',
+                docHydro: 'Hydro Bills',
+                docHydroDesc: 'Monthly history',
+                docAgr: 'Roommate Agreement',
+                docAgrDesc: 'Rules and signatures'
             }
         };
 
@@ -582,6 +812,7 @@
 
         function updateContent() {
             const t = translations[currentLang];
+            if (!t) return;
             document.documentElement.lang = currentLang.toLowerCase();
             document.title = t.title;
             
@@ -643,6 +874,41 @@
             modalBtns[0].innerText = t.modalCancel;
             modalBtns[1].innerText = t.modalValidate;
 
+            // Update Nav
+            document.getElementById('tab-home').innerText = t.navHome;
+            document.getElementById('tab-finance').innerText = t.navFinance;
+            document.getElementById('tab-life').innerText = t.navLife;
+            document.getElementById('tab-docs').innerText = t.navDocs;
+
+            // Update Home Tab
+            document.getElementById('home-category').innerText = t.homeCategory;
+            document.getElementById('home-title').innerText = t.homeTitle;
+            document.getElementById('hero-img-label').innerText = t.heroImgLabel;
+            document.getElementById('hero-img-sub').innerText = t.heroImgSub;
+            document.getElementById('roommates-title').innerText = t.roommatesTitle;
+            document.getElementById('role-ana').innerText = t.roleAna;
+            document.getElementById('role-kash').innerText = t.roleKash;
+            document.getElementById('role-vik').innerText = t.roleVik;
+
+            // Update Life Tab
+            document.getElementById('life-category').innerText = t.lifeCategory;
+            document.getElementById('life-title').innerText = t.lifeTitle;
+            document.getElementById('tasks-title').innerText = t.tasksTitle;
+            document.getElementById('rules-title').innerText = t.rulesTitle;
+            document.getElementById('rules-desc').innerText = t.rulesDesc;
+            document.getElementById('task-1').innerText = t.task1;
+            document.getElementById('task-2').innerText = t.task2;
+
+            // Update Docs Tab
+            document.getElementById('docs-category').innerText = t.docsCategory;
+            document.getElementById('docs-title').innerText = t.docsTitle;
+            document.getElementById('doc-lease').innerText = t.docLease;
+            document.getElementById('doc-lease-desc').innerText = t.docLeaseDesc;
+            document.getElementById('doc-hydro').innerText = t.docHydro;
+            document.getElementById('doc-hydro-desc').innerText = t.docHydroDesc;
+            document.getElementById('doc-agr').innerText = t.docAgr;
+            document.getElementById('doc-agr-desc').innerText = t.docAgrDesc;
+
             renderTables();
         }
 
@@ -691,7 +957,19 @@
             renderTable(occupantsCurrent, 'occupants-table-body', 'text-[#003063]');
         }
 
+        window.addEventListener('scroll', () => {
+            const btn = document.getElementById('back-to-top');
+            if (window.scrollY > 300) {
+                btn.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-10');
+                btn.classList.add('opacity-100', 'translate-y-0');
+            } else {
+                btn.classList.add('opacity-0', 'pointer-events-none', 'translate-y-10');
+                btn.classList.remove('opacity-100', 'translate-y-0');
+            }
+        });
+
         renderTables();
+        updateContent();
     </script>
 </body>
 </html>
