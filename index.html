@@ -132,6 +132,55 @@
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
+
+        /* Calendar Styles */
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 1px;
+            background-color: var(--color-outline-variant);
+            border: 1px solid var(--color-outline-variant);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        .calendar-day {
+            background-color: white;
+            min-height: 80px;
+            padding: 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .calendar-day.other-month {
+            background-color: #f8f9fa;
+            color: #c2c6d2;
+        }
+        .calendar-header-day {
+            background-color: #f3f4f5;
+            padding: 10px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #424751;
+        }
+        .task-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+        .task-pill {
+            font-size: 9px;
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: white;
+            font-weight: 700;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
     </style>
 </head>
 <body class="min-h-screen selection:bg-primary selection:text-white">
@@ -414,6 +463,56 @@
                 <p id="life-category" class="font-label text-xs uppercase tracking-[0.2em] text-primary mb-2 font-bold">Vie Commune</p>
                 <h1 id="life-title" class="text-4xl md:text-5xl font-headline font-extrabold tracking-tight text-on-surface">Tâches & Vie en Colocation</h1>
             </div>
+
+            <!-- Calendar Container -->
+            <div class="fade-in delay-1 bg-white p-6 rounded-3xl shadow-sm border border-outline-variant/10 mb-12">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-6">
+                    <div>
+                        <h3 class="text-2xl font-headline font-bold flex items-center gap-3">
+                            <span class="material-symbols-outlined text-primary">calendar_month</span>
+                            <span id="calendar-title-text">Calendrier des Tâches</span>
+                        </h3>
+                        <p class="text-sm text-on-surface-variant mt-1" id="calendar-subtitle">Organisation et vie commune</p>
+                    </div>
+                    
+                    <div class="flex items-center gap-4 bg-surface-container rounded-2xl p-2">
+                        <button id="edit-tasks-btn" onclick="toggleEdit('tasks')" class="p-2 hover:bg-white rounded-xl transition-all shadow-sm flex items-center gap-2 group">
+                            <span class="material-symbols-outlined text-sm text-primary">edit</span>
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-primary">Modifier</span>
+                        </button>
+                        <div class="w-px h-4 bg-outline-variant/30"></div>
+                        <button onclick="prevMonth()" class="p-2 hover:bg-white rounded-xl transition-all shadow-sm">
+                            <span class="material-symbols-outlined">chevron_left</span>
+                        </button>
+                        <span id="current-month-display" class="font-headline font-bold text-sm min-w-[120px] text-center uppercase tracking-widest text-on-surface">Avril 2024</span>
+                        <button onclick="nextMonth()" class="p-2 hover:bg-white rounded-xl transition-all shadow-sm">
+                            <span class="material-symbols-outlined">chevron_right</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Roommate Legend / Color Config -->
+                <div class="flex flex-wrap gap-4 mb-8 p-4 bg-surface-container-low rounded-2xl border border-outline-variant/20">
+                    <p class="w-full text-[10px] font-bold uppercase tracking-widest text-on-surface-variant mb-2">Couleurs des Colocataires (cliquez pour changer)</p>
+                    <div class="flex items-center gap-3 bg-white px-3 py-2 rounded-xl shadow-sm border border-outline-variant/30">
+                        <input type="color" id="color-ana" value="#6366f1" onchange="updateColors()" class="w-6 h-6 rounded-full border-none cursor-pointer bg-transparent">
+                        <span class="font-bold text-xs uppercase tracking-tight">Anabelle</span>
+                    </div>
+                    <div class="flex items-center gap-3 bg-white px-3 py-2 rounded-xl shadow-sm border border-outline-variant/30 transition-shadow">
+                        <input type="color" id="color-kash" value="#f59e0b" onchange="updateColors()" class="w-6 h-6 rounded-full border-none cursor-pointer bg-transparent">
+                        <span class="font-bold text-xs uppercase tracking-tight">Kashish</span>
+                    </div>
+                    <div class="flex items-center gap-3 bg-white px-3 py-2 rounded-xl shadow-sm border border-outline-variant/30">
+                        <input type="color" id="color-vik" value="#003063" onchange="updateColors()" class="w-6 h-6 rounded-full border-none cursor-pointer bg-transparent">
+                        <span class="font-bold text-xs uppercase tracking-tight">Viktor</span>
+                    </div>
+                </div>
+
+                <!-- The Calendar Grid -->
+                <div id="calendar-grid-container" class="calendar-grid">
+                    <!-- Days will be injected here -->
+                </div>
+            </div>
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div class="bg-white p-8 rounded-3xl shadow-sm border border-outline-variant/10">
@@ -470,6 +569,30 @@
             </div>
         </div>
     </main>
+
+    <!-- Task Add Modal -->
+    <div id="task-modal" class="hidden fixed inset-0 z-[110] flex sm:items-center items-start justify-center p-4 sm:p-6 backdrop-blur-md bg-on-surface/20 overflow-y-auto">
+        <div class="bg-white rounded-3xl shadow-2xl border border-outline-variant/30 w-full max-w-sm overflow-hidden fade-in my-auto">
+            <div class="p-6 sm:p-8 space-y-6">
+                <div class="text-center space-y-2">
+                    <h3 class="text-xl font-headline font-bold text-on-surface">Ajouter une Tâche</h3>
+                    <p id="task-modal-date" class="text-sm text-on-surface-variant font-medium"></p>
+                </div>
+                <div class="space-y-4">
+                    <input type="text" id="task-input-text" class="w-full bg-surface-container rounded-xl px-4 py-3 text-sm font-medium focus:ring-2 focus:ring-blue-600 focus:outline-none border-none" placeholder="Nom de la tâche...">
+                    <select id="task-roommate-select" class="w-full bg-surface-container rounded-xl px-4 py-3 text-sm font-medium focus:ring-2 focus:ring-blue-600 focus:outline-none border-none">
+                        <option value="Anabelle">Anabelle</option>
+                        <option value="Kashish">Kashish</option>
+                        <option value="Viktor">Viktor</option>
+                    </select>
+                    <div class="flex gap-2">
+                        <button onclick="closeTaskModal()" class="flex-1 px-4 py-3 rounded-xl font-bold text-xs uppercase tracking-widest text-on-surface-variant bg-surface-container hover:bg-surface-container-high transition-all">Annuler</button>
+                        <button onclick="saveTask()" class="flex-1 px-4 py-3 rounded-xl font-bold text-xs uppercase tracking-widest text-white bg-blue-600 hover:bg-blue-700 transition-all shadow-lg active:scale-95">Valider</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Passcode Modal -->
     <div id="passcode-modal" class="hidden fixed inset-0 z-[100] flex items-center justify-center p-6 backdrop-blur-md bg-on-surface/20">
@@ -582,6 +705,9 @@
                 rulesDesc: '"Le respect et la communication sont les clés d\'une colocation réussie."',
                 task1: 'Poubelles & Recyclage (Lundi soir)',
                 task2: 'Nettoyage de la Cuisine',
+                taskModalTitle: 'Ajouter une Tâche',
+                taskModalPlaceholder: 'Nom de la tâche...',
+                taskModalValidate: 'Valider',
                 docsCategory: 'Archives & Preuves',
                 docsTitle: 'Documents Partagés',
                 docLease: 'Le Bail (2026-2027)',
@@ -651,6 +777,9 @@
                 rulesDesc: '"Respect and communication are the keys to a successful co-living."',
                 task1: 'Trash & Recycling (Monday evening)',
                 task2: 'Kitchen Cleaning',
+                taskModalTitle: 'Add a Task',
+                taskModalPlaceholder: 'Task name...',
+                taskModalValidate: 'Validate',
                 docsCategory: 'Archives & Proofs',
                 docsTitle: 'Shared Documents',
                 docLease: 'The Lease (2026-2027)',
@@ -723,12 +852,32 @@
                 editingActuel = true;
                 document.getElementById('edit-btn-1').classList.add('hidden');
                 document.getElementById('edit-controls-1').classList.remove('hidden');
-            } else {
+            } else if (type === 'prev') {
                 editingPrev = true;
                 document.getElementById('edit-btn-2').classList.add('hidden');
                 document.getElementById('edit-controls-2').classList.remove('hidden');
+            } else if (type === 'tasks') {
+                editingTasks = true;
+                document.getElementById('edit-tasks-btn').classList.add('bg-white', 'shadow-inner');
+                document.getElementById('edit-tasks-btn').innerHTML = `
+                    <span class="material-symbols-outlined text-sm text-secondary">check</span>
+                    <span class="text-[10px] font-bold uppercase tracking-wider text-secondary">Terminer</span>
+                `;
+                document.getElementById('edit-tasks-btn').onclick = () => stopTaskEdit();
             }
             renderTables();
+            renderCalendar();
+        }
+
+        function stopTaskEdit() {
+            editingTasks = false;
+            document.getElementById('edit-tasks-btn').classList.remove('bg-white', 'shadow-inner');
+            document.getElementById('edit-tasks-btn').innerHTML = `
+                <span class="material-symbols-outlined text-sm text-primary">edit</span>
+                <span class="text-[10px] font-bold uppercase tracking-wider text-primary">Modifier</span>
+            `;
+            document.getElementById('edit-tasks-btn').onclick = () => toggleEdit('tasks');
+            renderCalendar();
         }
 
         function cancelEdit(type) {
@@ -897,6 +1046,13 @@
             document.getElementById('task-1').innerText = t.task1;
             document.getElementById('task-2').innerText = t.task2;
 
+            // Updated task modal translation
+            document.querySelector('#task-modal h3').innerText = t.taskModalTitle;
+            document.getElementById('task-input-text').placeholder = t.taskModalPlaceholder;
+            const taskModalBtns = document.getElementById('task-modal').querySelectorAll('button');
+            taskModalBtns[0].innerText = t.modalCancel;
+            taskModalBtns[1].innerText = t.taskModalValidate;
+
             // Update Docs Tab
             document.getElementById('docs-category').innerText = t.docsCategory;
             document.getElementById('docs-title').innerText = t.docsTitle;
@@ -966,8 +1122,163 @@
             }
         });
 
+        let currentMonthDate = new Date();
+        const tasks = [
+            { day: 5, month: currentMonthDate.getMonth(), year: currentMonthDate.getFullYear(), roommate: 'Anabelle', task: 'Lavage Cuisine' },
+            { day: 12, month: currentMonthDate.getMonth(), year: currentMonthDate.getFullYear(), roommate: 'Kashish', task: 'Poubelles' },
+            { day: 19, month: currentMonthDate.getMonth(), year: currentMonthDate.getFullYear(), roommate: 'Viktor', task: 'Nettoyage Salon' },
+            { day: 26, month: currentMonthDate.getMonth(), year: currentMonthDate.getFullYear(), roommate: 'Anabelle', task: 'Recyclage' }
+        ];
+
+        let cologColors = {
+            Anabelle: '#6366f1',
+            Kashish: '#f59e0b',
+            Viktor: '#003063'
+        };
+
+        function updateColors() {
+            cologColors.Anabelle = document.getElementById('color-ana').value;
+            cologColors.Kashish = document.getElementById('color-kash').value;
+            cologColors.Viktor = document.getElementById('color-vik').value;
+            renderCalendar();
+        }
+
+        let editingTasks = false;
+        let selectedDayForTask = null;
+
+        function openTaskModal(day) {
+            if (!editingTasks) return;
+            selectedDayForTask = day;
+            document.getElementById('task-modal-date').innerText = `${day} ${document.getElementById('current-month-display').innerText}`;
+            document.getElementById('task-input-text').value = '';
+            document.getElementById('task-modal').classList.remove('hidden');
+        }
+
+        function closeTaskModal() {
+            document.getElementById('task-modal').classList.add('hidden');
+            selectedDayForTask = null;
+        }
+
+        function saveTask() {
+            const taskText = document.getElementById('task-input-text').value;
+            const roommate = document.getElementById('task-roommate-select').value;
+            if (!taskText) return;
+
+            tasks.push({
+                day: selectedDayForTask,
+                month: currentMonthDate.getMonth(),
+                year: currentMonthDate.getFullYear(),
+                roommate: roommate,
+                task: taskText
+            });
+
+            closeTaskModal();
+            renderCalendar();
+            sendEmailNotification(`Nouvelle tâche ajoutée : ${taskText} pour ${roommate} le ${selectedDayForTask}/${currentMonthDate.getMonth() + 1}`);
+        }
+
+        function deleteTask(index) {
+            if (!editingTasks) return;
+            tasks.splice(index, 1);
+            renderCalendar();
+            sendEmailNotification(`Une tâche a été supprimée du calendrier.`);
+        }
+
+        function sendEmailNotification(message) {
+            console.log("SIMULATION EMAIL : " + message);
+            // Dans un environnement réel avec backend, nous ferions un appel API ici.
+            // Sans backend personnalisé, nous pouvons utiliser un service tiers ou informer l'utilisateur.
+        }
+
+        function renderCalendar() {
+            const container = document.getElementById('calendar-grid-container');
+            const monthDisplay = document.getElementById('current-month-display');
+            if (!container) return;
+
+            const year = currentMonthDate.getFullYear();
+            const month = currentMonthDate.getMonth();
+
+            const monthNames = currentLang === 'FR' ? 
+                ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'] :
+                ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+            
+            const dayNames = currentLang === 'FR' ? 
+                ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'] :
+                ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
+            monthDisplay.innerText = `${monthNames[month]} ${year}`;
+
+            container.innerHTML = '';
+            
+            // Render Header Days
+            dayNames.forEach(d => {
+                const header = document.createElement('div');
+                header.className = 'calendar-header-day';
+                header.innerText = d;
+                container.appendChild(header);
+            });
+
+            const firstDay = new Date(year, month, 1).getDay();
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+            const prevMonthLastDay = new Date(year, month, 0).getDate();
+
+            // Previous month days
+            for (let i = firstDay; i > 0; i--) {
+                const day = document.createElement('div');
+                day.className = 'calendar-day other-month';
+                day.innerHTML = `<span class="text-[10px] font-bold text-gray-300">${prevMonthLastDay - i + 1}</span>`;
+                container.appendChild(day);
+            }
+
+            // Current month days
+            for (let i = 1; i <= daysInMonth; i++) {
+                const dayDiv = document.createElement('div');
+                dayDiv.className = `calendar-day ${editingTasks ? 'cursor-pointer hover:bg-primary/5 transition-colors' : ''}`;
+                dayDiv.onclick = () => openTaskModal(i);
+                dayDiv.innerHTML = `<span class="text-[10px] font-bold text-on-surface">${i}</span>`;
+                
+                // Add tasks
+                const dayTasks = tasks.map((t, idx) => ({ ...t, originalIndex: idx }))
+                                     .filter(t => t.day === i && t.month === month && t.year === year);
+                
+                dayTasks.forEach(t => {
+                    const pill = document.createElement('div');
+                    pill.className = 'task-pill relative group';
+                    pill.style.backgroundColor = cologColors[t.roommate];
+                    pill.innerHTML = `
+                        ${t.task}
+                        ${editingTasks ? `<span onclick="event.stopPropagation(); deleteTask(${t.originalIndex})" class="absolute -right-1 -top-1 bg-white text-error rounded-full w-3 h-3 flex items-center justify-center text-[8px] shadow-sm cursor-pointer opacity-0 group-hover:opacity-100 transition-opacity">×</span>` : ''}
+                    `;
+                    dayDiv.appendChild(pill);
+                });
+
+                container.appendChild(dayDiv);
+            }
+
+            // Next month days to fill grid
+            const totalCells = container.children.length - 7; // exclude headers
+            const remaining = 42 - totalCells;
+            for (let i = 1; i <= remaining; i++) {
+                const day = document.createElement('div');
+                day.className = 'calendar-day other-month';
+                day.innerHTML = `<span class="text-[10px] font-bold text-gray-300">${i}</span>`;
+                container.appendChild(day);
+            }
+        }
+
+        function nextMonth() {
+            currentMonthDate.setMonth(currentMonthDate.getMonth() + 1);
+            renderCalendar();
+        }
+
+        function prevMonth() {
+            currentMonthDate.setMonth(currentMonthDate.getMonth() - 1);
+            renderCalendar();
+        }
+
         renderTables();
         updateContent();
+        renderCalendar();
     </script>
 </body>
 </html>
