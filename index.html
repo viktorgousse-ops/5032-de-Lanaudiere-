@@ -166,7 +166,7 @@
             <!-- Hero Gallery -->
             <div class="grid grid-cols-1 md:grid-cols-12 gap-4 h-[500px]">
                 <div class="md:col-span-8 h-full rounded-2xl overflow-hidden shadow-lg relative group">
-                    <img src="https://picsum.photos/seed/lanaudiere-exterior/1200/800" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="Façade de l'appartement" referrerpolicy="no-referrer">
+                    <img src="https://picsum.photos/seed/montreal-ext/1200/800" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="Façade de l'appartement" referrerpolicy="no-referrer">
                     <div class="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black/60 to-transparent text-white">
                         <p class="font-headline font-bold text-2xl" id="hero-img-label">Le 5032 de Lanaudière</p>
                         <p class="text-sm opacity-80" id="hero-img-sub">Plateau-Mont-Royal, Montréal</p>
@@ -174,10 +174,10 @@
                 </div>
                 <div class="md:col-span-4 grid grid-rows-2 gap-4 h-full">
                     <div class="rounded-2xl overflow-hidden shadow-lg">
-                        <img src="https://picsum.photos/seed/plateau-park/600/400" class="w-full h-full object-cover" alt="Parc à proximité" referrerpolicy="no-referrer">
+                        <img src="https://picsum.photos/seed/montreal-park-mtl/600/400" class="w-full h-full object-cover" alt="Parc à proximité" referrerpolicy="no-referrer">
                     </div>
                     <div class="rounded-2xl overflow-hidden shadow-lg">
-                        <img src="https://picsum.photos/seed/plateau-cafe/600/400" class="w-full h-full object-cover" alt="Café du quartier" referrerpolicy="no-referrer">
+                        <img src="https://picsum.photos/seed/montreal-coffee-shop/600/400" class="w-full h-full object-cover" alt="Café du quartier" referrerpolicy="no-referrer">
                     </div>
                 </div>
             </div>
@@ -190,21 +190,27 @@
                 </h2>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                     <div class="bg-white p-8 rounded-3xl shadow-sm border border-outline-variant/10 text-center space-y-4 hover:shadow-md transition-shadow">
-                        <img src="https://picsum.photos/seed/mate-1/200/200" class="w-24 h-24 rounded-full mx-auto" alt="Anabelle" referrerpolicy="no-referrer">
+                        <div class="w-24 h-24 rounded-full mx-auto bg-primary/10 flex items-center justify-center">
+                            <span class="material-symbols-outlined text-primary text-4xl">person</span>
+                        </div>
                         <div>
                             <h3 class="font-headline font-bold text-xl">Anabelle</h3>
                             <p class="text-xs text-primary font-bold uppercase tracking-widest mt-1" id="role-ana">Petite Chambre</p>
                         </div>
                     </div>
                     <div class="bg-white p-8 rounded-3xl shadow-sm border border-outline-variant/10 text-center space-y-4 hover:shadow-md transition-shadow">
-                        <img src="https://picsum.photos/seed/mate-2/200/200" class="w-24 h-24 rounded-full mx-auto" alt="Kashish" referrerpolicy="no-referrer">
+                        <div class="w-24 h-24 rounded-full mx-auto bg-primary/10 flex items-center justify-center">
+                            <span class="material-symbols-outlined text-primary text-4xl">person</span>
+                        </div>
                         <div>
                             <h3 class="font-headline font-bold text-xl">Kashish</h3>
                             <p class="text-xs text-primary font-bold uppercase tracking-widest mt-1" id="role-kash">Moyenne Chambre</p>
                         </div>
                     </div>
                     <div class="bg-white p-8 rounded-3xl shadow-sm border border-outline-variant/10 text-center space-y-4 hover:shadow-md transition-shadow">
-                        <img src="https://picsum.photos/seed/mate-3/200/200" class="w-24 h-24 rounded-full mx-auto" alt="Viktor" referrerpolicy="no-referrer">
+                        <div class="w-24 h-24 rounded-full mx-auto bg-primary/10 flex items-center justify-center">
+                            <span class="material-symbols-outlined text-primary text-4xl">person</span>
+                        </div>
                         <div>
                             <h3 class="font-headline font-bold text-xl">Viktor</h3>
                             <p class="text-xs text-primary font-bold uppercase tracking-widest mt-1" id="role-vik">Grande Chambre</p>
@@ -465,16 +471,6 @@
         </div>
     </main>
 
-    <!-- Side Decoration (Editorial Flair) -->
-    <div class="hidden lg:block fixed right-10 top-1/2 -translate-y-1/2 w-48 opacity-10 pointer-events-none rotate-6 select-none">
-        <img 
-            class="rounded-2xl grayscale blur-[1px] hover:blur-0 transition-all duration-700" 
-            referrerpolicy="no-referrer"
-            alt="Minimalist architectural detail" 
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBV3a_yp6RcPurok1LVblaRfGBPbd8Z40FSm3Fnpl_2qoetfaxZXWpoR51eXKoaIuIF4pNTRxAyEFRXK4f9l4kA1G4buUJfeImfOGMMrIkMMld65DFO9Mc3WR-0kU0hS43I_t39fr7HyJFJ3C9YcBxX41_OGYNQPYt7T2F21lfRuOqahgOOVgacF68Hor8Nb9wH32Rvjf1XrRS3K_13pwBacrq5pW_P9LrQnQ0XFAIIN8ZSlJtVJQPSOJTzF61EFxI2Axms8g449Jw"
-        />
-    </div>
-
     <!-- Passcode Modal -->
     <div id="passcode-modal" class="hidden fixed inset-0 z-[100] flex items-center justify-center p-6 backdrop-blur-md bg-on-surface/20">
         <div class="bg-white rounded-2xl shadow-2xl border border-outline-variant/30 w-full max-w-sm overflow-hidden fade-in">
@@ -578,6 +574,7 @@
                 roleAna: 'Petite Chambre',
                 roleKash: 'Moyenne Chambre',
                 roleVik: 'Grande Chambre',
+                homeTitle: '5032 de Lanaudière',
                 lifeCategory: 'Vie Commune',
                 lifeTitle: 'Tâches & Vie en Colocation',
                 tasksTitle: 'Tâches Ménagères',
@@ -646,6 +643,7 @@
                 roleAna: 'Small Room',
                 roleKash: 'Medium Room',
                 roleVik: 'Large Room',
+                homeTitle: '5032 Lanaudière',
                 lifeCategory: 'Common Life',
                 lifeTitle: 'Tasks & Living Together',
                 tasksTitle: 'Housework',
