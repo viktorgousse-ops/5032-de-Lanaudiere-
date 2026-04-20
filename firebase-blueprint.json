@@ -19,9 +19,9 @@
       "description": "Color configuration for a roommate",
       "type": "object",
       "properties": {
-        "Anabelle": { "type": "string" },
-        "Kashish": { "type": "string" },
-        "Viktor": { "type": "string" }
+        "A.": { "type": "string" },
+        "K.": { "type": "string" },
+        "V.": { "type": "string" }
       }
     },
     "FinancialEntry": {

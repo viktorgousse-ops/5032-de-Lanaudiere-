@@ -32,9 +32,9 @@ service cloud.firestore {
 
     // Color Settings Validation
     function isValidColors(data) {
-      return (data.Anabelle is string && data.Anabelle.size() <= 10) &&
-             (data.Kashish is string && data.Kashish.size() <= 10) &&
-             (data.Viktor is string && data.Viktor.size() <= 10);
+      return (data['A.'] is string && data['A.'].size() <= 10) &&
+             (data['K.'] is string && data['K.'].size() <= 10) &&
+             (data['V.'] is string && data['V.'].size() <= 10);
     }
 
     match /coloc_settings/colors {

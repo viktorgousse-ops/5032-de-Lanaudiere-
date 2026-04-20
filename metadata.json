@@ -1,6 +1,6 @@
 {
-  "name": "Gestion 5032 de Lanaudière",
-  "description": "Application de gestion financière pour la colocation du 5032 de Lanaudière, incluant la répartition des loyers et des charges.",
+  "name": "Gestion Maison",
+  "description": "Application de gestion financière pour la colocation, incluant la répartition des loyers et des charges.",
   "requestFramePermissions": [],
   "majorCapabilities": []
 }
