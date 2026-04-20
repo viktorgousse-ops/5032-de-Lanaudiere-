@@ -135,12 +135,9 @@
 
         .tab-content {
             display: block;
-            opacity: 1;
-            transition: opacity 0.3s ease;
         }
         .tab-content.hidden {
-            display: none;
-            opacity: 0;
+            display: none !important;
         }
 
         /* Calendar Styles */
@@ -230,10 +227,10 @@
         </div>
     </nav>
 
-    <main class="py-12 px-6 max-w-5xl mx-auto space-y-12">
+    <main class="py-12 px-6 max-w-5xl mx-auto">
         <!-- Tab 1: Accueil (Home) -->
-        <div id="content-home" class="tab-content transition-all duration-500">
-            <div class="fade-in mb-10">
+        <div id="content-home" class="tab-content">
+            <div class="mb-10">
                 <p id="home-category" class="font-label text-xs uppercase tracking-[0.2em] text-primary mb-2 font-bold">Bienvenue chez nous</p>
                 <h1 id="home-title" class="text-4xl md:text-5xl font-headline font-extrabold tracking-tight text-on-surface">5032 de Lanaudière</h1>
             </div>
@@ -328,7 +325,7 @@
         </div>
 
         <!-- Main Financial Ledger (Actuel: Mai-Juin 2026) -->
-        <section class="fade-in delay-2 mb-12">
+        <section class="mb-12">
             <div class="flex items-center justify-between mb-6">
                 <h3 id="table-1-title" class="text-xl font-headline font-bold flex items-center gap-3">
                     <span class="w-1.5 h-6 bg-[#1b6d24] rounded-full"></span>
@@ -366,7 +363,7 @@
         </section>
 
         <!-- Main Financial Ledger (Prévisionnel: Juillet 2026) -->
-        <section class="fade-in delay-2 mb-12">
+        <section class="mb-12">
             <div class="flex items-center justify-between mb-6">
                 <h3 id="table-2-title" class="text-xl font-headline font-bold flex items-center gap-3">
                     <span class="w-1.5 h-6 bg-[#003063] rounded-full"></span>
@@ -404,7 +401,7 @@
         </section>
 
         <!-- Secondary Section: Evolution & Notes -->
-        <div class="fade-in delay-3 grid grid-cols-1 lg:grid-cols-5 gap-10">
+        <div class="grid grid-cols-1 lg:grid-cols-5 gap-10">
             <!-- Evolution Table -->
             <div class="lg:col-span-3">
                 <h3 id="history-title" class="text-xl font-headline font-bold mb-6 flex items-center gap-3">
@@ -479,14 +476,14 @@
     </div>
 
     <!-- Tab 3: Vie en Coloc (Life) -->
-        <div id="content-life" class="tab-content hidden transition-all duration-500">
-            <div class="fade-in mb-10">
+    <div id="content-life" class="tab-content hidden">
+        <div class="mb-10">
                 <p id="life-category" class="font-label text-xs uppercase tracking-[0.2em] text-primary mb-2 font-bold">Vie Commune</p>
                 <h1 id="life-title" class="text-4xl md:text-5xl font-headline font-extrabold tracking-tight text-on-surface">Tâches & Vie en Colocation</h1>
             </div>
 
             <!-- Calendar Container -->
-            <div class="fade-in delay-1 bg-white p-6 rounded-3xl shadow-sm border border-outline-variant/10 mb-12">
+            <div class="bg-white p-6 rounded-3xl shadow-sm border border-outline-variant/10 mb-12">
                 <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-6">
                     <div>
                         <h3 class="text-2xl font-headline font-bold flex items-center gap-3">
@@ -565,8 +562,8 @@
         </div>
 
         <!-- Tab 4: Documents -->
-        <div id="content-docs" class="tab-content hidden transition-all duration-500">
-            <div class="fade-in mb-10">
+        <div id="content-docs" class="tab-content hidden">
+            <div class="mb-10">
                 <p id="docs-category" class="font-label text-xs uppercase tracking-[0.2em] text-primary mb-2 font-bold">Archives & Preuves</p>
                 <h1 id="docs-title" class="text-4xl md:text-5xl font-headline font-extrabold tracking-tight text-on-surface">Documents Partagés</h1>
             </div>
@@ -653,6 +650,7 @@
                 document.querySelectorAll('.tab-content').forEach(content => {
                     content.classList.add('hidden');
                 });
+                
                 const activeTab = document.getElementById('content-' + tabId);
                 if (activeTab) {
                     activeTab.classList.remove('hidden');
@@ -661,13 +659,16 @@
                 // Update button styles
                 document.querySelectorAll('.tab-btn').forEach(btn => {
                     btn.classList.remove('active');
-                    btn.classList.replace('border-primary/100', 'border-primary/0');
+                    btn.classList.remove('border-primary/100');
+                    btn.classList.add('border-primary/0');
                     btn.classList.add('text-on-surface-variant');
                 });
+                
                 const activeBtn = document.getElementById('tab-' + tabId);
                 if (activeBtn) {
                     activeBtn.classList.add('active');
-                    activeBtn.classList.replace('border-primary/0', 'border-primary/100');
+                    activeBtn.classList.remove('border-primary/0');
+                    activeBtn.classList.add('border-primary/100');
                     activeBtn.classList.remove('text-on-surface-variant');
                 }
                 
