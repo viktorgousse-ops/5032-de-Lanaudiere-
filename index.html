@@ -170,14 +170,14 @@
         }
         .calendar-header-day {
             background-color: #f9fafb;
-            padding: 12px;
+            padding: 14px 8px;
             text-align: center;
-            font-weight: 800;
-            font-size: 11px;
+            font-weight: 700;
+            font-size: 10px;
             text-transform: uppercase;
-            letter-spacing: 0.15em;
+            letter-spacing: 0.1em;
             color: #6b7280;
-            border-bottom: 1px solid var(--color-outline-variant);
+            border-bottom: 2px solid var(--color-outline-variant);
         }
         .task-dot {
             width: 6px;
@@ -186,17 +186,18 @@
             display: inline-block;
         }
         .task-pill {
-            font-size: 10.5px;
+            font-size: 10px;
             padding: 4px 8px;
             border-radius: 6px;
             color: white;
-            font-weight: 700;
+            font-weight: 600;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            line-height: 1.2;
+            line-height: 1.25;
             -webkit-font-smoothing: antialiased;
-            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+            box-shadow: 0 1px 2px rgba(0,0,0,0.06);
+            letter-spacing: -0.01em;
         }
         
         /* Safari Backdrop Filter Support */
@@ -239,58 +240,47 @@
                 <h1 id="home-title" class="text-4xl md:text-5xl font-headline font-extrabold tracking-tight text-on-surface">Maison</h1>
             </div>
 
-            <!-- Hero Gallery -->
-            <div class="grid grid-cols-1 md:grid-cols-12 gap-4 h-[500px]">
-                <div class="md:col-span-8 h-full rounded-2xl overflow-hidden shadow-lg relative group">
-                    <img src="https://picsum.photos/seed/montreal-ext/1200/800" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="Façade de l'appartement" referrerpolicy="no-referrer">
+            <!-- Hero Gallery (Static) -->
+            <div id="hero-gallery-container" class="grid grid-cols-1 md:grid-cols-12 gap-4 h-[500px]">
+                <div id="main-hero-card" class="md:col-span-8 h-full rounded-2xl overflow-hidden shadow-lg relative group border border-outline-variant/10">
+                    <img id="main-hero-img" src="terrasse.jpg" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="Terrasse de l'appartement" referrerpolicy="no-referrer">
                     <div class="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black/60 to-transparent text-white">
-                        <p class="font-headline font-bold text-2xl" id="hero-img-label">La Maison</p>
-                        <p class="text-sm opacity-80" id="hero-img-sub">Plateau-Mont-Royal, Montréal</p>
+                        <p class="font-headline font-bold text-2xl" id="hero-img-label">La Terrasse</p>
+                        <p class="text-sm opacity-80" id="hero-img-sub">Espace extérieur & briques rouges</p>
                     </div>
                 </div>
-                <div class="md:col-span-4 grid grid-rows-2 gap-4 h-full">
-                    <div class="rounded-2xl overflow-hidden shadow-lg">
-                        <img src="https://picsum.photos/seed/montreal-park-mtl/600/400" class="w-full h-full object-cover" alt="Parc à proximité" referrerpolicy="no-referrer">
+                <div class="md:col-span-4 grid grid-rows-3 gap-4 h-full">
+                    <div class="rounded-2xl overflow-hidden shadow-lg border border-outline-variant/10">
+                        <img id="side-img-1" src="salon.jpg" class="w-full h-full object-cover" alt="Le Salon" referrerpolicy="no-referrer">
                     </div>
-                    <div class="rounded-2xl overflow-hidden shadow-lg">
-                        <img src="https://picsum.photos/seed/montreal-coffee-shop/600/400" class="w-full h-full object-cover" alt="Café du quartier" referrerpolicy="no-referrer">
+                    <div class="rounded-2xl overflow-hidden shadow-lg border border-outline-variant/10">
+                        <img id="side-img-2" src="cuisine.jpg" class="w-full h-full object-cover" alt="La Cuisine" referrerpolicy="no-referrer">
+                    </div>
+                    <div class="rounded-2xl overflow-hidden shadow-lg border border-outline-variant/10">
+                        <img id="side-img-3" src="balcon.jpg" class="w-full h-full object-cover" alt="Le Balcon" referrerpolicy="no-referrer">
                     </div>
                 </div>
             </div>
 
             <!-- Roommates Section -->
-            <section class="pt-12">
-                <h2 class="text-3xl font-headline font-bold mb-8 flex items-center gap-3">
-                    <span class="w-1.5 h-7 bg-primary rounded-full"></span>
-                    <span id="roommates-title">Les Colocataires</span>
+            <section class="pt-16 pb-20">
+                <h2 class="text-3xl font-headline font-bold mb-10 flex items-center gap-4">
+                    <span class="w-2 h-8 bg-primary rounded-full"></span>
+                    <span id="roommates-title">Les Visages du Plateau</span>
                 </h2>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <div class="bg-white p-8 rounded-3xl shadow-sm border border-outline-variant/10 text-center space-y-4 hover:shadow-md transition-shadow">
-                        <div class="w-24 h-24 rounded-full mx-auto bg-primary/10 flex items-center justify-center">
-                            <span class="material-symbols-outlined text-primary text-4xl">person</span>
-                        </div>
-                        <div>
-                            <h3 class="font-headline font-bold text-xl">A.</h3>
-                            <p class="text-xs text-primary font-bold uppercase tracking-widest mt-1" id="role-ana">Petite Chambre</p>
-                        </div>
+                <!-- Roommates Section Simplified -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="bg-white/50 p-6 rounded-2xl border border-outline-variant/10 text-center">
+                        <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-indigo-100 text-indigo-700 font-bold mb-2">A.</span>
+                        <p class="text-xs font-bold text-on-surface uppercase tracking-widest" id="role-ana">Petite Chambre</p>
                     </div>
-                    <div class="bg-white p-8 rounded-3xl shadow-sm border border-outline-variant/10 text-center space-y-4 hover:shadow-md transition-shadow">
-                        <div class="w-24 h-24 rounded-full mx-auto bg-primary/10 flex items-center justify-center">
-                            <span class="material-symbols-outlined text-primary text-4xl">person</span>
-                        </div>
-                        <div>
-                            <h3 class="font-headline font-bold text-xl">K.</h3>
-                            <p class="text-xs text-primary font-bold uppercase tracking-widest mt-1" id="role-kash">Moyenne Chambre</p>
-                        </div>
+                    <div class="bg-white/50 p-6 rounded-2xl border border-outline-variant/10 text-center">
+                        <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-amber-100 text-amber-700 font-bold mb-2">K.</span>
+                        <p class="text-xs font-bold text-on-surface uppercase tracking-widest" id="role-kash">Moyenne Chambre</p>
                     </div>
-                    <div class="bg-white p-8 rounded-3xl shadow-sm border border-outline-variant/10 text-center space-y-4 hover:shadow-md transition-shadow">
-                        <div class="w-24 h-24 rounded-full mx-auto bg-primary/10 flex items-center justify-center">
-                            <span class="material-symbols-outlined text-primary text-4xl">person</span>
-                        </div>
-                        <div>
-                            <h3 class="font-headline font-bold text-xl">V.</h3>
-                            <p class="text-xs text-primary font-bold uppercase tracking-widest mt-1" id="role-vik">Grande Chambre</p>
-                        </div>
+                    <div class="bg-white/50 p-6 rounded-2xl border border-outline-variant/10 text-center">
+                        <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-blue-100 text-blue-700 font-bold mb-2">V.</span>
+                        <p class="text-xs font-bold text-on-surface uppercase tracking-widest" id="role-vik">Grande Chambre</p>
                     </div>
                 </div>
             </section>
@@ -536,76 +526,14 @@
                 </div>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Rotation Table (New Section) -->
-                <div class="md:col-span-3 bg-white p-8 rounded-3xl shadow-sm border border-outline-variant/10 overflow-hidden">
-                    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-8 gap-4">
-                        <h3 class="text-xl font-headline font-bold flex items-center gap-3">
-                            <span class="material-symbols-outlined text-secondary">event_repeat</span>
-                            <span id="rotation-title">Calendrier de Rotation</span>
-                        </h3>
-                        <div class="bg-surface-container-low px-4 py-2 rounded-full border border-outline-variant/20">
-                            <span class="text-xs font-bold text-on-surface-variant uppercase tracking-widest" id="week-current-label">Semaine Actuelle</span>
-                            <span class="ml-2 font-headline font-black text-primary" id="current-week-num">1</span>
-                        </div>
-                    </div>
-                    
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-left border-collapse">
-                            <thead>
-                                <tr class="bg-surface-container-low text-on-surface-variant font-headline">
-                                    <th id="th-zone" class="py-4 px-6 font-bold text-sm rounded-tl-xl text-primary">Zone / Tâche</th>
-                                    <th class="py-4 px-6 font-bold text-sm week-col-1">Semaine 1</th>
-                                    <th class="py-4 px-6 font-bold text-sm week-col-2">Semaine 2</th>
-                                    <th class="py-4 px-6 font-bold text-sm week-col-3 rounded-tr-xl">Semaine 3</th>
-                                </tr>
-                            </thead>
-                            <tbody class="text-sm font-body">
-                                <tr class="border-b border-surface-container-low hover:bg-surface-container-lowest transition-colors">
-                                    <td class="py-5 px-6 font-semibold flex items-center gap-3">
-                                        <div class="w-9 h-9 rounded-xl bg-orange-100 flex items-center justify-center">
-                                            <span class="material-symbols-outlined text-orange-600 text-xl font-icon">cooking</span>
-                                        </div>
-                                        <span id="zone-kitchen">Cuisine</span>
-                                    </td>
-                                    <td class="py-5 px-6 week-col-1"><span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-surface-container-highest text-on-surface-variant font-bold">A.</span></td>
-                                    <td class="py-5 px-6 week-col-2"><span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-surface-container-highest text-on-surface-variant font-bold">K.</span></td>
-                                    <td class="py-5 px-6 week-col-3"><span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-surface-container-highest text-on-surface-variant font-bold">V.</span></td>
-                                </tr>
-                                <tr class="border-b border-surface-container-low hover:bg-surface-container-lowest transition-colors">
-                                    <td class="py-5 px-6 font-semibold flex items-center gap-3">
-                                        <div class="w-9 h-9 rounded-xl bg-blue-100 flex items-center justify-center">
-                                            <span class="material-symbols-outlined text-blue-600 text-xl font-icon">bathtub</span>
-                                        </div>
-                                        <span id="zone-bath">Salle de Bain</span>
-                                    </td>
-                                    <td class="py-5 px-6 week-col-1"><span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-surface-container-highest text-on-surface-variant font-bold">K.</span></td>
-                                    <td class="py-5 px-6 week-col-2"><span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-surface-container-highest text-on-surface-variant font-bold">V.</span></td>
-                                    <td class="py-5 px-6 week-col-3"><span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-surface-container-highest text-on-surface-variant font-bold">A.</span></td>
-                                </tr>
-                                <tr class="hover:bg-surface-container-lowest transition-colors">
-                                    <td class="py-5 px-6 font-semibold flex items-center gap-3">
-                                        <div class="w-9 h-9 rounded-xl bg-green-100 flex items-center justify-center">
-                                            <span class="material-symbols-outlined text-green-600 text-xl font-icon">weekend</span>
-                                        </div>
-                                        <span id="zone-living">Poubelles & Salon</span>
-                                    </td>
-                                    <td class="py-5 px-6 week-col-1"><span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-surface-container-highest text-on-surface-variant font-bold">V.</span></td>
-                                    <td class="py-5 px-6 week-col-2"><span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-surface-container-highest text-on-surface-variant font-bold">A.</span></td>
-                                    <td class="py-5 px-6 week-col-3"><span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-surface-container-highest text-on-surface-variant font-bold">K.</span></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <!-- Info Cards -->
                 <div class="bg-surface-container-low rounded-3xl p-6 flex flex-col gap-4 border-l-8 border-secondary/40">
                     <div class="flex items-center gap-3">
                         <span class="material-symbols-outlined text-secondary">info</span>
                         <h4 class="font-headline font-bold text-lg text-on-surface" id="principle-title">PRINCIPE</h4>
                     </div>
-                    <p class="text-sm text-on-surface-variant leading-relaxed" id="principle-desc">Chaque colocataire se voit attribuer une zone spécifique par semaine. La rotation s'effectue le dimanche soir.</p>
+                    <p class="text-sm text-on-surface-variant leading-relaxed" id="principle-desc">Chaque colocataire se voit attribuer une zone spécifique par semaine. La rotation s'effectue le dimanche soir. Les attributions sont visibles chaque lundi dans le calendrier.</p>
                 </div>
 
                 <div class="bg-white rounded-3xl p-6 flex flex-col gap-4 border border-outline-variant/10 shadow-sm transition-transform hover:scale-[1.02]">
@@ -634,36 +562,31 @@
                         <span id="tasks-title">Tâches Ménagères</span>
                     </h3>
                     <ul class="space-y-4">
-                        <li class="flex items-center gap-4 p-4 bg-surface-container-low rounded-xl">
-                            <span class="material-symbols-outlined text-green-600">recycling</span>
-                            <span class="text-sm font-medium" id="task-1">Recyclage (Lundi)</span>
+                        <li class="house-task-item flex items-center justify-between p-4 bg-surface-container-low rounded-xl border border-transparent">
+                            <div class="flex items-center gap-4">
+                                <span class="material-symbols-outlined text-green-600">recycling</span>
+                                <span class="text-sm font-medium" id="task-1">Recyclage (Lundi)</span>
+                            </div>
                         </li>
-                        <li class="flex items-center gap-4 p-4 bg-surface-container-low rounded-xl">
-                            <span class="material-symbols-outlined text-gray-600">delete</span>
-                            <span class="text-sm font-medium" id="task-2">Poubelles (Mercredi)</span>
+                        <li class="house-task-item flex items-center justify-between p-4 bg-surface-container-low rounded-xl border border-transparent">
+                            <div class="flex items-center gap-4">
+                                <span class="material-symbols-outlined text-gray-600">delete</span>
+                                <span class="text-sm font-medium" id="task-2">Poubelles (Mercredi)</span>
+                            </div>
                         </li>
-                        <li class="flex items-center gap-4 p-4 bg-surface-container-low rounded-xl">
-                            <span class="material-symbols-outlined text-orange-800">compost</span>
-                            <span class="text-sm font-medium" id="task-3">Compost (Jeudi)</span>
+                        <li class="house-task-item flex items-center justify-between p-4 bg-surface-container-low rounded-xl border border-transparent">
+                            <div class="flex items-center gap-4">
+                                <span class="material-symbols-outlined text-orange-800">compost</span>
+                                <span class="text-sm font-medium" id="task-3">Compost (Jeudi)</span>
+                            </div>
                         </li>
-                        <li class="flex items-center gap-4 p-4 bg-surface-container-low rounded-xl border-t border-outline-variant/10 pt-6 mt-6">
-                            <span class="material-symbols-outlined text-primary">cleaning_services</span>
-                            <span class="text-sm font-medium" id="task-clean">Entretien des aires communes</span>
+                        <li class="house-task-item flex items-center justify-between p-4 bg-surface-container-low rounded-xl border-t border-outline-variant/10 mt-6">
+                            <div class="flex items-center gap-4">
+                                <span class="material-symbols-outlined text-primary">cleaning_services</span>
+                                <span class="text-sm font-medium" id="task-clean">Entretien des aires communes</span>
+                            </div>
                         </li>
                     </ul>
-                </div>
-                
-                <div class="bg-blue-600/5 rounded-3xl p-8 flex flex-col items-center justify-center text-center gap-6 border border-blue-600/10">
-                    <div class="w-16 h-16 rounded-full bg-blue-600 flex items-center justify-center text-white shadow-xl animate-pulse">
-                        <span class="material-symbols-outlined text-3xl">verified</span>
-                    </div>
-                    <div>
-                        <h4 class="font-headline font-bold text-xl text-on-surface mb-2">Suivi & Validation</h4>
-                        <p class="text-sm text-on-surface-variant max-w-xs mx-auto">Cochez vos tâches une fois terminées pour maintenir la transparence au sein du foyer.</p>
-                    </div>
-                    <button id="btn-validate-tasks" class="w-full bg-blue-600 text-white px-8 py-4 rounded-2xl font-label font-bold uppercase tracking-wider text-xs shadow-lg hover:bg-blue-700 transition-all active:scale-95">
-                        Valider mes tâches
-                    </button>
                 </div>
 
                 <div class="bg-white p-8 rounded-3xl shadow-sm border border-outline-variant/10">
@@ -741,7 +664,11 @@
                     <p id="modal-desc" class="text-sm text-on-surface-variant font-medium">Veuillez entrer le code d'accès pour modifier.</p>
                 </div>
                 <div class="space-y-4">
-                    <input type="password" id="passcode-input" class="w-full bg-surface-container rounded-xl px-4 py-3 text-center text-2xl font-black tracking-[0.5em] focus:ring-2 focus:ring-primary focus:outline-none border-none" placeholder="••••" maxlength="4">
+                    <input type="password" id="passcode-input" 
+                        oninput="if(this.value.length === 4) validatePasscode()"
+                        onkeydown="if(event.key === 'Enter') validatePasscode()"
+                        class="w-full bg-surface-container rounded-xl px-4 py-3 text-center text-2xl font-black tracking-[0.5em] focus:ring-2 focus:ring-primary focus:outline-none border-none" 
+                        placeholder="••••" maxlength="4">
                     <p id="modal-error" class="hidden text-center text-xs font-bold text-error uppercase tracking-wider">Code incorrect</p>
                     <div class="flex gap-2">
                         <button onclick="closePasscodeModal()" class="flex-1 px-4 py-3 rounded-xl font-bold text-xs uppercase tracking-widest text-on-surface-variant bg-surface-container hover:bg-surface-container-high transition-all">Annuler</button>
@@ -803,7 +730,7 @@
         let tasks = [];
         let cologColors = {
             'A.': '#6366f1',
-            'K.': '#d97706',
+            'K.': '#f59e0b',
             'V.': '#003063'
         };
 
@@ -845,6 +772,16 @@
                     return { id: doc.id, ...data, roommate: anonymizeName(data.roommate) };
                 });
                 renderCalendar();
+            });
+
+            // Sync house tasks
+            onSnapshot(doc(db, 'coloc_data', 'house_tasks'), (docSnap) => {
+                if (docSnap.exists()) {
+                    houseTasksState = docSnap.data();
+                    Object.keys(houseTasksState).forEach(taskId => {
+                        updateHouseTaskUI(taskId);
+                    });
+                }
             });
 
             // Finances Sync
@@ -1219,9 +1156,13 @@
                 totalCharges += parseCurrency(occ.internet) + parseCurrency(occ.hydro);
             });
 
-            document.getElementById('summary-rent').innerText = formatCurrency(totalRent);
-            document.getElementById('summary-charges').innerText = formatCurrency(totalCharges);
-            document.getElementById('summary-total').innerText = formatCurrency(totalRent + totalCharges);
+            const rentEl = document.getElementById('summary-rent');
+            const chargesEl = document.getElementById('summary-charges');
+            const totalEl = document.getElementById('summary-total');
+
+            if (rentEl) rentEl.innerText = formatCurrency(totalRent);
+            if (chargesEl) chargesEl.innerText = formatCurrency(totalCharges);
+            if (totalEl) totalEl.innerText = formatCurrency(totalRent + totalCharges);
         }
 
         function parseCurrency(str) {
@@ -1255,129 +1196,162 @@
         function updateContent() {
             const t = translations[currentLang];
             if (!t) return;
+            
+            const setSafeText = (id, text) => {
+                const el = document.getElementById(id);
+                if (el) el.innerText = text;
+            };
+
+            const setSafeHTML = (id, html) => {
+                const el = document.getElementById(id);
+                if (el) el.innerHTML = html;
+            };
+
             document.documentElement.lang = currentLang.toLowerCase();
             document.title = t.title;
             
-            document.getElementById('lang-text').innerText = t.langBtn;
-            document.getElementById('hero-category').innerText = t.heroCat;
-            document.getElementById('hero-title').innerText = t.heroTitle;
-            document.getElementById('label-spread').innerText = t.totalSpread;
-            document.getElementById('label-payments').innerText = t.payments;
-            document.getElementById('spread-desc').innerText = t.spreadDesc;
-            document.getElementById('label-rent-box').innerText = t.rent;
-            document.getElementById('rent-box-desc').innerText = t.rentDesc;
-            document.getElementById('label-charges-box').innerText = t.charges;
-            document.getElementById('charges-box-desc').innerText = t.chargesDesc;
+            setSafeText('lang-text', t.langBtn);
+            setSafeText('hero-category', t.heroCat);
+            setSafeText('hero-title', t.heroTitle);
+            setSafeText('label-spread', t.totalSpread);
+            setSafeText('label-payments', t.payments);
+            setSafeText('spread-desc', t.spreadDesc);
+            setSafeText('label-rent-box', t.rent);
+            setSafeText('rent-box-desc', t.rentDesc);
+            setSafeText('label-charges-box', t.charges);
+            setSafeText('charges-box-desc', t.chargesDesc);
             
-            document.getElementById('table-1-title').innerHTML = `<span class="w-1.5 h-6 bg-[#1b6d24] rounded-full"></span>${t.table1Title}`;
-            document.getElementById('badge-1').innerText = t.badge1;
-            document.getElementById('th-occ-1').innerText = t.thOcc;
-            document.getElementById('th-rent-1').innerText = t.thRent;
-            document.getElementById('th-internet-1').innerText = t.thInternet;
-            document.getElementById('th-hydro-1').innerText = t.thHydro;
-            document.getElementById('th-total-1').innerText = t.thTotal;
+            setSafeHTML('table-1-title', `<span class="w-1.5 h-6 bg-[#1b6d24] rounded-full"></span>${t.table1Title}`);
+            setSafeText('badge-1', t.badge1);
+            setSafeText('th-occ-1', t.thOcc);
+            setSafeText('th-rent-1', t.thRent);
+            setSafeText('th-internet-1', t.thInternet);
+            setSafeText('th-hydro-1', t.thHydro);
+            setSafeText('th-total-1', t.thTotal);
 
-            document.getElementById('table-2-title').innerHTML = `<span class="w-1.5 h-6 bg-[#003063] rounded-full"></span>${t.table2Title}`;
-            document.getElementById('badge-2').innerText = t.badge2;
-            document.getElementById('th-occ-2').innerText = t.thOcc;
-            document.getElementById('th-rent-2').innerText = t.thRentPrev;
-            document.getElementById('th-internet-2').innerText = t.thInternet;
-            document.getElementById('th-hydro-2').innerText = t.thHydro;
-            document.getElementById('th-total-2').innerText = t.thTotal;
+            setSafeHTML('table-2-title', `<span class="w-1.5 h-6 bg-[#003063] rounded-full"></span>${t.table2Title}`);
+            setSafeText('badge-2', t.badge2);
+            setSafeText('th-occ-2', t.thOcc);
+            setSafeText('th-rent-2', t.thRentPrev);
+            setSafeText('th-internet-2', t.thInternet);
+            setSafeText('th-hydro-2', t.thHydro);
+            setSafeText('th-total-2', t.thTotal);
 
-            document.getElementById('history-title').innerHTML = `<span class="w-1.5 h-6 bg-[#1b6d24] rounded-full"></span>${t.historyTitle}`;
-            document.getElementById('history-header').innerText = t.historyHeader;
+            setSafeHTML('history-title', `<span class="w-1.5 h-6 bg-[#1b6d24] rounded-full"></span>${t.historyTitle}`);
+            setSafeText('history-header', t.historyHeader);
             
-            document.getElementById('hist-date-1').innerText = t.histDate1;
-            document.getElementById('hist-desc-1').innerText = t.histDesc1;
-            document.getElementById('hist-date-2').innerText = t.histDate2;
-            document.getElementById('hist-desc-2').innerText = t.histDesc2;
+            setSafeText('hist-date-1', t.histDate1);
+            setSafeText('hist-desc-1', t.histDesc1);
+            setSafeText('hist-date-2', t.histDate2);
+            setSafeText('hist-desc-2', t.histDesc2);
             
-            document.getElementById('notes-title').innerHTML = `<span class="w-1.5 h-6 bg-[#636037] rounded-full"></span>${t.notesTitle}`;
-            document.getElementById('internet-detail').innerText = t.internetDetail;
-            document.getElementById('hydro-detail').innerText = t.hydroDetail;
+            setSafeHTML('notes-title', `<span class="w-1.5 h-6 bg-[#636037] rounded-full"></span>${t.notesTitle}`);
+            setSafeText('internet-detail', t.internetDetail);
+            setSafeText('hydro-detail', t.hydroDetail);
 
-            document.getElementById('btn-edit-text-1').innerText = t.edit;
-            document.getElementById('btn-edit-text-2').innerText = t.edit;
+            setSafeText('btn-edit-text-1', t.edit);
+            setSafeText('btn-edit-text-2', t.edit);
             
-            const table1Controls = document.getElementById('edit-controls-1').querySelectorAll('button');
-            table1Controls[0].innerText = t.save;
-            table1Controls[1].innerText = t.cancel;
+            const ec1 = document.getElementById('edit-controls-1');
+            if (ec1) {
+                const table1Controls = ec1.querySelectorAll('button');
+                if (table1Controls.length >= 2) {
+                    table1Controls[0].innerText = t.save;
+                    table1Controls[1].innerText = t.cancel;
+                }
+            }
             
-            const table2Controls = document.getElementById('edit-controls-2').querySelectorAll('button');
-            table2Controls[0].innerText = t.save;
-            table2Controls[1].innerText = t.cancel;
+            const ec2 = document.getElementById('edit-controls-2');
+            if (ec2) {
+                const table2Controls = ec2.querySelectorAll('button');
+                if (table2Controls.length >= 2) {
+                    table2Controls[0].innerText = t.save;
+                    table2Controls[1].innerText = t.cancel;
+                }
+            }
 
             // Update Modal
-            document.getElementById('modal-title').innerText = t.modalTitle;
-            document.getElementById('modal-desc').innerText = t.modalDesc;
-            document.getElementById('modal-error').innerText = t.modalError;
-            const modalBtns = document.getElementById('passcode-modal').querySelectorAll('button');
-            modalBtns[0].innerText = t.modalCancel;
-            modalBtns[1].innerText = t.modalValidate;
+            setSafeText('modal-title', t.modalTitle);
+            setSafeText('modal-desc', t.modalDesc);
+            setSafeText('modal-error', t.modalError);
+            const pm = document.getElementById('passcode-modal');
+            if (pm) {
+                const modalBtns = pm.querySelectorAll('button');
+                if (modalBtns.length >= 2) {
+                    modalBtns[0].innerText = t.modalCancel;
+                    modalBtns[1].innerText = t.modalValidate;
+                }
+            }
 
             // Update Nav
-            document.getElementById('tab-home').innerText = t.navHome;
-            document.getElementById('tab-finance').innerText = t.navFinance;
-            document.getElementById('tab-life').innerText = t.navLife;
-            document.getElementById('tab-docs').innerText = t.navDocs;
+            setSafeText('tab-home', t.navHome);
+            setSafeText('tab-finance', t.navFinance);
+            setSafeText('tab-life', t.navLife);
+            setSafeText('tab-docs', t.navDocs);
 
             // Update Rotation Week
             updateRotationWeek();
 
             // Update Home Tab
-            document.getElementById('home-category').innerText = t.homeCategory;
-            document.getElementById('home-title').innerText = t.homeTitle;
-            document.getElementById('hero-img-label').innerText = t.heroImgLabel;
-            document.getElementById('hero-img-sub').innerText = t.heroImgSub;
-            document.getElementById('roommates-title').innerText = t.roommatesTitle;
-            document.getElementById('role-ana').innerText = t.roleAna;
-            document.getElementById('role-kash').innerText = t.roleKash;
-            document.getElementById('role-vik').innerText = t.roleVik;
+            setSafeText('home-category', t.homeCategory);
+            setSafeText('home-title', t.homeTitle);
+            setSafeText('hero-img-label', t.heroImgLabel);
+            setSafeText('hero-img-sub', t.heroImgSub);
+            setSafeText('roommates-title', t.roommatesTitle);
+            setSafeText('role-ana', t.roleAna);
+            setSafeText('role-kash', t.roleKash);
+            setSafeText('role-vik', t.roleVik);
 
             // Update Life Tab
-            document.getElementById('life-category').innerText = t.lifeCategory;
-            document.getElementById('life-title').innerText = t.lifeTitle;
-            document.getElementById('tasks-title').innerText = t.tasksTitle;
+            setSafeText('life-category', t.lifeCategory);
+            setSafeText('life-title', t.lifeTitle);
+            setSafeText('tasks-title', t.tasksTitle);
             
-            document.getElementById('rotation-title').innerText = t.rotationTitle;
-            document.getElementById('week-current-label').innerText = t.weekCurrent;
-            document.getElementById('th-zone').innerText = t.thZone;
-            document.getElementById('zone-kitchen').innerText = t.zoneKitchen;
-            document.getElementById('zone-bath').innerText = t.zoneBath;
-            document.getElementById('zone-living').innerText = t.zoneLiving;
+            setSafeText('rotation-title', t.rotationTitle);
+            setSafeText('week-current-label', t.weekCurrent);
+            setSafeText('th-zone', t.thZone);
+            setSafeText('zone-kitchen', t.zoneKitchen);
+            setSafeText('zone-bath', t.zoneBath);
+            setSafeText('zone-living', t.zoneLiving);
             
-            document.getElementById('principle-title').innerText = t.principleTitle;
-            document.getElementById('principle-desc').innerText = t.principleDesc;
-            document.getElementById('rules-header').innerText = t.rulesHeader;
-            document.getElementById('rules-content').innerText = t.rulesContent;
-            document.getElementById('flex-title').innerText = t.flexTitle;
-            document.getElementById('flex-desc').innerText = t.flexDesc;
-            document.getElementById('btn-validate-tasks').innerText = t.validateTasks;
+            setSafeText('principle-title', t.principleTitle);
+            setSafeText('principle-desc', t.principleDesc);
+            setSafeText('rules-header', t.rulesHeader);
+            setSafeText('rules-content', t.rulesContent);
+            setSafeText('flex-title', t.flexTitle);
+            setSafeText('flex-desc', t.flexDesc);
+            setSafeText('btn-validate-tasks', t.validateTasks);
 
-            document.getElementById('rules-title').innerText = t.rulesTitle;
-            document.getElementById('rules-desc').innerText = t.rulesDesc;
-            document.getElementById('task-1').innerText = t.task1;
-            document.getElementById('task-2').innerText = t.task2;
-            document.getElementById('task-3').innerText = t.task3;
-            document.getElementById('task-clean').innerText = t.taskClean;
+            setSafeText('rules-title', t.rulesTitle);
+            setSafeText('rules-desc', t.rulesDesc);
+            setSafeText('task-1', t.task1);
+            setSafeText('task-2', t.task2);
+            setSafeText('task-3', t.task3);
+            setSafeText('task-clean', t.taskClean);
 
             // Updated task modal translation
-            document.querySelector('#task-modal h3').innerText = t.taskModalTitle;
-            document.getElementById('task-input-text').placeholder = t.taskModalPlaceholder;
-            const taskModalBtns = document.getElementById('task-modal').querySelectorAll('button');
-            taskModalBtns[0].innerText = t.modalCancel;
-            taskModalBtns[1].innerText = t.taskModalValidate;
+            const tmHeader = document.querySelector('#task-modal h3');
+            if (tmHeader) tmHeader.innerText = t.taskModalTitle;
+            const tmit = document.getElementById('task-input-text');
+            if (tmit) tmit.placeholder = t.taskModalPlaceholder;
+            const tm = document.getElementById('task-modal');
+            if (tm) {
+                const taskModalBtns = tm.querySelectorAll('button');
+                if (taskModalBtns.length >= 2) {
+                    taskModalBtns[0].innerText = t.modalCancel;
+                    taskModalBtns[1].innerText = t.taskModalValidate;
+                }
+            }
 
             // Update Docs Tab
-            document.getElementById('docs-category').innerText = t.docsCategory;
-            document.getElementById('docs-title').innerText = t.docsTitle;
-            document.getElementById('doc-lease').innerText = t.docLease;
-            document.getElementById('doc-lease-desc').innerText = t.docLeaseDesc;
-            document.getElementById('doc-hydro').innerText = t.docHydro;
-            document.getElementById('doc-hydro-desc').innerText = t.docHydroDesc;
-            document.getElementById('doc-agr').innerText = t.docAgr;
-            document.getElementById('doc-agr-desc').innerText = t.docAgrDesc;
+            setSafeText('docs-category', t.docsCategory);
+            setSafeText('docs-title', t.docsTitle);
+            setSafeText('doc-lease', t.docLease);
+            setSafeText('doc-lease-desc', t.docLeaseDesc);
+            setSafeText('doc-hydro', t.docHydro);
+            setSafeText('doc-hydro-desc', t.docHydroDesc);
+            setSafeText('doc-agr', t.docAgr);
+            setSafeText('doc-agr-desc', t.docAgrDesc);
 
             renderTables();
         }
@@ -1454,7 +1428,11 @@
         window.openTaskModal = function(day) {
             if (!editingTasks) return;
             selectedDayForTask = day;
-            document.getElementById('task-modal-date').innerText = `${day} ${document.getElementById('current-month-display').innerText}`;
+            const modalDateEl = document.getElementById('task-modal-date');
+            const monthDisplayEl = document.getElementById('current-month-display');
+            if (modalDateEl && monthDisplayEl) {
+                modalDateEl.innerText = `${day} ${monthDisplayEl.innerText}`;
+            }
             document.getElementById('task-input-text').value = '';
             document.getElementById('task-modal').classList.remove('hidden');
         }
@@ -1517,7 +1495,9 @@
                 ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'] :
                 ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
-            monthDisplay.innerText = `${monthNames[month]} ${year}`;
+            if (monthDisplay) {
+                monthDisplay.innerText = `${monthNames[month]} ${year}`;
+            }
 
             container.innerHTML = '';
             
@@ -1554,19 +1534,74 @@
                 // Add recurrent tasks
                 const date = new Date(year, month, i);
                 const dayOfWeek = date.getDay(); // 0 = Dim, 1 = Lun, 2 = Mar, 3 = Mer, 4 = Jeu, 5 = Ven, 6 = Sam
+                const dateKey = `${year}-${String(month + 1).padStart(2, '0')}-${String(i).padStart(2, '0')}`;
                 
+                // Rotation logic integration
+                const startOfYear = new Date(year, 0, 1);
+                const daysDiff = Math.floor((date - startOfYear) / (24 * 60 * 60 * 1000));
+                const weekOfYear = Math.ceil((daysDiff + startOfYear.getDay() + 1) / 7);
+                const rotationWeek = ((weekOfYear - 1) % 3) + 1;
+
+                // On Mondays, show assignments for the week
+                if (dayOfWeek === 1) {
+                    const assignments = [];
+                    if (rotationWeek === 1) {
+                        assignments.push({ id: 'task-kitchen', zone: 'Cuisine', person: 'A.' });
+                        assignments.push({ id: 'task-bath', zone: 'SdB', person: 'K.' });
+                        assignments.push({ id: 'task-living', zone: 'Salon', person: 'V.' });
+                    } else if (rotationWeek === 2) {
+                        assignments.push({ id: 'task-kitchen', zone: 'Cuisine', person: 'K.' });
+                        assignments.push({ id: 'task-bath', zone: 'SdB', person: 'V.' });
+                        assignments.push({ id: 'task-living', zone: 'Salon', person: 'A.' });
+                    } else {
+                        assignments.push({ id: 'task-kitchen', zone: 'Cuisine', person: 'V.' });
+                        assignments.push({ id: 'task-bath', zone: 'SdB', person: 'A.' });
+                        assignments.push({ id: 'task-living', zone: 'Salon', person: 'K.' });
+                    }
+
+                    assignments.forEach(asgn => {
+                        const fullId = `${dateKey}_${asgn.id}`;
+                        const isDone = houseTasksState[fullId];
+                        const rotPill = document.createElement('div');
+                        rotPill.className = `w-full text-[8.5px] font-bold text-white px-1.5 py-1 rounded flex justify-between items-center mb-1 shadow-sm cursor-pointer transition-all hover:brightness-110 ${isDone ? 'ring-1 ring-white/50 ring-offset-1 ring-offset-green-500' : ''}`;
+                        rotPill.style.backgroundColor = cologColors[asgn.person] || '#ccc';
+                        rotPill.onclick = (e) => {
+                            e.stopPropagation();
+                            window.toggleHouseTask(fullId);
+                        };
+                        rotPill.innerHTML = `
+                            <div class="flex items-center gap-1">
+                                ${isDone ? '<span class="material-symbols-outlined text-[10px]">check_circle</span>' : '<div class="w-2 h-2 rounded-full border border-white/30"></div>'}
+                                <span>${asgn.zone}</span>
+                            </div>
+                            <span class="opacity-90">${asgn.person}</span>
+                        `;
+                        dayDiv.appendChild(rotPill);
+                    });
+                }
+
                 const recurrentTasks = [];
-                if (dayOfWeek === 1) recurrentTasks.push({ task: "Recyclage", color: "#22c55e" }); // Vert
-                if (dayOfWeek === 3) recurrentTasks.push({ task: "Poubelles", color: "#4b5563" }); // Gris
-                if (dayOfWeek === 4) recurrentTasks.push({ task: "Compost", color: "#854d0e" });   // Brun/Orange foncé
+                if (dayOfWeek === 1) recurrentTasks.push({ id: 'task-1', task: "Recyclage", color: "#22c55e" }); // Vert
+                if (dayOfWeek === 3) recurrentTasks.push({ id: 'task-2', task: "Poubelles", color: "#4b5563" }); // Gris
+                if (dayOfWeek === 4) recurrentTasks.push({ id: 'task-3', task: "Compost", color: "#854d0e" });   // Brun/Orange foncé
+                if (dayOfWeek === 0) recurrentTasks.push({ id: 'task-clean', task: "Entretien", color: "#2a5ea5" }); // Bleu
 
                 recurrentTasks.forEach(rt => {
+                    const fullId = `${dateKey}_${rt.id}`;
+                    const isDone = houseTasksState[fullId];
                     const pill = document.createElement('div');
-                    pill.className = 'task-pill text-white font-bold opacity-80';
+                    pill.className = `task-pill flex justify-between items-center gap-1 cursor-pointer transition-all hover:brightness-110 ${isDone ? 'opacity-100 ring-1 ring-white/50 ring-offset-1 ring-offset-green-500' : 'opacity-90'}`;
                     pill.style.backgroundColor = rt.color;
-                    pill.style.fontSize = '8px';
-                    pill.style.padding = '2px 4px';
-                    pill.innerText = rt.task;
+                    pill.style.fontSize = '9.5px';
+                    pill.style.padding = '3px 6px';
+                    pill.onclick = (e) => {
+                        e.stopPropagation();
+                        window.toggleHouseTask(fullId);
+                    };
+                    pill.innerHTML = `
+                        <span>${rt.task}</span>
+                        ${isDone ? '<span class="material-symbols-outlined text-[11px]">check_circle</span>' : '<div class="w-2.5 h-2.5 rounded-full border border-white/30"></div>'}
+                    `;
                     dayDiv.appendChild(pill);
                 });
                 
@@ -1595,37 +1630,25 @@
             }
         }
 
-        function updateRotationWeek() {
-            const now = new Date();
-            const startOfYear = new Date(now.getFullYear(), 0, 1);
-            const days = Math.floor((now - startOfYear) / (24 * 60 * 60 * 1000));
-            const weekOfYear = Math.ceil((days + startOfYear.getDay() + 1) / 7);
-            
-            const rotationWeek = ((weekOfYear - 1) % 3) + 1;
-            document.getElementById('current-week-num').innerText = rotationWeek;
+        let houseTasksState = {};
 
-            // Highlight the column
-            for (let i = 1; i <= 3; i++) {
-                const cols = document.querySelectorAll(`.week-col-${i}`);
-                cols.forEach(col => {
-                    if (i === rotationWeek) {
-                        col.classList.add('bg-blue-50', 'border-x', 'border-blue-100');
-                        // Highlight the pill specifically
-                        const pill = col.querySelector('span');
-                        if (pill) {
-                            pill.classList.remove('bg-surface-container-highest', 'text-on-surface-variant');
-                            pill.classList.add('bg-blue-600', 'text-white', 'shadow-md');
-                        }
-                    } else {
-                        col.classList.remove('bg-blue-50', 'border-x', 'border-blue-100');
-                        const pill = col.querySelector('span');
-                        if (pill) {
-                            pill.classList.add('bg-surface-container-highest', 'text-on-surface-variant');
-                            pill.classList.remove('bg-blue-600', 'text-white', 'shadow-md');
-                        }
-                    }
-                });
+        window.toggleHouseTask = async function(fullKey) {
+            houseTasksState[fullKey] = !houseTasksState[fullKey];
+            renderCalendar(); // Re-render to show updated state in calendar
+            
+            try {
+                await setDoc(doc(db, 'coloc_data', 'house_tasks'), houseTasksState);
+            } catch (e) {
+                console.error("Toggle house task error:", e);
             }
+        }
+
+        function updateHouseTaskUI(taskId) {
+            // Updated to just trigger a re-render since we are using the calendar
+            renderCalendar();
+        }
+        function updateRotationWeek() {
+            // Function logic moved into renderCalendar for better integration
         }
 
         window.nextMonth = function() {

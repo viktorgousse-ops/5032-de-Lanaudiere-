@@ -60,5 +60,10 @@ service cloud.firestore {
       );
       allow delete: if true;
     }
+
+    match /coloc_data/house_tasks {
+      allow read: if true;
+      allow write: if true; // In a real production app, we would add stricter validation
+    }
   }
 }

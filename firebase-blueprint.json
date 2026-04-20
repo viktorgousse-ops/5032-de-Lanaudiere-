@@ -40,6 +40,12 @@
         "order": { "type": "number" }
       },
       "required": ["name", "rent", "internet", "hydro", "total", "type"]
+    },
+    "HouseTasksState": {
+      "title": "HouseTasksState",
+      "description": "Completion state of recurring house tasks (dynamic keys: YYYY-MM-DD_taskId)",
+      "type": "object",
+      "additionalProperties": { "type": "boolean" }
     }
   },
   "firestore": {
@@ -54,6 +60,10 @@
     "/finances/{financeId}": {
       "schema": "FinancialEntry",
       "description": "List of financial entries for rent and charges"
+    },
+    "/coloc_data/house_tasks": {
+      "schema": "HouseTasksState",
+      "description": "Synchronization of house tasks completion state (Recyclage, Poubelles, Compost, Entretien, Cuisine, SdB, Salon)"
     }
   }
 }
