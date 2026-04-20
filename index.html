@@ -102,6 +102,10 @@
             display: inline-block;
         }
 
+        .font-icon {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
         /* Basic Fade-in Animation */
         .fade-in {
             animation: fadeIn 0.8s ease-out forwards;
@@ -532,7 +536,98 @@
                 </div>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Rotation Table (New Section) -->
+                <div class="md:col-span-3 bg-white p-8 rounded-3xl shadow-sm border border-outline-variant/10 overflow-hidden">
+                    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-8 gap-4">
+                        <h3 class="text-xl font-headline font-bold flex items-center gap-3">
+                            <span class="material-symbols-outlined text-secondary">event_repeat</span>
+                            <span id="rotation-title">Calendrier de Rotation</span>
+                        </h3>
+                        <div class="bg-surface-container-low px-4 py-2 rounded-full border border-outline-variant/20">
+                            <span class="text-xs font-bold text-on-surface-variant uppercase tracking-widest" id="week-current-label">Semaine Actuelle</span>
+                            <span class="ml-2 font-headline font-black text-primary" id="current-week-num">1</span>
+                        </div>
+                    </div>
+                    
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="bg-surface-container-low text-on-surface-variant font-headline">
+                                    <th id="th-zone" class="py-4 px-6 font-bold text-sm rounded-tl-xl text-primary">Zone / Tâche</th>
+                                    <th class="py-4 px-6 font-bold text-sm week-col-1">Semaine 1</th>
+                                    <th class="py-4 px-6 font-bold text-sm week-col-2">Semaine 2</th>
+                                    <th class="py-4 px-6 font-bold text-sm week-col-3 rounded-tr-xl">Semaine 3</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-sm font-body">
+                                <tr class="border-b border-surface-container-low hover:bg-surface-container-lowest transition-colors">
+                                    <td class="py-5 px-6 font-semibold flex items-center gap-3">
+                                        <div class="w-9 h-9 rounded-xl bg-orange-100 flex items-center justify-center">
+                                            <span class="material-symbols-outlined text-orange-600 text-xl font-icon">cooking</span>
+                                        </div>
+                                        <span id="zone-kitchen">Cuisine</span>
+                                    </td>
+                                    <td class="py-5 px-6 week-col-1"><span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-surface-container-highest text-on-surface-variant font-bold">A.</span></td>
+                                    <td class="py-5 px-6 week-col-2"><span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-surface-container-highest text-on-surface-variant font-bold">K.</span></td>
+                                    <td class="py-5 px-6 week-col-3"><span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-surface-container-highest text-on-surface-variant font-bold">V.</span></td>
+                                </tr>
+                                <tr class="border-b border-surface-container-low hover:bg-surface-container-lowest transition-colors">
+                                    <td class="py-5 px-6 font-semibold flex items-center gap-3">
+                                        <div class="w-9 h-9 rounded-xl bg-blue-100 flex items-center justify-center">
+                                            <span class="material-symbols-outlined text-blue-600 text-xl font-icon">bathtub</span>
+                                        </div>
+                                        <span id="zone-bath">Salle de Bain</span>
+                                    </td>
+                                    <td class="py-5 px-6 week-col-1"><span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-surface-container-highest text-on-surface-variant font-bold">K.</span></td>
+                                    <td class="py-5 px-6 week-col-2"><span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-surface-container-highest text-on-surface-variant font-bold">V.</span></td>
+                                    <td class="py-5 px-6 week-col-3"><span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-surface-container-highest text-on-surface-variant font-bold">A.</span></td>
+                                </tr>
+                                <tr class="hover:bg-surface-container-lowest transition-colors">
+                                    <td class="py-5 px-6 font-semibold flex items-center gap-3">
+                                        <div class="w-9 h-9 rounded-xl bg-green-100 flex items-center justify-center">
+                                            <span class="material-symbols-outlined text-green-600 text-xl font-icon">weekend</span>
+                                        </div>
+                                        <span id="zone-living">Poubelles & Salon</span>
+                                    </td>
+                                    <td class="py-5 px-6 week-col-1"><span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-surface-container-highest text-on-surface-variant font-bold">V.</span></td>
+                                    <td class="py-5 px-6 week-col-2"><span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-surface-container-highest text-on-surface-variant font-bold">A.</span></td>
+                                    <td class="py-5 px-6 week-col-3"><span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-surface-container-highest text-on-surface-variant font-bold">K.</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Info Cards -->
+                <div class="bg-surface-container-low rounded-3xl p-6 flex flex-col gap-4 border-l-8 border-secondary/40">
+                    <div class="flex items-center gap-3">
+                        <span class="material-symbols-outlined text-secondary">info</span>
+                        <h4 class="font-headline font-bold text-lg text-on-surface" id="principle-title">PRINCIPE</h4>
+                    </div>
+                    <p class="text-sm text-on-surface-variant leading-relaxed" id="principle-desc">Chaque colocataire se voit attribuer une zone spécifique par semaine. La rotation s'effectue le dimanche soir.</p>
+                </div>
+
+                <div class="bg-white rounded-3xl p-6 flex flex-col gap-4 border border-outline-variant/10 shadow-sm transition-transform hover:scale-[1.02]">
+                    <div class="flex items-center gap-3">
+                        <span class="material-symbols-outlined text-secondary">gavel</span>
+                        <h4 class="font-headline font-bold text-lg text-on-surface" id="rules-header">RÈGLES</h4>
+                    </div>
+                    <p class="text-sm text-on-surface-variant leading-relaxed" id="rules-content">Le matériel de nettoyage doit être rangé après usage. Les produits communs sont rachetés via le fond commun.</p>
+                </div>
+
+                <div class="bg-white rounded-3xl p-6 flex flex-col gap-4 border border-outline-variant/10 shadow-sm transition-transform hover:scale-[1.02] relative overflow-hidden">
+                    <div class="absolute -top-4 -right-4 opacity-10">
+                        <span class="material-symbols-outlined text-secondary text-8xl">swap_horiz</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <span class="material-symbols-outlined text-secondary">handshake</span>
+                        <h4 class="font-headline font-bold text-lg text-on-surface" id="flex-title">FLEXIBILITÉ</h4>
+                    </div>
+                    <p class="text-sm text-on-surface-variant leading-relaxed" id="flex-desc">L'échange de tâches est autorisé après accord mutuel. Signalez tout changement pour le suivi.</p>
+                </div>
+
+                <!-- Trash Management (Keeping as secondary list) -->
                 <div class="bg-white p-8 rounded-3xl shadow-sm border border-outline-variant/10">
                     <h3 class="text-xl font-headline font-bold mb-6 flex items-center gap-3">
                         <span class="material-symbols-outlined text-secondary">cleaning_services</span>
@@ -540,15 +635,37 @@
                     </h3>
                     <ul class="space-y-4">
                         <li class="flex items-center gap-4 p-4 bg-surface-container-low rounded-xl">
-                            <span class="material-symbols-outlined text-on-surface-variant">check_circle</span>
-                            <span class="text-sm font-medium" id="task-1">Poubelles & Recyclage (Lundi soir)</span>
+                            <span class="material-symbols-outlined text-green-600">recycling</span>
+                            <span class="text-sm font-medium" id="task-1">Recyclage (Lundi)</span>
                         </li>
                         <li class="flex items-center gap-4 p-4 bg-surface-container-low rounded-xl">
-                            <span class="material-symbols-outlined text-on-surface-variant">check_circle</span>
-                            <span class="text-sm font-medium" id="task-2">Nettoyage de la Cuisine</span>
+                            <span class="material-symbols-outlined text-gray-600">delete</span>
+                            <span class="text-sm font-medium" id="task-2">Poubelles (Mercredi)</span>
+                        </li>
+                        <li class="flex items-center gap-4 p-4 bg-surface-container-low rounded-xl">
+                            <span class="material-symbols-outlined text-orange-800">compost</span>
+                            <span class="text-sm font-medium" id="task-3">Compost (Jeudi)</span>
+                        </li>
+                        <li class="flex items-center gap-4 p-4 bg-surface-container-low rounded-xl border-t border-outline-variant/10 pt-6 mt-6">
+                            <span class="material-symbols-outlined text-primary">cleaning_services</span>
+                            <span class="text-sm font-medium" id="task-clean">Entretien des aires communes</span>
                         </li>
                     </ul>
                 </div>
+                
+                <div class="bg-blue-600/5 rounded-3xl p-8 flex flex-col items-center justify-center text-center gap-6 border border-blue-600/10">
+                    <div class="w-16 h-16 rounded-full bg-blue-600 flex items-center justify-center text-white shadow-xl animate-pulse">
+                        <span class="material-symbols-outlined text-3xl">verified</span>
+                    </div>
+                    <div>
+                        <h4 class="font-headline font-bold text-xl text-on-surface mb-2">Suivi & Validation</h4>
+                        <p class="text-sm text-on-surface-variant max-w-xs mx-auto">Cochez vos tâches une fois terminées pour maintenir la transparence au sein du foyer.</p>
+                    </div>
+                    <button id="btn-validate-tasks" class="w-full bg-blue-600 text-white px-8 py-4 rounded-2xl font-label font-bold uppercase tracking-wider text-xs shadow-lg hover:bg-blue-700 transition-all active:scale-95">
+                        Valider mes tâches
+                    </button>
+                </div>
+
                 <div class="bg-white p-8 rounded-3xl shadow-sm border border-outline-variant/10">
                     <h3 class="text-xl font-headline font-bold mb-6 flex items-center gap-3">
                         <span class="material-symbols-outlined text-tertiary">groups</span>
@@ -861,8 +978,23 @@
                 tasksTitle: 'Tâches Ménagères',
                 rulesTitle: 'Règles de Vie',
                 rulesDesc: '"Le respect et la communication sont les clés d\'une colocation réussie."',
-                task1: 'Poubelles & Recyclage (Lundi soir)',
-                task2: 'Nettoyage de la Cuisine',
+                rotationTitle: 'Calendrier de Rotation',
+                weekCurrent: 'Semaine Actuelle',
+                thZone: 'Zone / Tâche',
+                zoneKitchen: 'Cuisine',
+                zoneBath: 'Salle de Bain',
+                zoneLiving: 'Poubelles & Salon',
+                principleTitle: 'PRINCIPE',
+                principleDesc: 'Chaque colocataire se voit attribuer une zone spécifique par semaine. La rotation s\'effectue le dimanche soir.',
+                rulesHeader: 'RÈGLES',
+                rulesContent: 'Le matériel de nettoyage doit être rangé après usage. Les produits communs sont rachetés via le fond commun.',
+                flexTitle: 'FLEXIBILITÉ',
+                flexDesc: 'L\'échange de tâches est autorisé après accord mutuel. Signalez tout changement pour le suivi.',
+                validateTasks: 'Valider mes tâches',
+                task1: 'Recyclage (Lundi)',
+                task2: 'Poubelles (Mercredi)',
+                task3: 'Compost (Jeudi)',
+                taskClean: 'Entretien des aires communes',
                 taskModalTitle: 'Ajouter une Tâche',
                 taskModalPlaceholder: 'Nom de la tâche...',
                 taskModalValidate: 'Valider',
@@ -933,8 +1065,23 @@
                 tasksTitle: 'Housework',
                 rulesTitle: 'House Rules',
                 rulesDesc: '"Respect and communication are the keys to a successful co-living."',
-                task1: 'Trash & Recycling (Monday evening)',
-                task2: 'Kitchen Cleaning',
+                rotationTitle: 'Rotation Calendar',
+                weekCurrent: 'Current Week',
+                thZone: 'Zone / Task',
+                zoneKitchen: 'Kitchen',
+                zoneBath: 'Bathroom',
+                zoneLiving: 'Trash & Living Room',
+                principleTitle: 'PRINCIPLE',
+                principleDesc: 'Each roommate is assigned a specific zone per week. Rotation occurs on Sunday evening.',
+                rulesHeader: 'RULES',
+                rulesContent: 'Cleaning equipment must be stored after use. Common products are replaced via the common fund.',
+                flexTitle: 'FLEXIBILITY',
+                flexDesc: 'Task exchange is allowed after mutual agreement. Report any change for tracking.',
+                validateTasks: 'Validate my tasks',
+                task1: 'Recycling (Monday)',
+                task2: 'Trash (Wednesday)',
+                task3: 'Compost (Thursday)',
+                taskClean: 'Common Areas Cleaning',
                 taskModalTitle: 'Add a Task',
                 taskModalPlaceholder: 'Task name...',
                 taskModalValidate: 'Validate',
@@ -1175,6 +1322,9 @@
             document.getElementById('tab-life').innerText = t.navLife;
             document.getElementById('tab-docs').innerText = t.navDocs;
 
+            // Update Rotation Week
+            updateRotationWeek();
+
             // Update Home Tab
             document.getElementById('home-category').innerText = t.homeCategory;
             document.getElementById('home-title').innerText = t.homeTitle;
@@ -1189,10 +1339,28 @@
             document.getElementById('life-category').innerText = t.lifeCategory;
             document.getElementById('life-title').innerText = t.lifeTitle;
             document.getElementById('tasks-title').innerText = t.tasksTitle;
+            
+            document.getElementById('rotation-title').innerText = t.rotationTitle;
+            document.getElementById('week-current-label').innerText = t.weekCurrent;
+            document.getElementById('th-zone').innerText = t.thZone;
+            document.getElementById('zone-kitchen').innerText = t.zoneKitchen;
+            document.getElementById('zone-bath').innerText = t.zoneBath;
+            document.getElementById('zone-living').innerText = t.zoneLiving;
+            
+            document.getElementById('principle-title').innerText = t.principleTitle;
+            document.getElementById('principle-desc').innerText = t.principleDesc;
+            document.getElementById('rules-header').innerText = t.rulesHeader;
+            document.getElementById('rules-content').innerText = t.rulesContent;
+            document.getElementById('flex-title').innerText = t.flexTitle;
+            document.getElementById('flex-desc').innerText = t.flexDesc;
+            document.getElementById('btn-validate-tasks').innerText = t.validateTasks;
+
             document.getElementById('rules-title').innerText = t.rulesTitle;
             document.getElementById('rules-desc').innerText = t.rulesDesc;
             document.getElementById('task-1').innerText = t.task1;
             document.getElementById('task-2').innerText = t.task2;
+            document.getElementById('task-3').innerText = t.task3;
+            document.getElementById('task-clean').innerText = t.taskClean;
 
             // Updated task modal translation
             document.querySelector('#task-modal h3').innerText = t.taskModalTitle;
@@ -1383,6 +1551,25 @@
                 // Add tasks
                 const dayTasks = tasks.filter(t => t.day === i && t.month === month && t.year === year);
                 
+                // Add recurrent tasks
+                const date = new Date(year, month, i);
+                const dayOfWeek = date.getDay(); // 0 = Dim, 1 = Lun, 2 = Mar, 3 = Mer, 4 = Jeu, 5 = Ven, 6 = Sam
+                
+                const recurrentTasks = [];
+                if (dayOfWeek === 1) recurrentTasks.push({ task: "Recyclage", color: "#22c55e" }); // Vert
+                if (dayOfWeek === 3) recurrentTasks.push({ task: "Poubelles", color: "#4b5563" }); // Gris
+                if (dayOfWeek === 4) recurrentTasks.push({ task: "Compost", color: "#854d0e" });   // Brun/Orange foncé
+
+                recurrentTasks.forEach(rt => {
+                    const pill = document.createElement('div');
+                    pill.className = 'task-pill text-white font-bold opacity-80';
+                    pill.style.backgroundColor = rt.color;
+                    pill.style.fontSize = '8px';
+                    pill.style.padding = '2px 4px';
+                    pill.innerText = rt.task;
+                    dayDiv.appendChild(pill);
+                });
+                
                 dayTasks.forEach(t => {
                     const pill = document.createElement('div');
                     pill.className = 'task-pill relative group';
@@ -1405,6 +1592,39 @@
                 day.className = 'calendar-day other-month';
                 day.innerHTML = `<span class="text-[10px] font-bold text-gray-300">${i}</span>`;
                 container.appendChild(day);
+            }
+        }
+
+        function updateRotationWeek() {
+            const now = new Date();
+            const startOfYear = new Date(now.getFullYear(), 0, 1);
+            const days = Math.floor((now - startOfYear) / (24 * 60 * 60 * 1000));
+            const weekOfYear = Math.ceil((days + startOfYear.getDay() + 1) / 7);
+            
+            const rotationWeek = ((weekOfYear - 1) % 3) + 1;
+            document.getElementById('current-week-num').innerText = rotationWeek;
+
+            // Highlight the column
+            for (let i = 1; i <= 3; i++) {
+                const cols = document.querySelectorAll(`.week-col-${i}`);
+                cols.forEach(col => {
+                    if (i === rotationWeek) {
+                        col.classList.add('bg-blue-50', 'border-x', 'border-blue-100');
+                        // Highlight the pill specifically
+                        const pill = col.querySelector('span');
+                        if (pill) {
+                            pill.classList.remove('bg-surface-container-highest', 'text-on-surface-variant');
+                            pill.classList.add('bg-blue-600', 'text-white', 'shadow-md');
+                        }
+                    } else {
+                        col.classList.remove('bg-blue-50', 'border-x', 'border-blue-100');
+                        const pill = col.querySelector('span');
+                        if (pill) {
+                            pill.classList.add('bg-surface-container-highest', 'text-on-surface-variant');
+                            pill.classList.remove('bg-blue-600', 'text-white', 'shadow-md');
+                        }
+                    }
+                });
             }
         }
 
