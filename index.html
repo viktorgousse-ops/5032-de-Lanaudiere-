@@ -133,6 +133,16 @@
             scrollbar-width: none;
         }
 
+        .tab-content {
+            display: block;
+            opacity: 1;
+            transition: opacity 0.3s ease;
+        }
+        .tab-content.hidden {
+            display: none;
+            opacity: 0;
+        }
+
         /* Calendar Styles */
         .calendar-grid {
             display: grid;
@@ -287,16 +297,12 @@
 
         <!-- Tab 2: Gestion Financière (Finance) -->
         <div id="content-finance" class="tab-content hidden transition-all duration-500">
-            <!-- Title & Hero Section -->
             <div class="fade-in mb-10">
                 <p id="hero-category" class="font-label text-xs uppercase tracking-[0.2em] text-primary mb-2 font-bold">Gestion Financière</p>
                 <h1 id="hero-title" class="text-4xl md:text-5xl font-headline font-extrabold tracking-tight text-on-surface">Répartition de Mai à Juillet</h1>
             </div>
 
-            <!-- ... existing summary grid and tables ... -->
-            <!-- Note: I will wrap the existing summary grid and tables here -->
-
-        <div class="fade-in delay-1 grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+            <div class="fade-in delay-1 grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
             <div class="md:col-span-2 bg-gradient-to-br from-[#003063] to-[#00468c] p-6 rounded-xl text-white shadow-xl flex flex-col justify-between min-h-[160px]">
                 <div class="flex justify-between items-start">
                     <span id="label-spread" class="font-label text-xs uppercase tracking-widest opacity-80">Total à Répartir</span>
@@ -471,8 +477,6 @@
             </div>
         </div>
 
-        </div>
-
         <!-- Tab 3: Vie en Coloc (Life) -->
         <div id="content-life" class="tab-content hidden transition-all duration-500">
             <div class="fade-in mb-10">
@@ -640,23 +644,38 @@
 
     <script>
         function switchTab(tabId) {
-            // Scroll to top on tab change
-            window.scrollTo({top: 0, behavior: 'smooth'});
-            
-            // Update tabs visibility
-            document.querySelectorAll('.tab-content').forEach(content => {
-                content.classList.add('hidden');
-            });
-            document.getElementById('content-' + tabId).classList.remove('hidden');
+            try {
+                // Scroll to top
+                window.scrollTo({top: 0, behavior: 'instant'});
+                
+                // Update tabs visibility
+                document.querySelectorAll('.tab-content').forEach(content => {
+                    content.classList.add('hidden');
+                });
+                const activeTab = document.getElementById('content-' + tabId);
+                if (activeTab) {
+                    activeTab.classList.remove('hidden');
+                }
 
-            // Update button styles
-            document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.classList.remove('active');
-                btn.classList.replace('border-primary/100', 'border-primary/0');
-            });
-            const activeBtn = document.getElementById('tab-' + tabId);
-            activeBtn.classList.add('active');
-            activeBtn.classList.replace('border-primary/0', 'border-primary/100');
+                // Update button styles
+                document.querySelectorAll('.tab-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                    btn.classList.replace('border-primary/100', 'border-primary/0');
+                    btn.classList.add('text-on-surface-variant');
+                });
+                const activeBtn = document.getElementById('tab-' + tabId);
+                if (activeBtn) {
+                    activeBtn.classList.add('active');
+                    activeBtn.classList.replace('border-primary/0', 'border-primary/100');
+                    activeBtn.classList.remove('text-on-surface-variant');
+                }
+                
+                // Re-render
+                if (tabId === 'life') renderCalendar();
+                if (tabId === 'finance') renderTables();
+            } catch (e) {
+                console.error("Tab switch error:", e);
+            }
         }
 
         let currentLang = 'FR';
@@ -1292,9 +1311,17 @@
             renderCalendar();
         }
 
-        renderTables();
-        updateContent();
-        renderCalendar();
+        window.addEventListener('DOMContentLoaded', () => {
+            try {
+                renderTables();
+                updateContent();
+                renderCalendar();
+                // Ensure home is visible
+                switchTab('home');
+            } catch (e) {
+                console.error("Init error:", e);
+            }
+        });
     </script>
 </body>
 </html>
