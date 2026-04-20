@@ -290,12 +290,12 @@
                     Détails des Charges
                 </h3>
                 <div class="space-y-4">
-                    <div class="bg-[#a3f69c]/30 p-5 rounded-xl border border-[#88d982]/20 shadow-sm">
+                    <div class="bg-white p-5 rounded-xl shadow-sm border border-[#c2c6d2]/15">
                         <div class="flex gap-4">
                             <span class="material-symbols-outlined text-[#1b6d24] text-2xl">wifi</span>
                             <div>
-                                <p class="text-sm font-black text-[#217128] mb-1 uppercase tracking-wider">Internet (FIZZ)</p>
-                                <p id="internet-detail" class="text-[11px] text-[#005312] leading-relaxed font-medium">44,85 $ total divisé par 3 occupants (14,95 $/pers). Inclus haute vitesse illimitée.</p>
+                                <p class="text-sm font-black text-[#191c1d] mb-1 uppercase tracking-wider">Internet (FIZZ)</p>
+                                <p id="internet-detail" class="text-[11px] text-[#424751] leading-relaxed font-medium">44,85 $ total divisé par 3 occupants (14,95 $/pers). Inclus haute vitesse illimitée.</p>
                             </div>
                         </div>
                     </div>
@@ -322,6 +322,29 @@
             alt="Minimalist architectural detail" 
             src="https://lh3.googleusercontent.com/aida-public/AB6AXuBV3a_yp6RcPurok1LVblaRfGBPbd8Z40FSm3Fnpl_2qoetfaxZXWpoR51eXKoaIuIF4pNTRxAyEFRXK4f9l4kA1G4buUJfeImfOGMMrIkMMld65DFO9Mc3WR-0kU0hS43I_t39fr7HyJFJ3C9YcBxX41_OGYNQPYt7T2F21lfRuOqahgOOVgacF68Hor8Nb9wH32Rvjf1XrRS3K_13pwBacrq5pW_P9LrQnQ0XFAIIN8ZSlJtVJQPSOJTzF61EFxI2Axms8g449Jw"
         />
+    </div>
+
+    <!-- Passcode Modal -->
+    <div id="passcode-modal" class="hidden fixed inset-0 z-[100] flex items-center justify-center p-6 backdrop-blur-md bg-on-surface/20">
+        <div class="bg-white rounded-2xl shadow-2xl border border-outline-variant/30 w-full max-w-sm overflow-hidden fade-in">
+            <div class="p-8 space-y-6">
+                <div class="text-center space-y-2">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="material-symbols-outlined text-primary">lock</span>
+                    </div>
+                    <h3 id="modal-title" class="text-xl font-headline font-bold text-on-surface">Accès Sécurisé</h3>
+                    <p id="modal-desc" class="text-sm text-on-surface-variant font-medium">Veuillez entrer le code d'accès pour modifier.</p>
+                </div>
+                <div class="space-y-4">
+                    <input type="password" id="passcode-input" class="w-full bg-surface-container rounded-xl px-4 py-3 text-center text-2xl font-black tracking-[0.5em] focus:ring-2 focus:ring-primary focus:outline-none border-none" placeholder="••••" maxlength="4">
+                    <p id="modal-error" class="hidden text-center text-xs font-bold text-error uppercase tracking-wider">Code incorrect</p>
+                    <div class="flex gap-2">
+                        <button onclick="closePasscodeModal()" class="flex-1 px-4 py-3 rounded-xl font-bold text-xs uppercase tracking-widest text-on-surface-variant bg-surface-container hover:bg-surface-container-high transition-all">Annuler</button>
+                        <button onclick="validatePasscode()" class="flex-1 px-4 py-3 rounded-xl font-bold text-xs uppercase tracking-widest text-white bg-primary hover:opacity-90 transition-all shadow-lg active:scale-95">Valider</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -361,7 +384,12 @@
                 evolPrice: 'évolution du prix',
                 edit: 'Modifier',
                 save: 'Enregistrer',
-                cancel: 'Annuler'
+                cancel: 'Annuler',
+                modalTitle: 'Accès Sécurisé',
+                modalDesc: 'Veuillez entrer le code d\'accès pour modifier.',
+                modalError: 'Code incorrect',
+                modalCancel: 'Annuler',
+                modalValidate: 'Valider'
             },
             EN: {
                 langBtn: 'FR',
@@ -397,26 +425,72 @@
                 evolPrice: 'price evolution',
                 edit: 'Modify',
                 save: 'Save',
-                cancel: 'Cancel'
+                cancel: 'Cancel',
+                modalTitle: 'Secure Access',
+                modalDesc: 'Please enter the access code to edit.',
+                modalError: 'Incorrect code',
+                modalCancel: 'Cancel',
+                modalValidate: 'Validate'
             }
         };
 
         let editingActuel = false;
         let editingPrev = false;
+        let isAuthenticated = false;
+        let pendingEditType = null;
+
+        function showPasscodeModal(type) {
+            pendingEditType = type;
+            const modal = document.getElementById('passcode-modal');
+            const input = document.getElementById('passcode-input');
+            const error = document.getElementById('modal-error');
+            input.value = '';
+            error.classList.add('hidden');
+            modal.classList.remove('hidden');
+            input.focus();
+        }
+
+        function closePasscodeModal() {
+            document.getElementById('passcode-modal').classList.add('hidden');
+            pendingEditType = null;
+        }
+
+        function validatePasscode() {
+            const input = document.getElementById('passcode-input');
+            const error = document.getElementById('modal-error');
+            
+            if (input.value === '0000') {
+                isAuthenticated = true;
+                closePasscodeModal();
+                executeEdit(pendingEditType);
+            } else {
+                error.classList.remove('hidden');
+                input.value = '';
+                input.focus();
+            }
+        }
 
         const occupantsCurrent = [
-            { name: "Anabelle", detail: "Petite • +18.33$ inc.", detailEN: "Small • +18.33$ inc.", rent: "610,48 $", internet: "14,95 $", hydro: "16,94 $", total: "642,37 $" },
-            { name: "Kashish", detail: "Moyenne • +22.49$ inc.", detailEN: "Medium • +22.49$ inc.", rent: "748,99 $", internet: "14,95 $", hydro: "16,94 $", total: "780,88 $" },
-            { name: "Viktor", detail: "Grande • +24.18$ inc.", detailEN: "Large • +24.18$ inc.", rent: "805,53 $", internet: "14,95 $", hydro: "16,94 $", total: "837,42 $" },
+            { name: "Anabelle", detail: "Petite • +18.33$ inc.", detailEN: "Small • +18.33$ inc.", rent: "610,48 $", internet: "14,95 $", hydro: "16,94 $", total: "643 $" },
+            { name: "Kashish", detail: "Moyenne • +22.49$ inc.", detailEN: "Medium • +22.49$ inc.", rent: "748,99 $", internet: "14,95 $", hydro: "16,94 $", total: "781 $" },
+            { name: "Viktor", detail: "Grande • +24.18$ inc.", detailEN: "Large • +24.18$ inc.", rent: "805,53 $", internet: "14,95 $", hydro: "16,94 $", total: "838 $" },
         ];
 
         const occupantsActuel = [
-            { name: "Anabelle", detail: "Petite • +18.33$ inc.", detailEN: "Small • +18.33$ inc.", rent: "592,11 $", internet: "14,95 $", hydro: "16,94 $", total: "624,00 $" },
-            { name: "Kashish", detail: "Moyenne • +22.49$ inc.", detailEN: "Medium • +22.49$ inc.", rent: "726,11 $", internet: "14,95 $", hydro: "16,94 $", total: "758,00 $" },
-            { name: "Viktor", detail: "Grande • +24.18$ inc.", detailEN: "Large • +24.18$ inc.", rent: "781,11 $", internet: "14,95 $", hydro: "16,94 $", total: "813,00 $" },
+            { name: "Anabelle", detail: "Petite • +18.33$ inc.", detailEN: "Small • +18.33$ inc.", rent: "592,11 $", internet: "14,95 $", hydro: "16,94 $", total: "624 $" },
+            { name: "Kashish", detail: "Moyenne • +22.49$ inc.", detailEN: "Medium • +22.49$ inc.", rent: "726,11 $", internet: "14,95 $", hydro: "16,94 $", total: "758 $" },
+            { name: "Viktor", detail: "Grande • +24.18$ inc.", detailEN: "Large • +24.18$ inc.", rent: "781,11 $", internet: "14,95 $", hydro: "16,94 $", total: "813 $" },
         ];
 
         function toggleEdit(type) {
+            if (isAuthenticated) {
+                executeEdit(type);
+            } else {
+                showPasscodeModal(type);
+            }
+        }
+
+        function executeEdit(type) {
             if (type === 'actuel') {
                 editingActuel = true;
                 document.getElementById('edit-btn-1').classList.add('hidden');
@@ -496,7 +570,9 @@
             const internet = parseCurrency(inputs[1].value);
             const hydro = parseCurrency(inputs[2].value);
             const total = rent + internet + hydro;
-            inputs[3].value = formatCurrency(total);
+            
+            // Apply rounding up to whole number for all Totals
+            inputs[3].value = Math.ceil(total) + ' $';
         }
 
         function toggleLanguage() {
@@ -558,6 +634,14 @@
             const table2Controls = document.getElementById('edit-controls-2').querySelectorAll('button');
             table2Controls[0].innerText = t.save;
             table2Controls[1].innerText = t.cancel;
+
+            // Update Modal
+            document.getElementById('modal-title').innerText = t.modalTitle;
+            document.getElementById('modal-desc').innerText = t.modalDesc;
+            document.getElementById('modal-error').innerText = t.modalError;
+            const modalBtns = document.getElementById('passcode-modal').querySelectorAll('button');
+            modalBtns[0].innerText = t.modalCancel;
+            modalBtns[1].innerText = t.modalValidate;
 
             renderTables();
         }
