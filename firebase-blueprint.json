@@ -1,0 +1,59 @@
+{
+  "entities": {
+    "Task": {
+      "title": "Task",
+      "description": "A laundry or chores task in the shared calendar",
+      "type": "object",
+      "properties": {
+        "day": { "type": "number" },
+        "month": { "type": "number" },
+        "year": { "type": "number" },
+        "roommate": { "type": "string" },
+        "task": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["day", "month", "year", "roommate", "task"]
+    },
+    "ColocColor": {
+      "title": "ColocColor",
+      "description": "Color configuration for a roommate",
+      "type": "object",
+      "properties": {
+        "Anabelle": { "type": "string" },
+        "Kashish": { "type": "string" },
+        "Viktor": { "type": "string" }
+      }
+    },
+    "FinancialEntry": {
+      "title": "FinancialEntry",
+      "description": "A row in the financial ledger",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "detail": { "type": "string" },
+        "detailEN": { "type": "string" },
+        "rent": { "type": "string" },
+        "internet": { "type": "string" },
+        "hydro": { "type": "string" },
+        "total": { "type": "string" },
+        "type": { "type": "string", "enum": ["actuel", "previsionnel"] },
+        "order": { "type": "number" }
+      },
+      "required": ["name", "rent", "internet", "hydro", "total", "type"]
+    }
+  },
+  "firestore": {
+    "/tasks/{taskId}": {
+      "schema": "Task",
+      "description": "Collection of tasks for the calendar"
+    },
+    "/coloc_settings/colors": {
+      "schema": "ColocColor",
+      "description": "Global color settings for roommates"
+    },
+    "/finances/{financeId}": {
+      "schema": "FinancialEntry",
+      "description": "List of financial entries for rent and charges"
+    }
+  }
+}

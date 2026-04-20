@@ -1,0 +1,64 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Default deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Helper functions
+    function isValidId(id) { return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$'); }
+    function isSignedIn() { return request.auth != null; }
+    function incoming() { return request.resource.data; }
+    function existing() { return resource.data; }
+
+    // Task Validation
+    function isValidTask(data) {
+      return data.day is number && data.day >= 1 && data.day <= 31 &&
+             data.month is number && data.month >= 0 && data.month <= 11 &&
+             data.year is number &&
+             data.roommate is string && data.roommate.size() <= 50 &&
+             data.task is string && data.task.size() <= 200;
+    }
+
+    match /tasks/{taskId} {
+      allow read: if true;
+      allow create: if isValidId(taskId) && isValidTask(incoming());
+      allow update: if isValidId(taskId) && isValidTask(incoming()) && (
+        incoming().diff(existing()).affectedKeys().hasOnly(['task', 'roommate', 'day', 'month', 'year'])
+      );
+      allow delete: if true;
+    }
+
+    // Color Settings Validation
+    function isValidColors(data) {
+      return (data.Anabelle is string && data.Anabelle.size() <= 10) &&
+             (data.Kashish is string && data.Kashish.size() <= 10) &&
+             (data.Viktor is string && data.Viktor.size() <= 10);
+    }
+
+    match /coloc_settings/colors {
+      allow read: if true;
+      allow write: if isValidColors(incoming());
+    }
+
+    // Finance Validation
+    function isValidFinance(data) {
+      return data.name is string &&
+             data.rent is string &&
+             data.internet is string &&
+             data.hydro is string &&
+             data.total is string &&
+             data.type in ['actuel', 'previsionnel'];
+    }
+
+    match /finances/{financeId} {
+      allow read: if true;
+      allow create: if isValidId(financeId) && isValidFinance(incoming());
+      allow update: if isValidId(financeId) && isValidFinance(incoming()) && (
+        incoming().diff(existing()).affectedKeys().hasOnly(['rent', 'internet', 'hydro', 'total'])
+      );
+      allow delete: if true;
+    }
+  }
+}

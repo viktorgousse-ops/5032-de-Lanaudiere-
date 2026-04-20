@@ -640,8 +640,106 @@
         <span class="material-symbols-outlined">home</span>
     </button>
 
-    <script>
-        function switchTab(tabId) {
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+        import { 
+            getFirestore, 
+            doc, 
+            setDoc, 
+            getDoc, 
+            collection, 
+            addDoc, 
+            onSnapshot, 
+            query, 
+            orderBy, 
+            deleteDoc,
+            serverTimestamp 
+        } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+
+        const firebaseConfig = {
+            projectId: "gen-lang-client-0009344543",
+            appId: "1:467671422182:web:89b889915f768400ee1727",
+            apiKey: "AIzaSyBrN311sSV5SgFJmUL13a00uEv0_JXeljQ",
+            authDomain: "gen-lang-client-0009344543.firebaseapp.com",
+            firestoreDatabaseId: "ai-studio-013b1c59-93f4-4094-8692-f5442c71f1d6"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app, firebaseConfig.firestoreDatabaseId);
+
+        // State variables (moved to more global scope or kept within module)
+        let occupantsCurrent = [];
+        let occupantsActuel = [];
+        let tasks = [];
+        let cologColors = {
+            Anabelle: '#6366f1',
+            Kashish: '#d97706',
+            Viktor: '#003063'
+        };
+
+        // UI State
+        let currentLang = 'FR';
+        let editingActuel = false;
+        let editingPrev = false;
+        let editingTasks = false;
+        let isAuthenticated = false;
+        let pendingEditType = null;
+        let currentMonthDate = new Date();
+        let selectedDayForTask = null;
+
+        // Firebase Sync
+        function initFirebaseSync() {
+            // Colors Sync
+            onSnapshot(doc(db, 'coloc_settings', 'colors'), (docSnap) => {
+                if (docSnap.exists()) {
+                    cologColors = docSnap.data();
+                    // Update pickers if they exist
+                    if (document.getElementById('color-ana')) {
+                        document.getElementById('color-ana').value = cologColors.Anabelle || '#6366f1';
+                        document.getElementById('color-kash').value = cologColors.Kashish || '#f59e0b';
+                        document.getElementById('color-vik').value = cologColors.Viktor || '#003063';
+                    }
+                    renderCalendar();
+                }
+            });
+
+            // Tasks Sync
+            onSnapshot(query(collection(db, 'tasks'), orderBy('day', 'asc')), (snapshot) => {
+                tasks = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                renderCalendar();
+            });
+
+            // Finances Sync
+            onSnapshot(query(collection(db, 'finances')), (snapshot) => {
+                const allFinances = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                occupantsActuel = allFinances.filter(f => f.type === 'actuel').sort((a, b) => (a.order || 0) - (b.order || 0));
+                occupantsCurrent = allFinances.filter(f => f.type === 'previsionnel').sort((a, b) => (a.order || 0) - (b.order || 0));
+                
+                // Fallback to defaults if empty
+                if (occupantsActuel.length === 0) {
+                    seedDefaultFinances();
+                }
+
+                renderTables();
+                updateSummary();
+            });
+        }
+
+        async function seedDefaultFinances() {
+            const defaults = [
+                { name: "Anabelle", detail: "Petite • +18.33$ inc.", detailEN: "Small • +18.33$ inc.", rent: "592,34 $", internet: "14,95 $", hydro: "16,71 $", total: "624 $", type: "actuel", order: 0 },
+                { name: "Kashish", detail: "Moyenne • +22.49$ inc.", detailEN: "Medium • +22.49$ inc.", rent: "726,33 $", internet: "14,95 $", hydro: "16,72 $", total: "758 $", type: "actuel", order: 1 },
+                { name: "Viktor", detail: "Grande • +24.18$ inc.", detailEN: "Large • +24.18$ inc.", rent: "781,33 $", internet: "14,95 $", hydro: "16,72 $", total: "813 $", type: "actuel", order: 2 },
+                { name: "Anabelle", detail: "Petite • +18.33$ inc.", detailEN: "Small • +18.33$ inc.", rent: "611,34 $", internet: "14,95 $", hydro: "16,71 $", total: "643 $", type: "previsionnel", order: 0 },
+                { name: "Kashish", detail: "Moyenne • +22.49$ inc.", detailEN: "Medium • +22.49$ inc.", rent: "749,33 $", internet: "14,95 $", hydro: "16,72 $", total: "781 $", type: "previsionnel", order: 1 },
+                { name: "Viktor", detail: "Grande • +24.18$ inc.", detailEN: "Large • +24.18$ inc.", rent: "805,33 $", internet: "14,95 $", hydro: "16,72 $", total: "837 $", type: "previsionnel", order: 2 }
+            ];
+            for (const item of defaults) {
+                await addDoc(collection(db, 'finances'), item);
+            }
+        }
+
+        window.switchTab = function(tabId) {
             try {
                 // Scroll to top
                 window.scrollTo({top: 0, behavior: 'instant'});
@@ -680,7 +778,6 @@
             }
         }
 
-        let currentLang = 'FR';
         const translations = {
             FR: {
                 langBtn: 'EN',
@@ -828,12 +925,7 @@
             }
         };
 
-        let editingActuel = false;
-        let editingPrev = false;
-        let isAuthenticated = false;
-        let pendingEditType = null;
-
-        function showPasscodeModal(type) {
+        window.showPasscodeModal = function(type) {
             pendingEditType = type;
             const modal = document.getElementById('passcode-modal');
             const input = document.getElementById('passcode-input');
@@ -844,12 +936,12 @@
             input.focus();
         }
 
-        function closePasscodeModal() {
+        window.closePasscodeModal = function() {
             document.getElementById('passcode-modal').classList.add('hidden');
             pendingEditType = null;
         }
 
-        function validatePasscode() {
+        window.validatePasscode = function() {
             const input = document.getElementById('passcode-input');
             const error = document.getElementById('modal-error');
             
@@ -864,19 +956,7 @@
             }
         }
 
-        const occupantsCurrent = [
-            { name: "Anabelle", detail: "Petite • +18.33$ inc.", detailEN: "Small • +18.33$ inc.", rent: "611,34 $", internet: "14,95 $", hydro: "16,71 $", total: "643 $" },
-            { name: "Kashish", detail: "Moyenne • +22.49$ inc.", detailEN: "Medium • +22.49$ inc.", rent: "749,33 $", internet: "14,95 $", hydro: "16,72 $", total: "781 $" },
-            { name: "Viktor", detail: "Grande • +24.18$ inc.", detailEN: "Large • +24.18$ inc.", rent: "805,33 $", internet: "14,95 $", hydro: "16,72 $", total: "837 $" },
-        ];
-
-        const occupantsActuel = [
-            { name: "Anabelle", detail: "Petite • +18.33$ inc.", detailEN: "Small • +18.33$ inc.", rent: "592,34 $", internet: "14,95 $", hydro: "16,71 $", total: "624 $" },
-            { name: "Kashish", detail: "Moyenne • +22.49$ inc.", detailEN: "Medium • +22.49$ inc.", rent: "726,33 $", internet: "14,95 $", hydro: "16,72 $", total: "758 $" },
-            { name: "Viktor", detail: "Grande • +24.18$ inc.", detailEN: "Large • +24.18$ inc.", rent: "781,33 $", internet: "14,95 $", hydro: "16,72 $", total: "813 $" },
-        ];
-
-        function toggleEdit(type) {
+        window.toggleEdit = function(type) {
             if (isAuthenticated) {
                 executeEdit(type);
             } else {
@@ -884,7 +964,7 @@
             }
         }
 
-        function executeEdit(type) {
+        window.executeEdit = function(type) {
             if (type === 'actuel') {
                 editingActuel = true;
                 document.getElementById('edit-btn-1').classList.add('hidden');
@@ -906,7 +986,7 @@
             renderCalendar();
         }
 
-        function stopTaskEdit() {
+        window.stopTaskEdit = function() {
             editingTasks = false;
             document.getElementById('edit-tasks-btn').classList.remove('bg-white', 'shadow-inner');
             document.getElementById('edit-tasks-btn').innerHTML = `
@@ -917,7 +997,7 @@
             renderCalendar();
         }
 
-        function cancelEdit(type) {
+        window.cancelEdit = function(type) {
             if (type === 'actuel') {
                 editingActuel = false;
                 document.getElementById('edit-btn-1').classList.remove('hidden');
@@ -930,23 +1010,30 @@
             renderTables();
         }
 
-        function saveData(type) {
+        window.saveData = async function(type) {
             const tableId = type === 'actuel' ? 'occupants-table-body-2026' : 'occupants-table-body';
             const rows = document.getElementById(tableId).querySelectorAll('tr');
             const data = type === 'actuel' ? occupantsActuel : occupantsCurrent;
 
-            rows.forEach((row, index) => {
+            for (let i = 0; i < rows.length; i++) {
+                const row = rows[i];
                 const inputs = row.querySelectorAll('input');
                 if (inputs.length > 0) {
-                    data[index].rent = inputs[0].value;
-                    data[index].internet = inputs[1].value;
-                    data[index].hydro = inputs[2].value;
-                    data[index].total = inputs[3].value;
+                    const id = data[i].id;
+                    const updatedData = {
+                        rent: inputs[0].value,
+                        internet: inputs[1].value,
+                        hydro: inputs[2].value,
+                        total: inputs[3].value
+                    };
+                    if (id) {
+                        try {
+                            await setDoc(doc(db, 'finances', id), updatedData, { merge: true });
+                        } catch (e) {
+                            console.error("Save error:", e);
+                        }
+                    }
                 }
-            });
-
-            if (type === 'actuel') {
-                updateSummary();
             }
 
             cancelEdit(type);
@@ -977,7 +1064,7 @@
             return val.toFixed(2).replace('.', ',') + ' $';
         }
 
-        function handleRowInput(input) {
+        window.handleRowInput = function(input) {
             const tr = input.closest('tr');
             const inputs = tr.querySelectorAll('input');
             const rent = parseCurrency(inputs[0].value);
@@ -989,7 +1076,7 @@
             inputs[3].value = Math.ceil(total) + ' $';
         }
 
-        function toggleLanguage() {
+        window.toggleLanguage = function() {
             currentLang = currentLang === 'FR' ? 'EN' : 'FR';
             updateContent();
         }
@@ -1159,31 +1246,7 @@
             }
         });
 
-        let currentMonthDate = new Date();
-        const tasks = [
-            { day: 5, month: currentMonthDate.getMonth(), year: currentMonthDate.getFullYear(), roommate: 'Anabelle', task: 'Lavage Cuisine' },
-            { day: 12, month: currentMonthDate.getMonth(), year: currentMonthDate.getFullYear(), roommate: 'Kashish', task: 'Poubelles' },
-            { day: 19, month: currentMonthDate.getMonth(), year: currentMonthDate.getFullYear(), roommate: 'Viktor', task: 'Nettoyage Salon' },
-            { day: 26, month: currentMonthDate.getMonth(), year: currentMonthDate.getFullYear(), roommate: 'Anabelle', task: 'Recyclage' }
-        ];
-
-        let cologColors = {
-            Anabelle: '#6366f1',
-            Kashish: '#d97706', // More saturated amber for better contrast
-            Viktor: '#003063'
-        };
-
-        function updateColors() {
-            cologColors.Anabelle = document.getElementById('color-ana').value;
-            cologColors.Kashish = document.getElementById('color-kash').value;
-            cologColors.Viktor = document.getElementById('color-vik').value;
-            renderCalendar();
-        }
-
-        let editingTasks = false;
-        let selectedDayForTask = null;
-
-        function openTaskModal(day) {
+        window.openTaskModal = function(day) {
             if (!editingTasks) return;
             selectedDayForTask = day;
             document.getElementById('task-modal-date').innerText = `${day} ${document.getElementById('current-month-display').innerText}`;
@@ -1191,34 +1254,40 @@
             document.getElementById('task-modal').classList.remove('hidden');
         }
 
-        function closeTaskModal() {
+        window.closeTaskModal = function() {
             document.getElementById('task-modal').classList.add('hidden');
             selectedDayForTask = null;
         }
 
-        function saveTask() {
+        window.saveTask = async function() {
             const taskText = document.getElementById('task-input-text').value;
             const roommate = document.getElementById('task-roommate-select').value;
             if (!taskText) return;
 
-            tasks.push({
-                day: selectedDayForTask,
-                month: currentMonthDate.getMonth(),
-                year: currentMonthDate.getFullYear(),
-                roommate: roommate,
-                task: taskText
-            });
-
-            closeTaskModal();
-            renderCalendar();
-            sendEmailNotification(`Nouvelle tâche ajoutée : ${taskText} pour ${roommate} le ${selectedDayForTask}/${currentMonthDate.getMonth() + 1}`);
+            try {
+                await addDoc(collection(db, 'tasks'), {
+                    day: selectedDayForTask,
+                    month: currentMonthDate.getMonth(),
+                    year: currentMonthDate.getFullYear(),
+                    roommate: roommate,
+                    task: taskText,
+                    createdAt: serverTimestamp()
+                });
+                closeTaskModal();
+                sendEmailNotification(`Nouvelle tâche ajoutée : ${taskText} pour ${roommate} le ${selectedDayForTask}/${currentMonthDate.getMonth() + 1}`);
+            } catch (e) {
+                console.error("Save task error:", e);
+            }
         }
 
-        function deleteTask(index) {
+        window.deleteTask = async function(id) {
             if (!editingTasks) return;
-            tasks.splice(index, 1);
-            renderCalendar();
-            sendEmailNotification(`Une tâche a été supprimée du calendrier.`);
+            try {
+                await deleteDoc(doc(db, 'tasks', id));
+                sendEmailNotification(`Une tâche a été supprimée du calendrier.`);
+            } catch (e) {
+                console.error("Delete task error:", e);
+            }
         }
 
         function sendEmailNotification(message) {
@@ -1275,16 +1344,15 @@
                 dayDiv.innerHTML = `<span class="text-[10px] font-bold text-on-surface">${i}</span>`;
                 
                 // Add tasks
-                const dayTasks = tasks.map((t, idx) => ({ ...t, originalIndex: idx }))
-                                     .filter(t => t.day === i && t.month === month && t.year === year);
+                const dayTasks = tasks.filter(t => t.day === i && t.month === month && t.year === year);
                 
                 dayTasks.forEach(t => {
                     const pill = document.createElement('div');
                     pill.className = 'task-pill relative group';
-                    pill.style.backgroundColor = cologColors[t.roommate];
+                    pill.style.backgroundColor = cologColors[t.roommate] || '#ccc';
                     pill.innerHTML = `
                         ${t.task}
-                        ${editingTasks ? `<span onclick="event.stopPropagation(); deleteTask(${t.originalIndex})" class="absolute -right-1 -top-1 bg-white text-error rounded-full w-3 h-3 flex items-center justify-center text-[8px] shadow-sm cursor-pointer opacity-0 group-hover:opacity-100 transition-opacity">×</span>` : ''}
+                        ${editingTasks ? `<span onclick="event.stopPropagation(); window.deleteTask('${t.id}')" class="absolute -right-1 -top-1 bg-white text-error rounded-full w-3 h-3 flex items-center justify-center text-[8px] shadow-sm cursor-pointer opacity-0 group-hover:opacity-100 transition-opacity">×</span>` : ''}
                     `;
                     dayDiv.appendChild(pill);
                 });
@@ -1303,21 +1371,20 @@
             }
         }
 
-        function nextMonth() {
+        window.nextMonth = function() {
             currentMonthDate.setMonth(currentMonthDate.getMonth() + 1);
             renderCalendar();
         }
 
-        function prevMonth() {
+        window.prevMonth = function() {
             currentMonthDate.setMonth(currentMonthDate.getMonth() - 1);
             renderCalendar();
         }
 
         window.addEventListener('DOMContentLoaded', () => {
             try {
-                renderTables();
+                initFirebaseSync();
                 updateContent();
-                renderCalendar();
                 // Ensure home is visible
                 switchTab('home');
             } catch (e) {
