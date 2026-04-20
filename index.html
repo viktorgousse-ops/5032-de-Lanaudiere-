@@ -778,9 +778,7 @@
             onSnapshot(doc(db, 'coloc_data', 'house_tasks'), (docSnap) => {
                 if (docSnap.exists()) {
                     houseTasksState = docSnap.data();
-                    Object.keys(houseTasksState).forEach(taskId => {
-                        updateHouseTaskUI(taskId);
-                    });
+                    renderCalendar();
                 }
             });
 
