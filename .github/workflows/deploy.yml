@@ -1,0 +1,50 @@
+# Workflow pour déployer automatiquement sur GitHub Pages
+name: Déploiement GitHub Pages
+
+on:
+  push:
+    branches: ["main"] # Se déclenche sur chaque export vers la branche main
+  workflow_dispatch:   # Permet un déclenchement manuel depuis l'onglet Actions
+
+# Autorisations nécessaires pour le déploiement
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Evite les déploiements simultanés
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Installation
+        run: npm install
+
+      - name: Construction (Build)
+        run: npm run build
+
+      - name: Configuration de GitHub Pages
+        uses: actions/configure-pages@v4
+
+      - name: Téléchargement de l'artéfact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # On déploie le dossier dist généré par la commande build
+          path: './dist'
+
+      - name: Déploiement sur GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
