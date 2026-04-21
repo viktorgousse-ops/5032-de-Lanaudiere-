@@ -243,7 +243,7 @@
             <!-- Hero Gallery (Static) -->
             <div id="hero-gallery-container" class="grid grid-cols-1 md:grid-cols-12 gap-4 h-[500px]">
                 <div id="main-hero-card" class="md:col-span-8 h-full rounded-2xl overflow-hidden shadow-lg relative group border border-outline-variant/10">
-                    <img id="main-hero-img" src="./terrasse.jpg" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="Terrasse de l'appartement" referrerpolicy="no-referrer">
+                    <img id="main-hero-img" src="terrasse.jpg" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="Terrasse de l'appartement" referrerpolicy="no-referrer">
                     <div class="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black/60 to-transparent text-white">
                         <p class="font-headline font-bold text-2xl" id="hero-img-label">La Terrasse</p>
                         <p class="text-sm opacity-80" id="hero-img-sub">Espace extérieur & briques rouges</p>
@@ -251,13 +251,13 @@
                 </div>
                 <div class="md:col-span-4 grid grid-rows-3 gap-4 h-full">
                     <div class="rounded-2xl overflow-hidden shadow-lg border border-outline-variant/10">
-                        <img id="side-img-1" src="./salon.jpg" class="w-full h-full object-cover" alt="Le Salon" referrerpolicy="no-referrer">
+                        <img id="side-img-1" src="salon.jpg" class="w-full h-full object-cover" alt="Le Salon" referrerpolicy="no-referrer">
                     </div>
                     <div class="rounded-2xl overflow-hidden shadow-lg border border-outline-variant/10">
-                        <img id="side-img-2" src="./cuisine.jpg" class="w-full h-full object-cover" alt="La Cuisine" referrerpolicy="no-referrer">
+                        <img id="side-img-2" src="cuisine.jpg" class="w-full h-full object-cover" alt="La Cuisine" referrerpolicy="no-referrer">
                     </div>
                     <div class="rounded-2xl overflow-hidden shadow-lg border border-outline-variant/10">
-                        <img id="side-img-3" src="./balcon.jpg" class="w-full h-full object-cover" alt="Le Balcon" referrerpolicy="no-referrer">
+                        <img id="side-img-3" src="balcon.jpg" class="w-full h-full object-cover" alt="Le Balcon" referrerpolicy="no-referrer">
                     </div>
                 </div>
             </div>
@@ -1198,6 +1198,16 @@
         window.toggleLanguage = function() {
             currentLang = currentLang === 'FR' ? 'EN' : 'FR';
             updateContent();
+        }
+
+        function setSafeText(id, text) {
+            const el = document.getElementById(id);
+            if (el) el.innerText = text || "";
+        }
+
+        function setSafeHTML(id, html) {
+            const el = document.getElementById(id);
+            if (el) el.innerHTML = html || "";
         }
 
         function updateContent() {
