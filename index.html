@@ -101,11 +101,6 @@
             display: inline-block;
         }
 
-        .font-icon {
-            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-        }
-
-        /* Basic Fade-in Animation */
         .fade-in {
             animation: fadeIn 0.8s ease-out forwards;
             opacity: 0;
@@ -121,29 +116,14 @@
 
         .delay-1 { animation-delay: 0.1s; }
         .delay-2 { animation-delay: 0.2s; }
-        .delay-3 { animation-delay: 0.3s; }
-        .delay-4 { animation-delay: 0.4s; }
-
-        .tab-btn.active {
-            color: var(--color-primary);
-        }
+        .tab-btn.active { color: var(--color-primary); }
         
-        .no-scrollbar::-webkit-scrollbar {
-            display: none;
-        }
-        .no-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-        .tab-content {
-            display: block;
-        }
-        .tab-content.hidden {
-            display: none !important;
-        }
+        .tab-content { display: block; }
+        .tab-content.hidden { display: none !important; }
 
-        /* Calendar Styles */
         .calendar-grid {
             display: grid;
             grid-template-columns: repeat(7, minmax(0, 1fr));
@@ -178,12 +158,6 @@
             color: #6b7280;
             border-bottom: 2px solid var(--color-outline-variant);
         }
-        .task-dot {
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            display: inline-block;
-        }
         .task-pill {
             font-size: 10px;
             padding: 4px 8px;
@@ -194,19 +168,12 @@
             overflow: hidden;
             text-overflow: ellipsis;
             line-height: 1.25;
-            -webkit-font-smoothing: antialiased;
             box-shadow: 0 1px 2px rgba(0,0,0,0.06);
-            letter-spacing: -0.01em;
         }
         
-        /* Safari Backdrop Filter Support */
         .backdrop-blur-md {
             -webkit-backdrop-filter: blur(12px);
             backdrop-filter: blur(12px);
-        }
-        .backdrop-blur-sm {
-            -webkit-backdrop-filter: blur(4px);
-            backdrop-filter: blur(4px);
         }
     </style>
 </head>
@@ -239,10 +206,9 @@
                 <h1 id="home-title" class="text-4xl md:text-5xl font-headline font-extrabold tracking-tight text-on-surface">Maison</h1>
             </div>
 
-            <!-- Hero Gallery (Static) -->
             <div id="hero-gallery-container" class="grid grid-cols-1 md:grid-cols-12 gap-4 h-[500px]">
                 <div id="main-hero-card" class="md:col-span-8 h-full rounded-2xl overflow-hidden shadow-lg relative group border border-outline-variant/10">
-                    <img id="main-hero-img" src="terrasse.jpg" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="Terrasse de l'appartement" referrerpolicy="no-referrer">
+                    <img src="terrasse.jpg" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="Terrasse" referrerpolicy="no-referrer">
                     <div class="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black/60 to-transparent text-white">
                         <p class="font-headline font-bold text-2xl" id="hero-img-label">La Terrasse</p>
                         <p class="text-sm opacity-80" id="hero-img-sub">Espace extérieur & briques rouges</p>
@@ -250,24 +216,22 @@
                 </div>
                 <div class="md:col-span-4 grid grid-rows-3 gap-4 h-full">
                     <div class="rounded-2xl overflow-hidden shadow-lg border border-outline-variant/10">
-                        <img id="side-img-1" src="salon.jpg" class="w-full h-full object-cover" alt="Le Salon" referrerpolicy="no-referrer">
+                        <img src="salon.jpg" class="w-full h-full object-cover" alt="Le Salon" referrerpolicy="no-referrer">
                     </div>
                     <div class="rounded-2xl overflow-hidden shadow-lg border border-outline-variant/10">
-                        <img id="side-img-2" src="cuisine.jpg" class="w-full h-full object-cover" alt="La Cuisine" referrerpolicy="no-referrer">
+                        <img src="cuisine.jpg" class="w-full h-full object-cover" alt="La Cuisine" referrerpolicy="no-referrer">
                     </div>
                     <div class="rounded-2xl overflow-hidden shadow-lg border border-outline-variant/10">
-                        <img id="side-img-3" src="balcon.jpg" class="w-full h-full object-cover" alt="Le Balcon" referrerpolicy="no-referrer">
+                        <img src="balcon.jpg" class="w-full h-full object-cover" alt="Le Balcon" referrerpolicy="no-referrer">
                     </div>
                 </div>
             </div>
 
-            <!-- Roommates Section -->
             <section class="pt-16 pb-20">
                 <h2 class="text-3xl font-headline font-bold mb-10 flex items-center gap-4">
                     <span class="w-2 h-8 bg-primary rounded-full"></span>
-                    <span id="roommates-title">Les Visages du Plateau</span>
+                    <span id="roommates-title">Les Colocataires</span>
                 </h2>
-                <!-- Roommates Section Simplified -->
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div class="bg-white/50 p-6 rounded-2xl border border-outline-variant/10 text-center">
                         <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-indigo-100 text-indigo-700 font-bold mb-2">A.</span>
@@ -286,316 +250,219 @@
         </div>
 
         <!-- Tab 2: Gestion Financière (Finance) -->
-        <div id="content-finance" class="tab-content hidden transition-all duration-500">
+        <div id="content-finance" class="tab-content hidden">
             <div class="fade-in mb-10">
                 <p id="hero-category" class="font-label text-xs uppercase tracking-[0.2em] text-primary mb-2 font-bold">Gestion Financière</p>
-                <h1 id="hero-title" class="text-4xl md:text-5xl font-headline font-extrabold tracking-tight text-on-surface">Répartition de Mai à Juillet</h1>
+                <h1 id="hero-title" class="text-4xl md:text-5xl font-headline font-extrabold tracking-tight text-on-surface">Maison</h1>
             </div>
 
             <div class="fade-in delay-1 grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
-            <div class="md:col-span-2 bg-gradient-to-br from-[#003063] to-[#00468c] p-6 rounded-xl text-white shadow-xl flex flex-col justify-between min-h-[160px]">
-                <div class="flex justify-between items-start">
-                    <span id="label-spread" class="font-label text-xs uppercase tracking-widest opacity-80">Total à Répartir</span>
-                    <span id="label-payments" class="font-label text-xs uppercase tracking-widest font-black opacity-80">paiements</span>
-                </div>
-                <div>
-                    <h2 id="summary-total" class="text-3xl font-headline font-bold">2 195,00 $</h2>
-                    <p id="spread-desc" class="text-sm opacity-70 mt-1">Montant global mensuel actuel (Mai - Juin)</p>
-                </div>
-            </div>
-            
-            <div class="bg-white p-6 rounded-xl shadow-[0_4px_24px_rgba(25,28,29,0.04)] border border-[#c2c6d2]/10">
-                <span id="label-rent-box" class="block font-headline font-black text-[#003063] mb-3 text-sm uppercase tracking-tighter">loyer</span>
-                <p id="rent-box-desc" class="font-label text-[10px] uppercase tracking-widest text-[#424751] mb-1">Loyer Total (Mai-Juin)</p>
-                <p id="summary-rent" class="text-xl font-headline font-bold text-[#191c1d]">2 100,00 $</p>
-            </div>
-            
-            <div class="bg-white p-6 rounded-xl shadow-[0_4px_24_rgba(25,28,29,0.04)] border border-[#c2c6d2]/10">
-                <span id="label-charges-box" class="block font-headline font-black text-[#003063] mb-3 text-sm uppercase tracking-tighter">charges</span>
-                <p id="charges-box-desc" class="font-label text-[10px] uppercase tracking-widest text-[#424751] mb-1">Internet & Hydro</p>
-                <p id="summary-charges" class="text-xl font-headline font-bold text-[#191c1d]">95,00 $</p>
-            </div>
-        </div>
-
-        <!-- Main Financial Ledger (Actuel: Mai-Juin 2026) -->
-        <section class="mb-12">
-            <div class="flex items-center justify-between mb-6">
-                <h3 id="table-1-title" class="text-xl font-headline font-bold flex items-center gap-3">
-                    <span class="w-1.5 h-6 bg-[#1b6d24] rounded-full"></span>
-                    Grille de Répartition (Mai - Juin 2026)
-                </h3>
-                <div class="flex items-center gap-3">
-                    <span id="badge-1" class="text-[10px] font-bold text-[#1b6d24] bg-[#1b6d24]/10 px-4 py-1.5 rounded-full uppercase tracking-wider">Actuel</span>
-                    <button id="edit-btn-1" onclick="toggleEdit('actuel')" class="flex items-center gap-1.5 text-[10px] font-bold text-primary hover:bg-primary/5 px-3 py-1.5 rounded-full uppercase tracking-wider transition-all border border-outline-variant/30">
-                        <span class="material-symbols-outlined text-sm">edit</span>
-                        <span id="btn-edit-text-1">Modifier</span>
-                    </button>
-                    <div id="edit-controls-1" class="hidden flex items-center gap-2">
-                        <button onclick="saveData('actuel')" class="text-[10px] font-bold text-white bg-secondary px-4 py-1.5 rounded-full uppercase tracking-wider shadow-sm hover:opacity-90 transition-all">Enregistrer</button>
-                        <button onclick="cancelEdit('actuel')" class="text-[10px] font-bold text-[#424751] bg-[#f3f4f5] px-4 py-1.5 rounded-full uppercase tracking-wider border border-outline-variant/30 hover:bg-white transition-all">Annuler</button>
+                <div class="md:col-span-2 bg-gradient-to-br from-[#003063] to-[#00468c] p-6 rounded-xl text-white shadow-xl flex flex-col justify-between min-h-[160px]">
+                    <div class="flex justify-between items-start">
+                        <span id="label-spread" class="font-label text-xs uppercase tracking-widest opacity-80">Total à Répartir</span>
+                        <span id="label-payments" class="font-label text-xs uppercase tracking-widest font-black opacity-80">paiements</span>
+                    </div>
+                    <div>
+                        <h2 id="summary-total" class="text-3xl font-headline font-bold">2 195,00 $</h2>
+                        <p id="spread-desc" class="text-sm opacity-70 mt-1">Montant global mensuel actuel (Mai - Juin)</p>
                     </div>
                 </div>
-            </div>
-            
-            <div class="overflow-hidden rounded-xl bg-[#f3f4f5] border border-[#c2c6d2]/10">
-                <div class="overflow-x-auto">
-                    <table class="w-full text-left border-collapse">
-                        <thead>
-                            <tr class="bg-white">
-                                <th id="th-occ-1" class="p-5 font-label text-[10px] uppercase tracking-widest text-[#424751] font-bold whitespace-nowrap">Occupant</th>
-                                <th id="th-rent-1" class="p-5 font-label text-[10px] uppercase tracking-widest text-[#424751] font-bold whitespace-nowrap">Loyer</th>
-                                <th id="th-internet-1" class="p-5 font-label text-[10px] uppercase tracking-widest text-[#424751] font-bold whitespace-nowrap">Internet</th>
-                                <th id="th-hydro-1" class="p-5 font-label text-[10px] uppercase tracking-widest text-[#424751] font-bold min-w-[120px] whitespace-nowrap">Hydro</th>
-                                <th id="th-total-1" class="p-5 font-label text-[10px] uppercase tracking-widest text-[#1b6d24] text-right font-bold whitespace-nowrap">Total</th>
-                            </tr>
-                        </thead>
-                        <tbody id="occupants-table-body-2026" class="divide-y divide-[#f8f9fa]"></tbody>
-                    </table>
+                <div class="bg-white p-6 rounded-xl shadow border border-outline-variant/10">
+                    <span id="label-rent-box" class="block font-headline font-black text-primary mb-3 text-sm uppercase tracking-tighter">loyer</span>
+                    <p id="rent-box-desc" class="font-label text-[10px] uppercase tracking-widest text-[#424751] mb-1">Loyer Total</p>
+                    <p id="summary-rent" class="text-xl font-headline font-bold text-[#191c1d]">2 100,00 $</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow border border-outline-variant/10">
+                    <span id="label-charges-box" class="block font-headline font-black text-primary mb-3 text-sm uppercase tracking-tighter">charges</span>
+                    <p id="charges-box-desc" class="font-label text-[10px] uppercase tracking-widest text-[#424751] mb-1">Internet & Hydro</p>
+                    <p id="summary-charges" class="text-xl font-headline font-bold text-[#191c1d]">95,00 $</p>
                 </div>
             </div>
-        </section>
 
-        <!-- Main Financial Ledger (Prévisionnel: Juillet 2026) -->
-        <section class="mb-12">
-            <div class="flex items-center justify-between mb-6">
-                <h3 id="table-2-title" class="text-xl font-headline font-bold flex items-center gap-3">
-                    <span class="w-1.5 h-6 bg-[#003063] rounded-full"></span>
-                    Grille de Répartition (Dès Juillet 2026)
-                </h3>
-                <div class="flex items-center gap-3">
-                    <span id="badge-2" class="text-[10px] font-bold text-[#003063] bg-[#003063]/10 px-4 py-1.5 rounded-full uppercase tracking-wider">Prévisionnel</span>
-                    <button id="edit-btn-2" onclick="toggleEdit('prev')" class="flex items-center gap-1.5 text-[10px] font-bold text-primary hover:bg-primary/5 px-3 py-1.5 rounded-full uppercase tracking-wider transition-all border border-outline-variant/30">
-                        <span class="material-symbols-outlined text-sm">edit</span>
-                        <span id="btn-edit-text-2">Modifier</span>
-                    </button>
-                    <div id="edit-controls-2" class="hidden flex items-center gap-2">
-                        <button onclick="saveData('prev')" class="text-[10px] font-bold text-white bg-primary px-4 py-1.5 rounded-full uppercase tracking-wider shadow-sm hover:opacity-90 transition-all">Enregistrer</button>
-                        <button onclick="cancelEdit('prev')" class="text-[10px] font-bold text-[#424751] bg-[#f3f4f5] px-4 py-1.5 rounded-full uppercase tracking-wider border border-outline-variant/30 hover:bg-white transition-all">Annuler</button>
+            <section class="mb-12">
+                <div class="flex items-center justify-between mb-6">
+                    <h3 id="table-1-title" class="text-xl font-headline font-bold flex items-center gap-3">
+                        <span class="w-1.5 h-6 bg-secondary rounded-full"></span>
+                        Grille de Répartition (Mai - Juin 2026)
+                    </h3>
+                    <div class="flex items-center gap-3">
+                        <span id="badge-1" class="text-[10px] font-bold text-secondary bg-secondary/10 px-4 py-1.5 rounded-full uppercase tracking-wider">Actuel</span>
+                        <button id="edit-btn-1" onclick="toggleEdit('actuel')" class="flex items-center gap-1.5 text-[10px] font-bold text-primary border border-outline-variant/30 px-3 py-1.5 rounded-full hover:bg-primary/5 uppercase tracking-wider">
+                            <span class="material-symbols-outlined text-sm">edit</span>
+                            <span id="btn-edit-text-1">Modifier</span>
+                        </button>
+                        <div id="edit-controls-1" class="hidden flex items-center gap-2">
+                            <button onclick="saveData('actuel')" class="text-[10px] font-bold text-white bg-secondary px-4 py-1.5 rounded-full">Enregistrer</button>
+                            <button onclick="cancelEdit('actuel')" class="text-[10px] font-bold text-[#424751] bg-[#f3f4f5] px-4 py-1.5 rounded-full">Annuler</button>
+                        </div>
                     </div>
                 </div>
-            </div>
-            
-            <div class="overflow-hidden rounded-xl bg-[#f3f4f5] border border-[#c2c6d2]/10">
-                <div class="overflow-x-auto">
-                    <table class="w-full text-left border-collapse">
-                        <thead>
-                            <tr class="bg-white">
-                                <th id="th-occ-2" class="p-5 font-label text-[10px] uppercase tracking-widest text-[#424751] font-bold whitespace-nowrap">Occupant</th>
-                                <th id="th-rent-2" class="p-5 font-label text-[10px] uppercase tracking-widest text-[#424751] font-bold whitespace-nowrap">Loyer (Prév.)</th>
-                                <th id="th-internet-2" class="p-5 font-label text-[10px] uppercase tracking-widest text-[#424751] font-bold whitespace-nowrap">Internet</th>
-                                <th id="th-hydro-2" class="p-5 font-label text-[10px] uppercase tracking-widest text-[#424751] font-bold min-w-[120px] whitespace-nowrap">Hydro</th>
-                                <th id="th-total-2" class="p-5 font-label text-[10px] uppercase tracking-widest text-[#003063] text-right font-bold whitespace-nowrap">Total</th>
-                            </tr>
-                        </thead>
-                        <tbody id="occupants-table-body" class="divide-y divide-[#f8f9fa]"></tbody>
-                    </table>
-                </div>
-            </div>
-        </section>
-
-        <!-- Secondary Section: Evolution & Notes -->
-        <div class="grid grid-cols-1 lg:grid-cols-5 gap-10">
-            <!-- Evolution Table -->
-            <div class="lg:col-span-3">
-                <h3 id="history-title" class="text-xl font-headline font-bold mb-6 flex items-center gap-3">
-                    <span class="w-1.5 h-6 bg-[#1b6d24] rounded-full"></span>
-                    Historique des Loyers 2026
-                </h3>
-
-                <div class="bg-[#f3f4f5] rounded-xl overflow-x-auto border border-[#c2c6d2]/10">
-                    <div class="p-5 bg-white border-b border-[#f8f9fa] flex justify-between items-center whitespace-nowrap gap-8">
-                        <span id="history-header" class="font-label text-[10px] uppercase tracking-widest text-[#424751] font-bold">Calendrier des Paiements</span>
+                <div class="overflow-hidden rounded-xl bg-[#f3f4f5] border border-outline-variant/10">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left">
+                            <thead class="bg-white">
+                                <tr class="text-[10px] uppercase tracking-widest text-[#424751] font-bold">
+                                    <th id="th-occ-1" class="p-5">Occupant</th>
+                                    <th id="th-rent-1" class="p-5">Loyer</th>
+                                    <th id="th-internet-1" class="p-5">Internet</th>
+                                    <th id="th-hydro-1" class="p-5">Hydro</th>
+                                    <th id="th-total-1" class="p-5 text-right text-secondary">Total</th>
+                                </tr>
+                            </thead>
+                            <tbody id="occupants-table-body-2026" class="divide-y divide-[#f8f9fa]"></tbody>
+                        </table>
                     </div>
-                    <div class="p-3 space-y-2 min-w-max">
-                        <div class="flex items-center justify-between p-4 rounded-lg hover:bg-white transition-all bg-secondary-fixed/10 gap-10">
-                            <div class="flex items-center gap-5 whitespace-nowrap">
-                                <div class="w-10 h-10 rounded-full bg-[#1b6d24]/15 flex items-center justify-center text-[#1b6d24] font-black text-xs shrink-0">ACT</div>
+                </div>
+            </section>
+
+            <section class="mb-12">
+                <div class="flex items-center justify-between mb-6">
+                    <h3 id="table-2-title" class="text-xl font-headline font-bold flex items-center gap-3">
+                        <span class="w-1.5 h-6 bg-primary rounded-full"></span>
+                        Grille de Répartition (Dès Juillet 2026)
+                    </h3>
+                    <div class="flex items-center gap-3">
+                        <span id="badge-2" class="text-[10px] font-bold text-primary bg-primary/10 px-4 py-1.5 rounded-full uppercase tracking-wider">Prévisionnel</span>
+                        <button id="edit-btn-2" onclick="toggleEdit('prev')" class="flex items-center gap-1.5 text-[10px] font-bold text-primary border border-outline-variant/30 px-3 py-1.5 rounded-full hover:bg-primary/5 uppercase tracking-wider">
+                            <span class="material-symbols-outlined text-sm">edit</span>
+                            <span id="btn-edit-text-2">Modifier</span>
+                        </button>
+                        <div id="edit-controls-2" class="hidden flex items-center gap-2">
+                            <button onclick="saveData('prev')" class="text-[10px] font-bold text-white bg-primary px-4 py-1.5 rounded-full">Enregistrer</button>
+                            <button onclick="cancelEdit('prev')" class="text-[10px] font-bold text-[#424751] bg-[#f3f4f5] px-4 py-1.5 rounded-full">Annuler</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="overflow-hidden rounded-xl bg-[#f3f4f5] border border-outline-variant/10">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left">
+                            <thead class="bg-white">
+                                <tr class="text-[10px] uppercase tracking-widest text-[#424751] font-bold">
+                                    <th id="th-occ-2" class="p-5">Occupant</th>
+                                    <th id="th-rent-2" class="p-5">Loyer (Prév.)</th>
+                                    <th id="th-internet-2" class="p-5">Internet</th>
+                                    <th id="th-hydro-2" class="p-5">Hydro</th>
+                                    <th id="th-total-2" class="p-5 text-right text-primary">Total</th>
+                                </tr>
+                            </thead>
+                            <tbody id="occupants-table-body" class="divide-y divide-[#f8f9fa]"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <div class="grid grid-cols-1 lg:grid-cols-5 gap-10">
+                <div class="lg:col-span-3">
+                    <h3 id="history-title" class="text-xl font-headline font-bold mb-6 flex items-center gap-3">
+                        <span class="w-1.5 h-6 bg-secondary rounded-full"></span>
+                        Historique des Loyers 2026
+                    </h3>
+                    <div class="bg-[#f3f4f5] rounded-xl border border-outline-variant/10 overflow-hidden">
+                        <div class="p-5 bg-white border-b border-[#f8f9fa] font-label text-[10px] uppercase tracking-widest text-[#424751] font-bold">Calendrier des Paiements</div>
+                        <div class="p-3 space-y-2">
+                            <div class="flex items-center justify-between p-4 rounded-lg bg-secondary/5">
                                 <div>
-                                    <p id="hist-date-1" class="font-bold text-[#191c1d]">Mai - Juin 2026</p>
-                                    <p id="hist-desc-1" class="text-[10px] text-[#424751] font-bold uppercase tracking-tight whitespace-nowrap">Petite: 624$ • Moy: 758$ • Gde: 813$ (Tout inclus)</p>
+                                    <p id="hist-date-1" class="font-bold">Mai - Juin 2026</p>
+                                    <p id="hist-desc-1" class="text-[10px] text-[#424751] font-bold uppercase tracking-tight">Petite: 624$ • Moy: 758$ • Gde: 813$</p>
                                 </div>
+                                <span class="font-headline font-black text-secondary text-lg">2 195 $</span>
                             </div>
-                            <div class="text-right whitespace-nowrap">
-                                <p id="hist-evol-1" class="text-[10px] font-bold text-[#424751] uppercase tracking-wider mb-0.5">évolution du prix</p>
-                                <span class="font-headline font-black text-[#1b6d24] text-lg leading-none">2 195 $</span>
-                            </div>
-                        </div>
-                        <div class="flex items-center justify-between p-4 rounded-lg hover:bg-white transition-all gap-10">
-                            <div class="flex items-center gap-5 whitespace-nowrap">
-                                <div class="w-10 h-10 rounded-full bg-[#003063]/10 flex items-center justify-center text-[#003063] font-black text-xs shrink-0">PRÉ</div>
+                            <div class="flex items-center justify-between p-4 rounded-lg bg-primary/5">
                                 <div>
-                                    <p id="hist-date-2" class="font-bold text-[#191c1d]">Dès Juillet 2026</p>
-                                    <p id="hist-desc-2" class="text-[10px] text-[#424751] font-bold uppercase tracking-tight whitespace-nowrap">Petite: 642$ • Moy: 781$ • Gde: 837$ (Tout inclus)</p>
+                                    <p id="hist-date-2" class="font-bold">Dès Juillet 2026</p>
+                                    <p id="hist-desc-2" class="text-[10px] text-[#424751] font-bold uppercase tracking-tight">Petite: 642$ • Moy: 781$ • Gde: 837$</p>
                                 </div>
-                            </div>
-                            <div class="text-right whitespace-nowrap">
-                                <p id="hist-evol-2" class="text-[10px] font-bold text-[#424751] uppercase tracking-wider mb-0.5">évolution du prix</p>
-                                <span class="font-headline font-black text-[#191c1d] text-lg leading-none">2 260 $</span>
+                                <span class="font-headline font-black text-primary text-lg">2 260 $</span>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <!-- Important Notes -->
-            <div class="lg:col-span-2">
-                <h3 id="notes-title" class="text-xl font-headline font-bold mb-6 flex items-center gap-3 text-[#191c1d]">
-                    <span class="w-1.5 h-6 bg-[#636037] rounded-full"></span>
-                    Détails des Charges
-                </h3>
-                <div class="space-y-4">
-                    <div class="bg-white p-5 rounded-xl shadow-sm border border-[#c2c6d2]/15">
-                        <div class="flex gap-4">
-                            <span class="material-symbols-outlined text-[#1b6d24] text-2xl">wifi</span>
-                            <div>
-                                <p class="text-sm font-black text-[#191c1d] mb-1 uppercase tracking-wider">Internet (FIZZ)</p>
-                                <p id="internet-detail" class="text-[11px] text-[#424751] leading-relaxed font-medium">44,85 $ total divisé par 3 occupants (14,95 $/pers). Inclus haute vitesse illimitée.</p>
-                            </div>
+                <div class="lg:col-span-2">
+                    <h3 id="notes-title" class="text-xl font-headline font-bold mb-6 flex items-center gap-3">
+                        <span class="w-1.5 h-6 bg-tertiary rounded-full"></span>
+                        Détails des Charges
+                    </h3>
+                    <div class="space-y-4">
+                        <div class="bg-white p-5 rounded-xl shadow-sm border border-outline-variant/10 flex gap-4">
+                            <span class="material-symbols-outlined text-secondary">wifi</span>
+                            <p id="internet-detail" class="text-[11px] text-[#424751] leading-relaxed">44,85 $ total divisé par 3 occupants (14,95 $/pers).</p>
                         </div>
-                    </div>
-                    
-                    <div class="bg-white p-5 rounded-xl shadow-sm border border-[#c2c6d2]/15">
-                        <div class="flex gap-4">
-                            <span class="material-symbols-outlined text-[#0077c8] text-2xl self-center">local_fire_department</span>
-                            <div>
-                                <p class="text-sm font-black text-[#191c1d] mb-1 uppercase tracking-wider">Hydro-Québec</p>
-                                <p id="hydro-detail" class="text-[11px] text-[#424751] leading-relaxed font-medium">50,83 $ total par mois (16,94 $/pers). Basé sur le plan de paiements égaux.</p>
-                            </div>
+                        <div class="bg-white p-5 rounded-xl shadow-sm border border-outline-variant/10 flex gap-4">
+                            <span class="material-symbols-outlined text-primary">local_fire_department</span>
+                            <p id="hydro-detail" class="text-[11px] text-[#424751] leading-relaxed">50,83 $ total par mois (16,94 $/pers).</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Tab 3: Vie en Coloc (Life) -->
-    <div id="content-life" class="tab-content hidden">
-        <div class="mb-10">
+        <!-- Tab 3: Vie en Coloc (Life) -->
+        <div id="content-life" class="tab-content hidden">
+            <div class="mb-10">
                 <p id="life-category" class="font-label text-xs uppercase tracking-[0.2em] text-primary mb-2 font-bold">Vie Commune</p>
-                <h1 id="life-title" class="text-4xl md:text-5xl font-headline font-extrabold tracking-tight text-on-surface">Tâches & Vie en Colocation</h1>
+                <h1 id="life-title" class="text-4xl md:text-5xl font-headline font-extrabold tracking-tight text-on-surface">Tâches & Vie</h1>
             </div>
 
-            <!-- Calendar Container -->
             <div class="bg-white p-6 rounded-3xl shadow-sm border border-outline-variant/10 mb-12">
                 <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-6">
                     <div>
                         <h3 class="text-2xl font-headline font-bold flex items-center gap-3">
                             <span class="material-symbols-outlined text-primary">calendar_month</span>
-                            <span id="calendar-title-text">Calendrier des Tâches</span>
+                            <span id="calendar-title-text">Calendrier</span>
                         </h3>
-                        <p class="text-sm text-on-surface-variant mt-1" id="calendar-subtitle">Organisation et vie commune</p>
                     </div>
-                    
                     <div class="flex items-center gap-4 bg-surface-container rounded-2xl p-2">
-                        <button id="edit-tasks-btn" onclick="toggleEdit('tasks')" class="p-2 hover:bg-white rounded-xl transition-all shadow-sm flex items-center gap-2 group">
+                        <button id="edit-tasks-btn" onclick="toggleEdit('tasks')" class="p-2 hover:bg-white rounded-xl transition-all shadow-sm flex items-center gap-2">
                             <span class="material-symbols-outlined text-sm text-primary">edit</span>
-                            <span class="text-[10px] font-bold uppercase tracking-wider text-primary">Modifier</span>
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-primary"></span>
                         </button>
                         <div class="w-px h-4 bg-outline-variant/30"></div>
-                        <button onclick="prevMonth()" class="p-2 hover:bg-white rounded-xl transition-all shadow-sm">
-                            <span class="material-symbols-outlined">chevron_left</span>
+                        <button onclick="prevMonth()" class="p-2 hover:bg-white rounded-xl">
+                            <span class="material-symbols-outlined text-sm">chevron_left</span>
                         </button>
-                        <span id="current-month-display" class="font-headline font-bold text-sm min-w-[120px] text-center uppercase tracking-widest text-on-surface">Avril 2024</span>
-                        <button onclick="nextMonth()" class="p-2 hover:bg-white rounded-xl transition-all shadow-sm">
-                            <span class="material-symbols-outlined">chevron_right</span>
+                        <span id="current-month-display" class="font-headline font-bold text-sm min-w-[120px] text-center uppercase tracking-widest"></span>
+                        <button onclick="nextMonth()" class="p-2 hover:bg-white rounded-xl">
+                            <span class="material-symbols-outlined text-sm">chevron_right</span>
                         </button>
                     </div>
                 </div>
 
-                <!-- Roommate Legend / Color Config -->
                 <div class="flex flex-wrap gap-4 mb-8 p-4 bg-surface-container-low rounded-2xl border border-outline-variant/20">
-                    <p class="w-full text-[10px] font-bold uppercase tracking-widest text-on-surface-variant mb-2">Couleurs des Colocataires (cliquez pour changer)</p>
-                    <div class="flex items-center gap-3 bg-white px-3 py-2 rounded-xl shadow-sm border border-outline-variant/30">
-                        <input type="color" id="color-ana" value="#6366f1" onchange="updateColors()" class="w-6 h-6 rounded-full border-none cursor-pointer bg-transparent">
-                        <span class="font-bold text-xs uppercase tracking-tight">A.</span>
+                    <p class="w-full text-[10px] font-bold uppercase tracking-widest text-[#424751] mb-2">Couleurs</p>
+                    <div class="flex items-center gap-3 bg-white px-3 py-2 rounded-xl border border-outline-variant/20">
+                        <input type="color" id="color-ana" value="#6366f1" onchange="updateColors()" class="w-6 h-6 rounded-md cursor-pointer border-none bg-transparent">
+                        <span class="font-bold text-xs">A.</span>
                     </div>
-                    <div class="flex items-center gap-3 bg-white px-3 py-2 rounded-xl shadow-sm border border-outline-variant/30 transition-shadow">
-                        <input type="color" id="color-kash" value="#f59e0b" onchange="updateColors()" class="w-6 h-6 rounded-full border-none cursor-pointer bg-transparent">
-                        <span class="font-bold text-xs uppercase tracking-tight">K.</span>
+                    <div class="flex items-center gap-3 bg-white px-3 py-2 rounded-xl border border-outline-variant/20">
+                        <input type="color" id="color-kash" value="#f59e0b" onchange="updateColors()" class="w-6 h-6 rounded-md cursor-pointer border-none bg-transparent">
+                        <span class="font-bold text-xs">K.</span>
                     </div>
-                    <div class="flex items-center gap-3 bg-white px-3 py-2 rounded-xl shadow-sm border border-outline-variant/30">
-                        <input type="color" id="color-vik" value="#003063" onchange="updateColors()" class="w-6 h-6 rounded-full border-none cursor-pointer bg-transparent">
-                        <span class="font-bold text-xs uppercase tracking-tight">V.</span>
+                    <div class="flex items-center gap-3 bg-white px-3 py-2 rounded-xl border border-outline-variant/20">
+                        <input type="color" id="color-vik" value="#003063" onchange="updateColors()" class="w-6 h-6 rounded-md cursor-pointer border-none bg-transparent">
+                        <span class="font-bold text-xs">V.</span>
                     </div>
                 </div>
 
-                <!-- The Calendar Grid -->
-                <div id="calendar-grid-container" class="calendar-grid">
-                    <!-- Days will be injected here -->
-                </div>
+                <div id="calendar-grid-container" class="calendar-grid"></div>
             </div>
-            
+
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <!-- Info Cards -->
-                <div class="bg-surface-container-low rounded-3xl p-6 flex flex-col gap-4 border-l-8 border-secondary/40">
-                    <div class="flex items-center gap-3">
-                        <span class="material-symbols-outlined text-secondary">info</span>
-                        <h4 class="font-headline font-bold text-lg text-on-surface" id="principle-title">PRINCIPE</h4>
-                    </div>
-                    <p class="text-sm text-on-surface-variant leading-relaxed" id="principle-desc">Chaque colocataire se voit attribuer une zone spécifique par semaine. La rotation s'effectue le dimanche soir. Les attributions sont visibles chaque lundi dans le calendrier.</p>
+                <div class="bg-surface-container-low rounded-3xl p-6 border-l-8 border-secondary/40">
+                    <h4 class="font-headline font-bold text-lg mb-2" id="principle-title">PRINCIPE</h4>
+                    <p class="text-sm text-on-surface-variant leading-relaxed" id="principle-desc"></p>
                 </div>
-
-                <div class="bg-white rounded-3xl p-6 flex flex-col gap-4 border border-outline-variant/10 shadow-sm transition-transform hover:scale-[1.02]">
-                    <div class="flex items-center gap-3">
-                        <span class="material-symbols-outlined text-secondary">gavel</span>
-                        <h4 class="font-headline font-bold text-lg text-on-surface" id="rules-header">RÈGLES</h4>
-                    </div>
-                    <p class="text-sm text-on-surface-variant leading-relaxed" id="rules-content">Le matériel de nettoyage doit être rangé après usage. Les produits communs sont rachetés via le fond commun.</p>
-                </div>
-
-                <div class="bg-white rounded-3xl p-6 flex flex-col gap-4 border border-outline-variant/10 shadow-sm transition-transform hover:scale-[1.02] relative overflow-hidden">
-                    <div class="absolute -top-4 -right-4 opacity-10">
-                        <span class="material-symbols-outlined text-secondary text-8xl">swap_horiz</span>
-                    </div>
-                    <div class="flex items-center gap-3">
-                        <span class="material-symbols-outlined text-secondary">handshake</span>
-                        <h4 class="font-headline font-bold text-lg text-on-surface" id="flex-title">FLEXIBILITÉ</h4>
-                    </div>
-                    <p class="text-sm text-on-surface-variant leading-relaxed" id="flex-desc">L'échange de tâches est autorisé après accord mutuel. Signalez tout changement pour le suivi.</p>
-                </div>
-
-                <!-- Trash Management (Keeping as secondary list) -->
+                <!-- Other rules ... -->
                 <div class="bg-white p-8 rounded-3xl shadow-sm border border-outline-variant/10">
                     <h3 class="text-xl font-headline font-bold mb-6 flex items-center gap-3">
                         <span class="material-symbols-outlined text-secondary">cleaning_services</span>
-                        <span id="tasks-title">Tâches Ménagères</span>
+                        <span id="tasks-title">Tâches</span>
                     </h3>
                     <ul class="space-y-4">
-                        <li class="house-task-item flex items-center justify-between p-4 bg-surface-container-low rounded-xl border border-transparent">
-                            <div class="flex items-center gap-4">
-                                <span class="material-symbols-outlined text-green-600">recycling</span>
-                                <span class="text-sm font-medium" id="task-1">Recyclage (Lundi)</span>
-                            </div>
-                        </li>
-                        <li class="house-task-item flex items-center justify-between p-4 bg-surface-container-low rounded-xl border border-transparent">
-                            <div class="flex items-center gap-4">
-                                <span class="material-symbols-outlined text-gray-600">delete</span>
-                                <span class="text-sm font-medium" id="task-2">Poubelles (Mercredi)</span>
-                            </div>
-                        </li>
-                        <li class="house-task-item flex items-center justify-between p-4 bg-surface-container-low rounded-xl border border-transparent">
-                            <div class="flex items-center gap-4">
-                                <span class="material-symbols-outlined text-orange-800">compost</span>
-                                <span class="text-sm font-medium" id="task-3">Compost (Jeudi)</span>
-                            </div>
-                        </li>
-                        <li class="house-task-item flex items-center justify-between p-4 bg-surface-container-low rounded-xl border-t border-outline-variant/10 mt-6">
-                            <div class="flex items-center gap-4">
-                                <span class="material-symbols-outlined text-primary">cleaning_services</span>
-                                <span class="text-sm font-medium" id="task-clean">Entretien des aires communes</span>
-                            </div>
+                        <li class="flex items-center gap-4 p-4 bg-surface-container-low rounded-xl">
+                            <span class="material-symbols-outlined text-green-600">recycling</span>
+                            <span class="text-sm font-medium" id="task-1">Recyclage</span>
                         </li>
                     </ul>
-                </div>
-
-                <div class="bg-white p-8 rounded-3xl shadow-sm border border-outline-variant/10">
-                    <h3 class="text-xl font-headline font-bold mb-6 flex items-center gap-3">
-                        <span class="material-symbols-outlined text-tertiary">groups</span>
-                        <span id="rules-title">Règles de Vie</span>
-                    </h3>
-                    <div class="p-6 bg-tertiary-container/10 rounded-2xl border border-tertiary-container/20">
-                        <p class="text-sm italic text-on-tertiary-container" id="rules-desc">"Le respect et la communication sont les clés d'une colocation réussie."</p>
-                    </div>
                 </div>
             </div>
         </div>
@@ -603,83 +470,62 @@
         <!-- Tab 4: Documents -->
         <div id="content-docs" class="tab-content hidden">
             <div class="mb-10">
-                <p id="docs-category" class="font-label text-xs uppercase tracking-[0.2em] text-primary mb-2 font-bold">Archives & Preuves</p>
-                <h1 id="docs-title" class="text-4xl md:text-5xl font-headline font-extrabold tracking-tight text-on-surface">Documents Partagés</h1>
+                <p id="docs-category" class="font-label text-xs uppercase tracking-[0.2em] text-primary mb-2 font-bold">Archives</p>
+                <h1 id="docs-title" class="text-4xl md:text-5xl font-headline font-extrabold tracking-tight text-on-surface">Documents</h1>
             </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="bg-white p-6 rounded-2xl border border-outline-variant/20 hover:border-primary/50 transition-all cursor-pointer group">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                <div class="bg-white p-6 rounded-2xl border border-outline-variant/20">
                     <span class="material-symbols-outlined text-primary text-3xl mb-4">description</span>
-                    <h4 class="font-headline font-bold text-lg mb-1" id="doc-lease">Le Bail (2026-2027)</h4>
-                    <p class="text-xs text-on-surface-variant" id="doc-lease-desc">Signé le 15 Janvier</p>
+                    <h4 class="font-headline font-bold" id="doc-lease">Le Bail</h4>
+                    <p class="text-xs text-on-surface-variant" id="doc-lease-desc"></p>
                 </div>
-                <div class="bg-white p-6 rounded-2xl border border-outline-variant/20 hover:border-primary/50 transition-all cursor-pointer group">
+                <div class="bg-white p-6 rounded-2xl border border-outline-variant/20">
                     <span class="material-symbols-outlined text-secondary text-3xl mb-4">receipt_long</span>
-                    <h4 class="font-headline font-bold text-lg mb-1" id="doc-hydro">Factures Hydro</h4>
-                    <p class="text-xs text-on-surface-variant" id="doc-hydro-desc">Historique mensuel</p>
+                    <h4 class="font-headline font-bold" id="doc-hydro">Factures</h4>
+                    <p class="text-xs text-on-surface-variant" id="doc-hydro-desc"></p>
                 </div>
-                <div class="bg-white p-6 rounded-2xl border border-outline-variant/20 hover:border-primary/50 transition-all cursor-pointer group">
+                <div class="bg-white p-6 rounded-2xl border border-outline-variant/20">
                     <span class="material-symbols-outlined text-tertiary text-3xl mb-4">handshake</span>
-                    <h4 class="font-headline font-bold text-lg mb-1" id="doc-agr">Entente de Coloc</h4>
-                    <p class="text-xs text-on-surface-variant" id="doc-agr-desc">Règles et signatures</p>
+                    <h4 class="font-headline font-bold" id="doc-agr">Entente</h4>
+                    <p class="text-xs text-on-surface-variant" id="doc-agr-desc"></p>
                 </div>
             </div>
         </div>
     </main>
 
-    <!-- Task Add Modal -->
-    <div id="task-modal" class="hidden fixed inset-0 z-[110] flex sm:items-center items-start justify-center p-4 sm:p-6 backdrop-blur-md bg-on-surface/20 overflow-y-auto">
-        <div class="bg-white rounded-3xl shadow-2xl border border-outline-variant/30 w-full max-w-sm overflow-hidden fade-in my-auto">
-            <div class="p-6 sm:p-8 space-y-6">
-                <div class="text-center space-y-2">
-                    <h3 class="text-xl font-headline font-bold text-on-surface">Ajouter une Tâche</h3>
-                    <p id="task-modal-date" class="text-sm text-on-surface-variant font-medium"></p>
-                </div>
-                <div class="space-y-4">
-                    <input type="text" id="task-input-text" class="w-full bg-surface-container rounded-xl px-4 py-3 text-sm font-medium focus:ring-2 focus:ring-blue-600 focus:outline-none border-none" placeholder="Nom de la tâche...">
-                    <select id="task-roommate-select" class="w-full bg-surface-container rounded-xl px-4 py-3 text-sm font-medium focus:ring-2 focus:ring-blue-600 focus:outline-none border-none">
-                        <option value="A.">A.</option>
-                        <option value="K.">K.</option>
-                        <option value="V.">V.</option>
-                    </select>
-                    <div class="flex gap-2">
-                        <button onclick="closeTaskModal()" class="flex-1 px-4 py-3 rounded-xl font-bold text-xs uppercase tracking-widest text-on-surface-variant bg-surface-container hover:bg-surface-container-high transition-all">Annuler</button>
-                        <button onclick="saveTask()" class="flex-1 px-4 py-3 rounded-xl font-bold text-xs uppercase tracking-widest text-white bg-blue-600 hover:bg-blue-700 transition-all shadow-lg active:scale-95">Valider</button>
-                    </div>
-                </div>
+    <!-- Modals -->
+    <div id="task-modal" class="hidden fixed inset-0 z-[110] flex items-center justify-center p-4 backdrop-blur-md bg-black/20">
+        <div class="bg-white rounded-3xl p-8 w-full max-w-sm shadow-2xl">
+            <h3 class="text-xl font-bold mb-4 text-center">Ajouter une Tâche</h3>
+            <p id="task-modal-date" class="text-center text-xs mb-6 text-on-surface-variant"></p>
+            <input type="text" id="task-input-text" class="w-full bg-surface-container rounded-xl px-4 py-3 mb-4 focus:outline-primary border-none">
+            <select id="task-roommate-select" class="w-full bg-surface-container rounded-xl px-4 py-3 mb-6 focus:outline-primary border-none">
+                <option value="A.">A.</option><option value="K.">K.</option><option value="V.">V.</option>
+            </select>
+            <div class="flex gap-2">
+                <button onclick="closeTaskModal()" class="flex-1 px-4 py-3 bg-surface-container-high rounded-xl text-xs font-bold uppercase">Annuler</button>
+                <button onclick="saveTask()" class="flex-1 px-4 py-3 bg-primary text-white rounded-xl text-xs font-bold uppercase">Valider</button>
             </div>
         </div>
     </div>
 
-    <!-- Passcode Modal -->
-    <div id="passcode-modal" class="hidden fixed inset-0 z-[100] flex items-center justify-center p-6 backdrop-blur-md bg-on-surface/20">
-        <div class="bg-white rounded-2xl shadow-2xl border border-outline-variant/30 w-full max-w-sm overflow-hidden fade-in">
-            <div class="p-8 space-y-6">
-                <div class="text-center space-y-2">
-                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <span class="material-symbols-outlined text-primary">lock</span>
-                    </div>
-                    <h3 id="modal-title" class="text-xl font-headline font-bold text-on-surface">Accès Sécurisé</h3>
-                    <p id="modal-desc" class="text-sm text-on-surface-variant font-medium">Veuillez entrer le code d'accès pour modifier.</p>
-                </div>
-                <div class="space-y-4">
-                    <input type="password" id="passcode-input" 
-                        oninput="if(this.value.length === 4) validatePasscode()"
-                        onkeydown="if(event.key === 'Enter') validatePasscode()"
-                        class="w-full bg-surface-container rounded-xl px-4 py-3 text-center text-2xl font-black tracking-[0.5em] focus:ring-2 focus:ring-primary focus:outline-none border-none" 
-                        placeholder="••••" maxlength="4">
-                    <p id="modal-error" class="hidden text-center text-xs font-bold text-error uppercase tracking-wider">Code incorrect</p>
-                    <div class="flex gap-2">
-                        <button onclick="closePasscodeModal()" class="flex-1 px-4 py-3 rounded-xl font-bold text-xs uppercase tracking-widest text-on-surface-variant bg-surface-container hover:bg-surface-container-high transition-all">Annuler</button>
-                        <button onclick="validatePasscode()" class="flex-1 px-4 py-3 rounded-xl font-bold text-xs uppercase tracking-widest text-white bg-blue-600 hover:bg-blue-700 transition-all shadow-lg active:scale-95">Valider</button>
-                    </div>
-                </div>
+    <div id="passcode-modal" class="hidden fixed inset-0 z-[100] flex items-center justify-center p-6 backdrop-blur-md bg-black/20">
+        <div class="bg-white rounded-2xl p-8 w-full max-w-sm shadow-2xl text-center">
+            <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <span class="material-symbols-outlined text-primary">lock</span>
+            </div>
+            <h3 id="modal-title" class="text-xl font-bold mb-2">Accès Sécurisé</h3>
+            <p id="modal-desc" class="text-xs text-on-surface-variant mb-6 font-medium">Veuillez entrer le code d'accès.</p>
+            <input type="password" id="passcode-input" class="w-full bg-surface-container rounded-xl px-4 py-3 text-center text-2xl font-black mb-2 focus:outline-primary border-none" maxlength="4" placeholder="••••">
+            <p id="modal-error" class="hidden text-error text-[10px] uppercase font-bold mb-4">Code incorrect</p>
+            <div class="flex gap-2">
+                <button onclick="closePasscodeModal()" class="flex-1 px-4 py-3 bg-surface-container-high rounded-xl text-xs font-bold uppercase">Annuler</button>
+                <button onclick="validatePasscode()" class="flex-1 px-4 py-3 bg-primary text-white rounded-xl text-xs font-bold uppercase">Valider</button>
             </div>
         </div>
     </div>
 
-    <!-- Back to Top Button -->
-    <button id="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="fixed bottom-8 right-8 z-50 bg-white text-primary w-12 h-12 rounded-full shadow-2xl flex items-center justify-center hover:scale-110 active:scale-95 transition-all opacity-0 pointer-events-none translate-y-10 border border-primary/20">
+    <button id="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="fixed bottom-8 right-8 z-50 bg-white text-primary w-12 h-12 rounded-full shadow-2xl flex items-center justify-center opacity-0 transition-all">
         <span class="material-symbols-outlined">home</span>
     </button>
 
