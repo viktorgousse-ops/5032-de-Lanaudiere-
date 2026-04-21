@@ -112,6 +112,7 @@ function initFirebaseSync() {
 }
 
 window.switchTab = function(tabId) {
+    console.log("Switching to tab:", tabId);
     try {
         window.scrollTo({top: 0, behavior: 'instant'});
         document.querySelectorAll('.tab-content').forEach(content => { content.classList.add('hidden'); });
@@ -413,7 +414,13 @@ window.nextMonth = function() { currentMonthDate.setMonth(currentMonthDate.getMo
 window.prevMonth = function() { currentMonthDate.setMonth(currentMonthDate.getMonth() - 1); debouncedRender(); }
 
 window.addEventListener('DOMContentLoaded', () => {
-    initFirebaseSync();
-    updateContent();
-    window.switchTab('home');
+    console.log("DOM Content Loaded - Initializing App");
+    try {
+        initFirebaseSync();
+        updateContent();
+        window.switchTab('home');
+        console.log("App Initialized Successfully");
+    } catch (e) {
+        console.error("Critical Init Error:", e);
+    }
 });
