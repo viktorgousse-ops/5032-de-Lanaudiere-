@@ -60,6 +60,8 @@
             --font-body: "SF Pro Text", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "Helvetica", "Arial", sans-serif;
         }
 
+    </style>
+    <script>
         tailwind.config = {
             theme: {
                 extend: {
@@ -70,11 +72,14 @@
                         'primary-container': 'var(--color-primary-container)',
                         'surface-container-lowest': 'var(--color-surface-container-lowest)',
                         'surface-container-low': 'var(--color-surface-container-low)',
+                        'surface-container-high': 'var(--color-surface-container-high)',
+                        'surface-container': 'var(--color-surface-container)',
                         'on-surface-variant': 'var(--color-on-surface-variant)',
                         'outline-variant': 'var(--color-outline-variant)',
                         secondary: 'var(--color-secondary)',
                         tertiary: 'var(--color-tertiary)',
-                        'secondary-fixed': 'var(--color-secondary-fixed)'
+                        'secondary-fixed': 'var(--color-secondary-fixed)',
+                        error: 'var(--color-error)'
                     },
                     fontFamily: {
                         headline: 'var(--font-headline)',
@@ -84,7 +89,8 @@
                 }
             }
         }
-
+    </script>
+    <style>
         body {
             background-color: var(--color-surface);
             color: var(--color-on-surface);
@@ -208,7 +214,7 @@
 
             <div id="hero-gallery-container" class="grid grid-cols-1 md:grid-cols-12 gap-4 h-[500px]">
                 <div id="main-hero-card" class="md:col-span-8 h-full rounded-2xl overflow-hidden shadow-lg relative group border border-outline-variant/10">
-                    <img src="./terrasse.jpg" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="Terrasse" referrerpolicy="no-referrer">
+                    <img src="/terrasse.jpg" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="Terrasse" referrerpolicy="no-referrer">
                     <div class="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black/60 to-transparent text-white">
                         <p class="font-headline font-bold text-2xl" id="hero-img-label">La Terrasse</p>
                         <p class="text-sm opacity-80" id="hero-img-sub">Espace extérieur & briques rouges</p>
@@ -216,13 +222,13 @@
                 </div>
                 <div class="md:col-span-4 grid grid-rows-3 gap-4 h-full">
                     <div class="rounded-2xl overflow-hidden shadow-lg border border-outline-variant/10">
-                        <img src="./salon.jpg" class="w-full h-full object-cover" alt="Le Salon" referrerpolicy="no-referrer">
+                        <img src="/salon.jpg" class="w-full h-full object-cover" alt="Le Salon" referrerpolicy="no-referrer">
                     </div>
                     <div class="rounded-2xl overflow-hidden shadow-lg border border-outline-variant/10">
-                        <img src="./cuisine.jpg" class="w-full h-full object-cover" alt="La Cuisine" referrerpolicy="no-referrer">
+                        <img src="/cuisine.jpg" class="w-full h-full object-cover" alt="La Cuisine" referrerpolicy="no-referrer">
                     </div>
                     <div class="rounded-2xl overflow-hidden shadow-lg border border-outline-variant/10">
-                        <img src="./balcon.jpg" class="w-full h-full object-cover" alt="Le Balcon" referrerpolicy="no-referrer">
+                        <img src="/balcon.jpg" class="w-full h-full object-cover" alt="Le Balcon" referrerpolicy="no-referrer">
                     </div>
                 </div>
             </div>
@@ -446,23 +452,18 @@
                 <div id="calendar-grid-container" class="calendar-grid"></div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <div class="bg-surface-container-low rounded-3xl p-6 border-l-8 border-secondary/40">
                     <h4 class="font-headline font-bold text-lg mb-2" id="principle-title">PRINCIPE</h4>
                     <p class="text-sm text-on-surface-variant leading-relaxed" id="principle-desc"></p>
                 </div>
-                <!-- Other rules ... -->
-                <div class="bg-white p-8 rounded-3xl shadow-sm border border-outline-variant/10">
-                    <h3 class="text-xl font-headline font-bold mb-6 flex items-center gap-3">
-                        <span class="material-symbols-outlined text-secondary">cleaning_services</span>
-                        <span id="tasks-title">Tâches</span>
-                    </h3>
-                    <ul class="space-y-4">
-                        <li class="flex items-center gap-4 p-4 bg-surface-container-low rounded-xl">
-                            <span class="material-symbols-outlined text-green-600">recycling</span>
-                            <span class="text-sm font-medium" id="task-1">Recyclage</span>
-                        </li>
-                    </ul>
+                <div class="bg-surface-container-low rounded-3xl p-6 border-l-8 border-primary/40">
+                    <h4 class="font-headline font-bold text-lg mb-2" id="rules-header">RÈGLES</h4>
+                    <p class="text-sm text-on-surface-variant leading-relaxed" id="rules-content"></p>
+                </div>
+                <div class="bg-surface-container-low rounded-3xl p-6 border-l-8 border-tertiary/40">
+                    <h4 class="font-headline font-bold text-lg mb-2" id="flex-title">FLEXIBILITÉ</h4>
+                    <p class="text-sm text-on-surface-variant leading-relaxed" id="flex-desc"></p>
                 </div>
             </div>
         </div>
@@ -529,6 +530,6 @@
         <span class="material-symbols-outlined">home</span>
     </button>
 
-    <script type="module" src="./src/main.js"></script>
+    <script type="module" src="/src/main.js"></script>
 </body>
 </html>
