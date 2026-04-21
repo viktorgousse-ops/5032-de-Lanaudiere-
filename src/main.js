@@ -295,10 +295,6 @@ function updateContent() {
     setSafeText('tab-docs', t.navDocs);
     setSafeText('home-category', t.homeCategory);
     setSafeText('home-title', t.homeTitle);
-    setSafeText('roommates-title', t.roommatesTitle);
-    setSafeText('role-ana', t.roleAna);
-    setSafeText('role-kash', t.roleKash);
-    setSafeText('role-vik', t.roleVik);
     setSafeText('life-category', t.lifeCategory);
     setSafeText('life-title', t.lifeTitle);
     setSafeText('tasks-title', t.tasksTitle);
@@ -459,6 +455,18 @@ window.addEventListener('DOMContentLoaded', () => {
         updateContent();
         window.switchTab('home');
         console.log("App Initialized Successfully");
+        
+        // Logique visibilité bouton retour en haut
+        const btt = document.getElementById('back-to-top');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                btt.classList.remove('opacity-0', 'pointer-events-none');
+                btt.classList.add('opacity-100');
+            } else {
+                btt.classList.add('opacity-0', 'pointer-events-none');
+                btt.classList.remove('opacity-100');
+            }
+        });
     } catch (e) {
         console.error("Critical Init Error:", e);
     }
