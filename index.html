@@ -243,7 +243,7 @@
             <!-- Hero Gallery (Static) -->
             <div id="hero-gallery-container" class="grid grid-cols-1 md:grid-cols-12 gap-4 h-[500px]">
                 <div id="main-hero-card" class="md:col-span-8 h-full rounded-2xl overflow-hidden shadow-lg relative group border border-outline-variant/10">
-                    <img id="main-hero-img" src="terrasse.jpg" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="Terrasse de l'appartement" referrerpolicy="no-referrer">
+                    <img id="main-hero-img" src="./terrasse.jpg" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="Terrasse de l'appartement" referrerpolicy="no-referrer">
                     <div class="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black/60 to-transparent text-white">
                         <p class="font-headline font-bold text-2xl" id="hero-img-label">La Terrasse</p>
                         <p class="text-sm opacity-80" id="hero-img-sub">Espace extérieur & briques rouges</p>
@@ -251,13 +251,13 @@
                 </div>
                 <div class="md:col-span-4 grid grid-rows-3 gap-4 h-full">
                     <div class="rounded-2xl overflow-hidden shadow-lg border border-outline-variant/10">
-                        <img id="side-img-1" src="salon.jpg" class="w-full h-full object-cover" alt="Le Salon" referrerpolicy="no-referrer">
+                        <img id="side-img-1" src="./salon.jpg" class="w-full h-full object-cover" alt="Le Salon" referrerpolicy="no-referrer">
                     </div>
                     <div class="rounded-2xl overflow-hidden shadow-lg border border-outline-variant/10">
-                        <img id="side-img-2" src="cuisine.jpg" class="w-full h-full object-cover" alt="La Cuisine" referrerpolicy="no-referrer">
+                        <img id="side-img-2" src="./cuisine.jpg" class="w-full h-full object-cover" alt="La Cuisine" referrerpolicy="no-referrer">
                     </div>
                     <div class="rounded-2xl overflow-hidden shadow-lg border border-outline-variant/10">
-                        <img id="side-img-3" src="balcon.jpg" class="w-full h-full object-cover" alt="Le Balcon" referrerpolicy="no-referrer">
+                        <img id="side-img-3" src="./balcon.jpg" class="w-full h-full object-cover" alt="Le Balcon" referrerpolicy="no-referrer">
                     </div>
                 </div>
             </div>
@@ -685,7 +685,7 @@
     </button>
 
     <script type="module">
-        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+        import { initializeApp } from 'firebase/app';
         import { 
             getFirestore, 
             doc, 
@@ -698,7 +698,7 @@
             orderBy, 
             deleteDoc,
             serverTimestamp 
-        } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+        } from 'firebase/firestore';
 
         const firebaseConfig = {
             projectId: "gen-lang-client-0009344543",
@@ -744,6 +744,15 @@
         let currentMonthDate = new Date();
         let selectedDayForTask = null;
 
+        // Helper to debounce repetitive UI updates
+        let renderTimeout = null;
+        function debouncedRender() {
+            if (renderTimeout) clearTimeout(renderTimeout);
+            renderTimeout = setTimeout(() => {
+                renderCalendar();
+            }, 50);
+        }
+
         // Firebase Sync
         function initFirebaseSync() {
             // Colors Sync
@@ -761,7 +770,7 @@
                         document.getElementById('color-kash').value = cologColors['K.'] || '#f59e0b';
                         document.getElementById('color-vik').value = cologColors['V.'] || '#003063';
                     }
-                    renderCalendar();
+                    debouncedRender();
                 }
             });
 
@@ -771,14 +780,14 @@
                     const data = doc.data();
                     return { id: doc.id, ...data, roommate: anonymizeName(data.roommate) };
                 });
-                renderCalendar();
+                debouncedRender();
             });
 
             // Sync house tasks
             onSnapshot(doc(db, 'coloc_data', 'house_tasks'), (docSnap) => {
                 if (docSnap.exists()) {
                     houseTasksState = docSnap.data();
-                    renderCalendar();
+                    debouncedRender();
                 }
             });
 
@@ -1632,7 +1641,7 @@
 
         window.toggleHouseTask = async function(fullKey) {
             houseTasksState[fullKey] = !houseTasksState[fullKey];
-            renderCalendar(); // Re-render to show updated state in calendar
+            debouncedRender();
             
             try {
                 await setDoc(doc(db, 'coloc_data', 'house_tasks'), houseTasksState);
@@ -1642,11 +1651,10 @@
         }
 
         function updateHouseTaskUI(taskId) {
-            // Updated to just trigger a re-render since we are using the calendar
-            renderCalendar();
+            debouncedRender();
         }
         function updateRotationWeek() {
-            // Function logic moved into renderCalendar for better integration
+            debouncedRender();
         }
 
         window.nextMonth = function() {
