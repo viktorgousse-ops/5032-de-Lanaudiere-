@@ -214,21 +214,17 @@
 
             <div id="hero-gallery-container" class="grid grid-cols-1 md:grid-cols-12 gap-4 h-[500px]">
                 <div id="main-hero-card" class="md:col-span-8 h-full rounded-2xl overflow-hidden shadow-lg relative group border border-outline-variant/10">
-                    <img src="/terrasse.jpg" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="Terrasse" referrerpolicy="no-referrer">
-                    <div class="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black/60 to-transparent text-white">
-                        <p class="font-headline font-bold text-2xl" id="hero-img-label">La Terrasse</p>
-                        <p class="text-sm opacity-80" id="hero-img-sub">Espace extérieur & briques rouges</p>
-                    </div>
+                    <img src="https://picsum.photos/seed/forest/1200/800" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="Paysage" referrerpolicy="no-referrer">
                 </div>
                 <div class="md:col-span-4 grid grid-rows-3 gap-4 h-full">
                     <div class="rounded-2xl overflow-hidden shadow-lg border border-outline-variant/10">
-                        <img src="/salon.jpg" class="w-full h-full object-cover" alt="Le Salon" referrerpolicy="no-referrer">
+                        <img src="https://picsum.photos/seed/mountain/800/600" class="w-full h-full object-cover" alt="Paysage" referrerpolicy="no-referrer">
                     </div>
                     <div class="rounded-2xl overflow-hidden shadow-lg border border-outline-variant/10">
-                        <img src="/cuisine.jpg" class="w-full h-full object-cover" alt="La Cuisine" referrerpolicy="no-referrer">
+                        <img src="https://picsum.photos/seed/lake/800/600" class="w-full h-full object-cover" alt="Paysage" referrerpolicy="no-referrer">
                     </div>
                     <div class="rounded-2xl overflow-hidden shadow-lg border border-outline-variant/10">
-                        <img src="/balcon.jpg" class="w-full h-full object-cover" alt="Le Balcon" referrerpolicy="no-referrer">
+                        <img src="https://picsum.photos/seed/river/800/600" class="w-full h-full object-cover" alt="Paysage" referrerpolicy="no-referrer">
                     </div>
                 </div>
             </div>
@@ -452,7 +448,7 @@
                 <div id="calendar-grid-container" class="calendar-grid"></div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
                 <div class="bg-surface-container-low rounded-3xl p-6 border-l-8 border-secondary/40">
                     <h4 class="font-headline font-bold text-lg mb-2" id="principle-title">PRINCIPE</h4>
                     <p class="text-sm text-on-surface-variant leading-relaxed" id="principle-desc"></p>
@@ -464,6 +460,27 @@
                 <div class="bg-surface-container-low rounded-3xl p-6 border-l-8 border-tertiary/40">
                     <h4 class="font-headline font-bold text-lg mb-2" id="flex-title">FLEXIBILITÉ</h4>
                     <p class="text-sm text-on-surface-variant leading-relaxed" id="flex-desc"></p>
+                </div>
+            </div>
+
+            <div class="bg-white p-8 rounded-3xl shadow-sm border border-outline-variant/10">
+                <h3 class="text-xl font-headline font-bold mb-6 flex items-center gap-3">
+                    <span class="material-symbols-outlined text-secondary">cleaning_services</span>
+                    <span id="recurrences-title">Récurrences Hebdomadaires</span>
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="flex items-center gap-4 p-4 bg-surface-container-low rounded-xl">
+                        <span class="material-symbols-outlined text-blue-600">recycling</span>
+                        <span class="text-sm font-bold" id="task-1">Recyclage (Lundi)</span>
+                    </div>
+                    <div class="flex items-center gap-4 p-4 bg-surface-container-low rounded-xl">
+                        <span class="material-symbols-outlined text-gray-600">delete</span>
+                        <span class="text-sm font-bold" id="task-2">Poubelles (Mercredi)</span>
+                    </div>
+                    <div class="flex items-center gap-4 p-4 bg-surface-container-low rounded-xl">
+                        <span class="material-symbols-outlined text-green-700">eco</span>
+                        <span class="text-sm font-bold" id="task-3">Compost (Jeudi)</span>
+                    </div>
                 </div>
             </div>
         </div>

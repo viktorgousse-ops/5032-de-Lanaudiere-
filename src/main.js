@@ -135,10 +135,10 @@ window.switchTab = function(tabId) {
 
 const translations = {
     FR: {
-        langBtn: 'EN', title: 'Gestion Maison', heroCat: 'Gestion Financière', heroTitle: 'Maison', totalSpread: 'Total à Répartir', payments: 'paiements', spreadDesc: 'Montant global mensuel actuel (Mai - Juin)', rent: 'loyer', rentDesc: 'Loyer Total (Mai-Juin)', charges: 'charges', chargesDesc: 'Internet & Hydro', table1Title: 'Grille de Répartition (Mai - Juin 2026)', badge1: 'Actuel', thOcc: 'Occupant', thRent: 'Loyer', thInternet: 'Internet', thHydro: 'Hydro', thTotal: 'Total', table2Title: 'Grille de Répartition (Dès Juillet 2026)', badge2: 'Prévisionnel', thRentPrev: 'Loyer (Prév.)', historyTitle: 'Historique des Loyers 2026', historyHeader: 'Calendrier des Paiements', histDate1: 'Mai - Juin 2026', histDesc1: 'Petite: 624$ • Moy: 758$ • Gde: 813$ (Tout inclus)', histDate2: 'Dès Juillet 2026', histDesc2: 'Petite: 642$ • Moy: 781$ • Gde: 837$ (Tout inclus)', notesTitle: 'Détails des Charges', internetDetail: '44,85 $ total divisé par 3 occupants (14,95 $/pers). Inclus haute vitesse illimitée.', hydroDetail: '50,83 $ total par mois (16,94 $/pers). Basé sur le plan de paiements égaux.', edit: 'Modifier', save: 'Enregistrer', cancel: 'Annuler', modalTitle: 'Accès Sécurisé', modalDesc: 'Veuillez entrer le code d\'accès pour modifier.', modalError: 'Code incorrect', modalCancel: 'Annuler', modalValidate: 'Valider', navHome: 'Accueil', navFinance: 'Gestion financière', navLife: 'Vie en coloc', navDocs: 'Documents', homeCategory: 'Bienvenue chez nous', heroImgLabel: 'La Terrasse', heroImgSub: 'Espace extérieur & briques rouges', roommatesTitle: 'Les Colocataires', roleAna: 'Petite Chambre', roleKash: 'Moyenne Chambre', roleVik: 'Grande Chambre', homeTitle: 'Maison', lifeCategory: 'Vie Commune', lifeTitle: 'Tâches & Vie en Colocation', tasksTitle: 'Tâches Ménagères', rulesTitle: 'Règles de Vie', rulesDesc: '"Le respect et la communication sont les clés d\'une colocation réussie."', rotationTitle: 'Calendrier de Rotation', weekCurrent: 'Semaine Actuelle', thZone: 'Zone / Tâche', zoneKitchen: 'Cuisine', zoneBath: 'Salle de Bain', zoneLiving: 'Poubelles & Salon', principleTitle: 'PRINCIPE', principleDesc: 'Chaque colocataire se voit attribuer une zone spécifique par semaine. La rotation s\'effectue le dimanche soir.', rulesHeader: 'RÈGLES', rulesContent: 'Le matériel de nettoyage doit être rangé après usage.', flexTitle: 'FLEXIBILITÉ', flexDesc: 'L\'échange de tâches est autorisé après accord mutuel.', validateTasks: 'Valider mes tâches', task1: 'Recyclage (Lundi)', task2: 'Poubelles (Mercredi)', task3: 'Compost (Jeudi)', taskClean: 'Entretien des aires communes', taskModalTitle: 'Ajouter une Tâche', taskModalPlaceholder: 'Nom de la tâche...', taskModalValidate: 'Valider', docsCategory: 'Archives', docsTitle: 'Documents Partagés', docLease: 'Le Bail', docLeaseDesc: 'Signé le 15 Janvier', docHydro: 'Factures Hydro', docHydroDesc: 'Historique mensuel', docAgr: 'Entente de Coloc', docAgrDesc: 'Règles et signatures'
+        langBtn: 'EN', title: 'Gestion Maison', heroCat: 'Gestion Financière', heroTitle: 'Maison', totalSpread: 'Total à Répartir', payments: 'paiements', spreadDesc: 'Montant global mensuel actuel (Mai - Juin)', rent: 'loyer', rentDesc: 'Loyer Total (Mai-Juin)', charges: 'charges', chargesDesc: 'Internet & Hydro', table1Title: 'Grille de Répartition (Mai - Juin 2026)', badge1: 'Actuel', thOcc: 'Occupant', thRent: 'Loyer', thInternet: 'Internet', thHydro: 'Hydro', thTotal: 'Total', table2Title: 'Grille de Répartition (Dès Juillet 2026)', badge2: 'Prévisionnel', thRentPrev: 'Loyer (Prév.)', historyTitle: 'Historique des Loyers 2026', historyHeader: 'Calendrier des Paiements', histDate1: 'Mai - Juin 2026', histDesc1: 'Petite: 624$ • Moy: 758$ • Gde: 813$ (Tout inclus)', histDate2: 'Dès Juillet 2026', histDesc2: 'Petite: 642$ • Moy: 781$ • Gde: 837$ (Tout inclus)', notesTitle: 'Détails des Charges', internetDetail: '44,85 $ total divisé par 3 occupants (14,95 $/pers). Inclus haute vitesse illimitée.', hydroDetail: '50,83 $ total par mois (16,94 $/pers). Basé sur le plan de paiements égaux.', edit: 'Modifier', save: 'Enregistrer', cancel: 'Annuler', modalTitle: 'Accès Sécurisé', modalDesc: 'Veuillez entrer le code d\'accès pour modifier.', modalError: 'Code incorrect', modalCancel: 'Annuler', modalValidate: 'Valider', navHome: 'Accueil', navFinance: 'Gestion financière', navLife: 'Vie en coloc', navDocs: 'Documents', homeCategory: 'Bienvenue chez nous', heroImgLabel: 'Espace de Vie', heroImgSub: 'Confort et convivialité', roommatesTitle: 'Les Colocataires', roleAna: 'Petite Chambre', roleKash: 'Moyenne Chambre', roleVik: 'Grande Chambre', homeTitle: 'Maison', lifeCategory: 'Vie Commune', lifeTitle: 'Tâches & Vie en Colocation', tasksTitle: 'Tâches Ménagères', rulesTitle: 'Règles de Vie', rulesDesc: '"Le respect et la communication sont les clés d\'une colocation réussie."', rotationTitle: 'Calendrier de Rotation', weekCurrent: 'Semaine Actuelle', thZone: 'Zone / Tâche', zoneKitchen: 'Cuisine', zoneBath: 'Salle de Bain', zoneLiving: 'Poubelles & Salon', principleTitle: 'PRINCIPE', principleDesc: 'Chaque colocataire se voit attribuer une zone spécifique par semaine. La rotation s\'effectue le dimanche soir.', rulesHeader: 'RÈGLES', rulesContent: 'Le matériel de nettoyage doit être rangé après usage.', flexTitle: 'FLEXIBILITÉ', flexDesc: 'L\'échange de tâches est autorisé après accord mutuel.', validateTasks: 'Valider mes tâches', recurrencesTitle: 'Récurrences Hebdomadaires', task1: 'Recyclage (Lundi)', task2: 'Poubelles (Mercredi)', task3: 'Compost (Jeudi)', taskClean: 'Entretien des aires communes', taskModalTitle: 'Ajouter une Tâche', taskModalPlaceholder: 'Nom de la tâche...', taskModalValidate: 'Valider', docsCategory: 'Archives', docsTitle: 'Documents Partagés', docLease: 'Le Bail', docLeaseDesc: 'Signé le 15 Janvier', docHydro: 'Factures Hydro', docHydroDesc: 'Historique mensuel', docAgr: 'Entente de Coloc', docAgrDesc: 'Règles et signatures'
     },
     EN: {
-        langBtn: 'FR', title: 'Home Management', heroCat: 'Financial Management', heroTitle: 'Maison', totalSpread: 'Total to Distribute', payments: 'payments', spreadDesc: 'Current global monthly amount (May - June)', rent: 'rent', rentDesc: 'Total Rent (May-June)', charges: 'charges', chargesDesc: 'Internet & Hydro', table1Title: 'Distribution Grid (May - June 2026)', badge1: 'Current', thOcc: 'Occupant', thRent: 'Rent', thInternet: 'Internet', thHydro: 'Hydro', thTotal: 'Total', table2Title: 'Distribution Grid (From July 2026)', badge2: 'Forecasted', thRentPrev: 'Rent (Fore.)', historyTitle: 'Rent History 2026', historyHeader: 'Payment Schedule', histDate1: 'May - June 2026', histDesc1: 'Small: 624$ • Med: 758$ • Large: 813$ (All inclusive)', histDate2: 'From July 2026', histDesc2: 'Small: 642$ • Med: 781$ • Large: 837$ (All inclusive)', notesTitle: 'Charges Details', internetDetail: '44,85 $ total divided by 3 occupants (14,95 $/pers).', hydroDetail: '50,83 $ total per month (16,94 $/pers).', edit: 'Edit', save: 'Save', cancel: 'Cancel', modalTitle: 'Secure Access', modalDesc: 'Please enter the access code to edit.', modalError: 'Incorrect code', modalCancel: 'Cancel', modalValidate: 'Validate', navHome: 'Home', navFinance: 'Financial Management', navLife: 'Life & Tasks', navDocs: 'Documents', homeCategory: 'Welcome Home', heroImgLabel: 'The Terrace', heroImgSub: 'Outdoor space & red bricks', roommatesTitle: 'The Roommates', roleAna: 'Small Room', roleKash: 'Medium Room', roleVik: 'Large Room', homeTitle: 'Maison', lifeCategory: 'Common Life', lifeTitle: 'Tasks & Life', tasksTitle: 'Housework', rulesTitle: 'House Rules', rulesDesc: '"Respect and communication are keys to co-living success."', rotationTitle: 'Rotation Calendar', weekCurrent: 'Current Week', thZone: 'Zone / Task', zoneKitchen: 'Kitchen', zoneBath: 'Bathroom', zoneLiving: 'Trash & Living Room', principleTitle: 'PRINCIPLE', principleDesc: 'Each roommate is assigned a specific zone per week. Rotation occurs on Sunday evening.', rulesHeader: 'RULES', rulesContent: 'Cleaning equipment must be stored after use.', flexTitle: 'FLEXIBILITY', flexDesc: 'Task exchange is allowed with mutual agreement.', validateTasks: 'Validate my tasks', task1: 'Recycling (Monday)', task2: 'Trash (Wednesday)', task3: 'Compost (Thursday)', taskClean: 'Common Areas Maintenance', taskModalTitle: 'Add a Task', taskModalPlaceholder: 'Task name...', taskModalValidate: 'Validate', docsCategory: 'Archives', docsTitle: 'Shared Documents', docLease: 'The Lease', docLeaseDesc: 'Signed Jan 15th', docHydro: 'Hydro Bills', docHydroDesc: 'Monthly history', docAgr: 'Roommate Agreement', docAgrDesc: 'Rules and signatures'
+        langBtn: 'FR', title: 'Home Management', heroCat: 'Financial Management', heroTitle: 'Maison', totalSpread: 'Total to Distribute', payments: 'payments', spreadDesc: 'Current global monthly amount (May - June)', rent: 'rent', rentDesc: 'Total Rent (May-June)', charges: 'charges', chargesDesc: 'Internet & Hydro', table1Title: 'Distribution Grid (May - June 2026)', badge1: 'Current', thOcc: 'Occupant', thRent: 'Rent', thInternet: 'Internet', thHydro: 'Hydro', thTotal: 'Total', table2Title: 'Distribution Grid (From July 2026)', badge2: 'Forecasted', thRentPrev: 'Rent (Fore.)', historyTitle: 'Rent History 2026', historyHeader: 'Payment Schedule', histDate1: 'May - June 2026', histDesc1: 'Small: 624$ • Med: 758$ • Large: 813$ (All inclusive)', histDate2: 'From July 2026', histDesc2: 'Small: 642$ • Med: 781$ • Large: 837$ (All inclusive)', notesTitle: 'Charges Details', internetDetail: '44,85 $ total divided by 3 occupants (14,95 $/pers).', hydroDetail: '50,83 $ total per month (16,94 $/pers).', edit: 'Edit', save: 'Save', cancel: 'Cancel', modalTitle: 'Secure Access', modalDesc: 'Please enter the access code to edit.', modalError: 'Incorrect code', modalCancel: 'Cancel', modalValidate: 'Validate', navHome: 'Home', navFinance: 'Financial Management', navLife: 'Life & Tasks', navDocs: 'Documents', homeCategory: 'Welcome Home', heroImgLabel: 'Living Space', heroImgSub: 'Comfort and conviviality', roommatesTitle: 'The Roommates', roleAna: 'Small Room', roleKash: 'Medium Room', roleVik: 'Large Room', homeTitle: 'Maison', lifeCategory: 'Common Life', lifeTitle: 'Tasks & Life', tasksTitle: 'Housework', rulesTitle: 'House Rules', rulesDesc: '"Respect and communication are keys to co-living success."', rotationTitle: 'Rotation Calendar', weekCurrent: 'Current Week', thZone: 'Zone / Task', zoneKitchen: 'Kitchen', zoneBath: 'Bathroom', zoneLiving: 'Trash & Living Room', principleTitle: 'PRINCIPLE', principleDesc: 'Each roommate is assigned a specific zone per week. Rotation occurs on Sunday evening.', rulesHeader: 'RULES', rulesContent: 'Cleaning equipment must be stored after use.', flexTitle: 'FLEXIBILITY', flexDesc: 'Task exchange is allowed with mutual agreement.', validateTasks: 'Validate my tasks', recurrencesTitle: 'Weekly Recurrences', task1: 'Recycling (Monday)', task2: 'Trash (Wednesday)', task3: 'Compost (Thursday)', taskClean: 'Common Areas Maintenance', taskModalTitle: 'Add a Task', taskModalPlaceholder: 'Task name...', taskModalValidate: 'Validate', docsCategory: 'Archives', docsTitle: 'Shared Documents', docLease: 'The Lease', docLeaseDesc: 'Signed Jan 15th', docHydro: 'Hydro Bills', docHydroDesc: 'Monthly history', docAgr: 'Roommate Agreement', docAgrDesc: 'Rules and signatures'
     }
 };
 
@@ -149,7 +149,15 @@ window.showPasscodeModal = function(type) {
     document.getElementById('passcode-input').value = '';
     document.getElementById('modal-error').classList.add('hidden');
     modal.classList.remove('hidden');
+    document.getElementById('passcode-input').focus();
 }
+
+// Add Enter key listener for passcode
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && !document.getElementById('passcode-modal').classList.contains('hidden')) {
+        window.validatePasscode();
+    }
+});
 
 window.closePasscodeModal = function() {
     document.getElementById('passcode-modal').classList.add('hidden');
@@ -287,8 +295,6 @@ function updateContent() {
     setSafeText('tab-docs', t.navDocs);
     setSafeText('home-category', t.homeCategory);
     setSafeText('home-title', t.homeTitle);
-    setSafeText('hero-img-label', t.heroImgLabel);
-    setSafeText('hero-img-sub', t.heroImgSub);
     setSafeText('roommates-title', t.roommatesTitle);
     setSafeText('role-ana', t.roleAna);
     setSafeText('role-kash', t.roleKash);
@@ -302,6 +308,10 @@ function updateContent() {
     setSafeText('rules-content', t.rulesContent);
     setSafeText('flex-title', t.flexTitle);
     setSafeText('flex-desc', t.flexDesc);
+    setSafeText('recurrences-title', t.recurrencesTitle);
+    setSafeText('task-1', t.task1);
+    setSafeText('task-2', t.task2);
+    setSafeText('task-3', t.task3);
     renderTables();
     debouncedRender();
 }
@@ -381,7 +391,7 @@ function renderCalendar() {
         const weekOfYear = Math.ceil((Math.floor((date - startOfYear) / (24 * 60 * 60 * 1000)) + startOfYear.getDay() + 1) / 7);
         const rotationIdx = ((weekOfYear - 1) % 3) + 1;
 
-        if (date.getDay() === 1) { // Monday Rotations
+        if (date.getDay() === 1) { // Monday Rotations & Recycling
             const asg = rotationIdx === 1 ? [['Cuisine', 'A.'], ['SdB', 'K.'], ['Salon', 'V.']] : rotationIdx === 2 ? [['Cuisine', 'K.'], ['SdB', 'V.'], ['Salon', 'A.']] : [['Cuisine', 'V.'], ['SdB', 'A.'], ['Salon', 'K.']];
             asg.forEach(([zone, pers]) => {
                 const fid = `${dateKey}_${zone}`;
@@ -393,6 +403,35 @@ function renderCalendar() {
                 p.innerHTML = `<span class="truncate">${zone}</span><span class="material-symbols-outlined text-[10px]">${done ? 'check_circle' : 'circle'}</span>`;
                 d.appendChild(p);
             });
+
+            // Recyclage (Lundi)
+            const recFid = `${dateKey}_Recyclage`;
+            const recDone = houseTasksState[recFid];
+            const recP = document.createElement('div');
+            recP.className = `task-pill flex justify-between items-center mb-1 cursor-pointer hover:brightness-110 bg-blue-600 ${recDone ? 'ring-1 ring-offset-1 ring-green-500' : ''}`;
+            recP.onclick = (e) => { e.stopPropagation(); window.toggleHouseTask(recFid); };
+            recP.innerHTML = `<span class="truncate text-white">Recyclage</span><span class="material-symbols-outlined text-[10px] text-white">${recDone ? 'check_circle' : 'circle'}</span>`;
+            d.appendChild(recP);
+        }
+
+        if (date.getDay() === 3) { // Mercredi Poubelles
+            const pFid = `${dateKey}_Poubelles`;
+            const pDone = houseTasksState[pFid];
+            const pDiv = document.createElement('div');
+            pDiv.className = `task-pill flex justify-between items-center mb-1 cursor-pointer hover:brightness-110 bg-gray-600 ${pDone ? 'ring-1 ring-offset-1 ring-green-500' : ''}`;
+            pDiv.onclick = (e) => { e.stopPropagation(); window.toggleHouseTask(pFid); };
+            pDiv.innerHTML = `<span class="truncate text-white">Poubelles</span><span class="material-symbols-outlined text-[10px] text-white">${pDone ? 'check_circle' : 'circle'}</span>`;
+            d.appendChild(pDiv);
+        }
+
+        if (date.getDay() === 4) { // Jeudi Compost
+            const cFid = `${dateKey}_Compost`;
+            const cDone = houseTasksState[cFid];
+            const cDiv = document.createElement('div');
+            cDiv.className = `task-pill flex justify-between items-center mb-1 cursor-pointer hover:brightness-110 bg-green-700 ${cDone ? 'ring-1 ring-offset-1 ring-green-500' : ''}`;
+            cDiv.onclick = (e) => { e.stopPropagation(); window.toggleHouseTask(cFid); };
+            cDiv.innerHTML = `<span class="truncate text-white">Compost</span><span class="material-symbols-outlined text-[10px] text-white">${cDone ? 'check_circle' : 'circle'}</span>`;
+            d.appendChild(cDiv);
         }
         
         dayTasks.forEach(t => {
