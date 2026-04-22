@@ -364,79 +364,75 @@ window.deleteTask = async function(id) { await deleteDoc(doc(db, 'tasks', id)); 
 function renderCalendar() {
     const container = document.getElementById('calendar-grid-container');
     if (!container) return;
-    const year = currentMonthDate.getFullYear();
-    const month = currentMonthDate.getMonth();
-    const monthNames = currentLang === 'FR' ? ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'] : ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-    const dayNames = currentLang === 'FR' ? ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'] : ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-    setSafeText('current-month-display', `${monthNames[month]} ${year}`);
+    
     container.innerHTML = '';
-    dayNames.forEach(d => { const h = document.createElement('div'); h.className = 'calendar-header-day'; h.innerText = d; container.appendChild(h); });
-    const firstDay = new Date(year, month, 1).getDay();
-    const daysInMonth = new Date(year, month + 1, 0).getDate();
-    for (let i = 0; i < firstDay; i++) { const d = document.createElement('div'); d.className = 'calendar-day other-month'; container.appendChild(d); }
-    for (let i = 1; i <= daysInMonth; i++) {
-        const d = document.createElement('div');
-        d.className = `calendar-day ${editingTasks ? 'cursor-pointer hover:bg-primary/5' : ''}`;
-        d.onclick = () => openTaskModal(i);
-        d.innerHTML = `<span class="text-[10px] font-bold">${i}</span>`;
-        const dayTasks = tasks.filter(t => t.day === i && t.month === month && t.year === year);
-        const dateKey = `${year}-${month + 1}-${i}`;
+    const dayNames = currentLang === 'FR' ? ['', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'] : ['', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+    
+    // Header
+    dayNames.forEach(d => {
+        const h = document.createElement('div');
+        h.className = 'calendar-header-day font-bold text-[10px] uppercase tracking-widest bg-surface-container/50';
+        h.innerText = d;
+        container.appendChild(h);
+    });
+    const weeks = ['A', 'B', 'C'];
+    weeks.forEach((week, idx) => {
+        const rotationIdx = idx + 1;
         
-        const date = new Date(year, month, i);
-        const startOfYear = new Date(year, 0, 1);
-        const weekOfYear = Math.ceil((Math.floor((date - startOfYear) / (24 * 60 * 60 * 1000)) + startOfYear.getDay() + 1) / 7);
-        const rotationIdx = ((weekOfYear - 1) % 3) + 1;
+        // Row label cell
+        const labelCell = document.createElement('div');
+        labelCell.className = 'calendar-day bg-surface-container/30 flex items-center justify-center font-headline font-black text-primary text-xs';
+        labelCell.innerText = `SEMAINE ${week}`;
+        container.appendChild(labelCell);
 
-        if (date.getDay() === 1) { // Monday Rotations & Recycling
-            const asg = rotationIdx === 1 ? [['Cuisine', 'A.'], ['SdB', 'K.'], ['Salon', 'V.']] : rotationIdx === 2 ? [['Cuisine', 'K.'], ['SdB', 'V.'], ['Salon', 'A.']] : [['Cuisine', 'V.'], ['SdB', 'A.'], ['Salon', 'K.']];
-            asg.forEach(([zone, pers]) => {
-                const fid = `${dateKey}_${zone}`;
-                const done = houseTasksState[fid];
-                const p = document.createElement('div');
-                p.className = `task-pill flex justify-between items-center mb-1 cursor-pointer hover:brightness-110 ${done ? 'ring-1 ring-offset-1 ring-green-500' : ''}`;
-                p.style.backgroundColor = cologColors[pers];
-                p.onclick = (e) => { e.stopPropagation(); window.toggleHouseTask(fid); };
-                p.innerHTML = `<span class="truncate">${zone}</span><span class="material-symbols-outlined text-[10px]">${done ? 'check_circle' : 'circle'}</span>`;
-                d.appendChild(p);
-            });
+        // 7 Day cells
+        for (let day = 1; day <= 7; day++) {
+            const d = document.createElement('div');
+            d.className = 'calendar-day min-h-[80px] p-2 flex flex-col gap-1';
 
-            // Recyclage (Lundi)
-            const recFid = `${dateKey}_Recyclage`;
-            const recDone = houseTasksState[recFid];
-            const recP = document.createElement('div');
-            recP.className = `task-pill flex justify-between items-center mb-1 cursor-pointer hover:brightness-110 bg-blue-600 ${recDone ? 'ring-1 ring-offset-1 ring-green-500' : ''}`;
-            recP.onclick = (e) => { e.stopPropagation(); window.toggleHouseTask(recFid); };
-            recP.innerHTML = `<span class="truncate text-white">Recyclage</span><span class="material-symbols-outlined text-[10px] text-white">${recDone ? 'check_circle' : 'circle'}</span>`;
-            d.appendChild(recP);
+            // Monday: House Rotations
+            if (day === 1) {
+                const asg = rotationIdx === 1 ? [['Cuisine', 'A.'], ['SdB', 'K.'], ['Salon', 'V.']] : 
+                            rotationIdx === 2 ? [['Cuisine', 'K.'], ['SdB', 'V.'], ['Salon', 'A.']] : 
+                            [['Cuisine', 'V.'], ['SdB', 'A.'], ['Salon', 'K.']];
+                
+                asg.forEach(([zone, pers]) => {
+                    const p = document.createElement('div');
+                    p.className = `task-pill flex justify-center items-center py-2 px-3 rounded-lg text-[10px] font-black text-white shadow-sm mb-1`;
+                    p.style.backgroundColor = cologColors[pers];
+                    p.innerHTML = `<span class="truncate uppercase tracking-wider">${zone} : ${pers}</span>`;
+                    d.appendChild(p);
+                });
+
+                // Recyclage (Lundi)
+                const recP = document.createElement('div');
+                recP.className = `task-pill flex justify-center items-center py-2 px-3 rounded-lg text-[10px] font-black text-white shadow-sm mb-1 bg-blue-600`;
+                recP.innerHTML = `<span class="truncate uppercase tracking-wider">Recyclage</span>`;
+                d.appendChild(recP);
+            }
+
+            // Mercredi Poubelles
+            if (day === 3) {
+                const pDiv = document.createElement('div');
+                pDiv.className = `task-pill flex justify-center items-center py-2 px-3 rounded-lg text-[10px] font-black text-white shadow-sm mb-1 bg-gray-600`;
+                pDiv.innerHTML = `<span class="truncate uppercase tracking-wider">Poubelles</span>`;
+                d.appendChild(pDiv);
+            }
+
+            // Jeudi Compost
+            if (day === 4) {
+                const cDiv = document.createElement('div');
+                cDiv.className = `task-pill flex justify-center items-center py-2 px-3 rounded-lg text-[10px] font-black text-white shadow-sm mb-1 bg-green-700`;
+                cDiv.innerHTML = `<span class="truncate uppercase tracking-wider">Compost</span>`;
+                d.appendChild(cDiv);
+            }
+            
+            container.appendChild(d);
         }
+    });
 
-        if (date.getDay() === 3) { // Mercredi Poubelles
-            const pFid = `${dateKey}_Poubelles`;
-            const pDone = houseTasksState[pFid];
-            const pDiv = document.createElement('div');
-            pDiv.className = `task-pill flex justify-between items-center mb-1 cursor-pointer hover:brightness-110 bg-gray-600 ${pDone ? 'ring-1 ring-offset-1 ring-green-500' : ''}`;
-            pDiv.onclick = (e) => { e.stopPropagation(); window.toggleHouseTask(pFid); };
-            pDiv.innerHTML = `<span class="truncate text-white">Poubelles</span><span class="material-symbols-outlined text-[10px] text-white">${pDone ? 'check_circle' : 'circle'}</span>`;
-            d.appendChild(pDiv);
-        }
-
-        if (date.getDay() === 4) { // Jeudi Compost
-            const cFid = `${dateKey}_Compost`;
-            const cDone = houseTasksState[cFid];
-            const cDiv = document.createElement('div');
-            cDiv.className = `task-pill flex justify-between items-center mb-1 cursor-pointer hover:brightness-110 bg-green-700 ${cDone ? 'ring-1 ring-offset-1 ring-green-500' : ''}`;
-            cDiv.onclick = (e) => { e.stopPropagation(); window.toggleHouseTask(cFid); };
-            cDiv.innerHTML = `<span class="truncate text-white">Compost</span><span class="material-symbols-outlined text-[10px] text-white">${cDone ? 'check_circle' : 'circle'}</span>`;
-            d.appendChild(cDiv);
-        }
-        
-        dayTasks.forEach(t => {
-            const p = document.createElement('div'); p.className = 'task-pill relative group mb-1'; p.style.backgroundColor = cologColors[t.roommate];
-            p.innerHTML = `<span class="truncate">${t.task}</span>${editingTasks ? `<span onclick="event.stopPropagation(); window.deleteTask('${t.id}')" class="absolute -right-1 -top-1 bg-white text-error rounded-full w-3 h-3 flex items-center justify-center text-[8px] opacity-0 group-hover:opacity-100">×</span>` : ''}`;
-            d.appendChild(p);
-        });
-        container.appendChild(d);
-    }
+    // Set title
+    setSafeText('calendar-title-text', currentLang === 'FR' ? 'Rotation des tâches' : 'Task Rotation');
 }
 
 window.toggleHouseTask = async function(fid) {
@@ -471,3 +467,40 @@ window.addEventListener('DOMContentLoaded', () => {
         console.error("Critical Init Error:", e);
     }
 });
+
+window.exportToPDF = function() {
+    const main = document.querySelector('main');
+    const allTabs = document.querySelectorAll('.tab-content');
+    const activeTabSnapshot = document.querySelector('.tab-content:not(.hidden)');
+    
+    // Preparation for PDF
+    document.body.style.width = '210mm';
+    allTabs.forEach(tab => {
+        tab.classList.remove('hidden');
+        tab.style.display = 'block';
+    });
+
+    const opt = {
+        margin: 0,
+        filename: `Rapport_Maison.pdf`,
+        image: { type: 'jpeg', quality: 1.0 },
+        html2canvas: { 
+            scale: 2, 
+            useCORS: true,
+            windowWidth: 794 // 210mm
+        },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+        pagebreak: { mode: 'css' } // This is crucial to respect page-break-after
+    };
+
+    html2pdf().set(opt).from(main).save().then(() => {
+        // Restore UI
+        allTabs.forEach(tab => {
+            if (tab !== activeTabSnapshot) {
+                tab.classList.add('hidden');
+                tab.style.display = '';
+            }
+        });
+        document.body.style.width = '';
+    });
+}

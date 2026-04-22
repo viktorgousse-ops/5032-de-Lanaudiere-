@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestion Maison</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -132,7 +133,7 @@
 
         .calendar-grid {
             display: grid;
-            grid-template-columns: repeat(7, minmax(0, 1fr));
+            grid-template-columns: 100px repeat(7, minmax(0, 1fr));
             gap: 1.5px;
             background-color: var(--color-outline-variant);
             border: 1.5px solid var(--color-outline-variant);
@@ -181,6 +182,33 @@
             -webkit-backdrop-filter: blur(12px);
             backdrop-filter: blur(12px);
         }
+
+        @media print {
+            nav, #back-to-top, button, .group\/edit, [onclick*="toggleEdit"], #language-toggle-container, .bg-surface-container, .tab-btn {
+                display: none !important;
+            }
+            body { 
+                background: white !important; 
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+            .tab-content { display: none !important; }
+            .tab-content:not(.hidden) { 
+                display: block !important; 
+                visibility: visible !important;
+                width: 100% !important;
+                padding: 0 !important;
+                margin: 0 !important;
+            }
+            .printable-area {
+                border: none !important;
+                box-shadow: none !important;
+                padding: 0 !important;
+            }
+            table { width: 100% !important; border-collapse: collapse !important; }
+            th, td { border-bottom: 1px solid #eee !important; padding: 8px 0 !important; }
+            .bg-surface-container { background: #f9fafb !important; -webkit-print-color-adjust: exact; }
+        }
     </style>
 </head>
 <body class="min-h-screen selection:bg-primary selection:text-white">
@@ -196,6 +224,10 @@
                 </div>
             </div>
             <div class="flex items-center gap-4">
+                <button onclick="window.print()" class="bg-primary text-on-primary px-3 py-1.5 rounded-full flex items-center gap-2 hover:shadow-lg transition-all group">
+                    <span class="material-symbols-outlined text-[18px]">print</span>
+                    <span class="font-label text-[10px] font-black uppercase tracking-widest sm:block hidden">Imprimer</span>
+                </button>
                 <button onclick="toggleLanguage()" class="bg-surface-container px-3 py-1.5 rounded-full flex items-center gap-2 hover:bg-outline-variant/20 transition-all group">
                     <span class="material-symbols-outlined text-primary text-sm">language</span>
                     <span id="lang-text" class="font-label text-[10px] font-black uppercase tracking-widest text-on-surface-variant group-hover:text-primary">EN</span>
@@ -392,19 +424,8 @@
                             <span id="calendar-title-text">Calendrier</span>
                         </h3>
                     </div>
-                    <div class="flex items-center gap-4 bg-surface-container rounded-2xl p-2">
-                        <button id="edit-tasks-btn" onclick="toggleEdit('tasks')" class="p-2 hover:bg-white rounded-xl transition-all shadow-sm flex items-center gap-2">
-                            <span class="material-symbols-outlined text-sm text-primary">edit</span>
-                            <span class="text-[10px] font-bold uppercase tracking-wider text-primary"></span>
-                        </button>
-                        <div class="w-px h-4 bg-outline-variant/30"></div>
-                        <button onclick="prevMonth()" class="p-2 hover:bg-white rounded-xl">
-                            <span class="material-symbols-outlined text-sm">chevron_left</span>
-                        </button>
-                        <span id="current-month-display" class="font-headline font-bold text-sm min-w-[120px] text-center uppercase tracking-widest"></span>
-                        <button onclick="nextMonth()" class="p-2 hover:bg-white rounded-xl">
-                            <span class="material-symbols-outlined text-sm">chevron_right</span>
-                        </button>
+                    <div class="flex items-center gap-4 bg-surface-container rounded-2xl p-2 px-6">
+                        <span class="text-[10px] font-black uppercase tracking-widest text-primary">Rotation 3 Semaines</span>
                     </div>
                 </div>
 
@@ -467,25 +488,63 @@
         <!-- Tab 4: Documents -->
         <div id="content-docs" class="tab-content hidden">
             <div class="mb-10">
-                <p id="docs-category" class="font-label text-xs uppercase tracking-[0.2em] text-primary mb-2 font-bold">Archives</p>
+                <p id="docs-category" class="font-label text-xs uppercase tracking-[0.2em] text-primary mb-2 font-bold">Archives & Partage</p>
                 <h1 id="docs-title" class="text-4xl md:text-5xl font-headline font-extrabold tracking-tight text-on-surface">Documents</h1>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
-                <div class="bg-white p-6 rounded-2xl border border-outline-variant/20">
-                    <span class="material-symbols-outlined text-primary text-3xl mb-4">description</span>
-                    <h4 class="font-headline font-bold" id="doc-lease">Le Bail</h4>
-                    <p class="text-xs text-on-surface-variant" id="doc-lease-desc"></p>
+
+            <div class="bg-white p-8 rounded-3xl border border-outline-variant/10 shadow-sm mb-10 printable-area">
+                <div class="flex justify-between items-start mb-8">
+                    <div>
+                        <h2 class="text-2xl font-headline font-black text-primary uppercase tracking-tighter">SYNTHÈSE DE LA COLOCATION</h2>
+                        <p class="text-xs text-on-surface-variant font-bold uppercase tracking-widest mt-1">Version officielle à partager</p>
+                    </div>
                 </div>
-                <div class="bg-white p-6 rounded-2xl border border-outline-variant/20">
-                    <span class="material-symbols-outlined text-secondary text-3xl mb-4">receipt_long</span>
-                    <h4 class="font-headline font-bold" id="doc-hydro">Factures</h4>
-                    <p class="text-xs text-on-surface-variant" id="doc-hydro-desc"></p>
+
+                <div class="space-y-8">
+                    <section>
+                        <h3 class="text-sm font-black uppercase tracking-widest text-secondary border-b border-outline-variant/30 pb-2 mb-4">RÉPARTITION FINANCIÈRE</h3>
+                        <table class="w-full text-left text-sm">
+                            <thead>
+                                <tr class="border-b border-outline-variant/20">
+                                    <th class="py-2">Colocataire</th>
+                                    <th class="py-2">Loyer</th>
+                                    <th class="py-2">Charges (Internet/Hydro)</th>
+                                    <th class="py-2 text-right">Total Mensuel</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td class="py-2 font-bold">Ana (A.)</td><td class="py-2">1 320,00 $</td><td class="py-2">14,35 $ + 0,00 $</td><td class="py-2 text-right font-black">1 334,35 $</td></tr>
+                                <tr><td class="py-2 font-bold">Kashish (K.)</td><td class="py-2">550,00 $</td><td class="py-2">14,35 $ + 0,00 $</td><td class="py-2 text-right font-black">564,35 $</td></tr>
+                                <tr><td class="py-2 font-bold">Viktor (V.)</td><td class="py-2">250,00 $</td><td class="py-2">14,35 $ + 31,95 $</td><td class="py-2 text-right font-black">296,30 $</td></tr>
+                            </tbody>
+                        </table>
+                    </section>
+
+                    <section>
+                        <h3 class="text-sm font-black uppercase tracking-widest text-secondary border-b border-outline-variant/30 pb-2 mb-4">ROTATION DES TÂCHES (Cycle A-B-C)</h3>
+                        <div class="grid grid-cols-3 gap-4 text-[10px]">
+                            <div class="bg-surface-container p-3 rounded-xl border border-outline-variant/20">
+                                <p class="font-black text-primary uppercase mb-2">Semaine A</p>
+                                <p>Cuisine : <b>Ana</b></p>
+                                <p>SdB : <b>Kashish</b></p>
+                                <p>Salon : <b>Viktor</b></p>
+                            </div>
+                            <div class="bg-surface-container p-3 rounded-xl border border-outline-variant/20">
+                                <p class="font-black text-primary uppercase mb-2">Semaine B</p>
+                                <p>Cuisine : <b>Kashish</b></p>
+                                <p>SdB : <b>Viktor</b></p>
+                                <p>Salon : <b>Ana</b></p>
+                            </div>
+                            <div class="bg-surface-container p-3 rounded-xl border border-outline-variant/20">
+                                <p class="font-black text-primary uppercase mb-2">Semaine C</p>
+                                <p>Cuisine : <b>Viktor</b></p>
+                                <p>SdB : <b>Ana</b></p>
+                                <p>Salon : <b>Kashish</b></p>
+                            </div>
+                        </div>
+                    </section>
                 </div>
-                <div class="bg-white p-6 rounded-2xl border border-outline-variant/20">
-                    <span class="material-symbols-outlined text-tertiary text-3xl mb-4">handshake</span>
-                    <h4 class="font-headline font-bold" id="doc-agr">Entente</h4>
-                    <p class="text-xs text-on-surface-variant" id="doc-agr-desc"></p>
-                </div>
+            </div>
             </div>
         </div>
     </main>
